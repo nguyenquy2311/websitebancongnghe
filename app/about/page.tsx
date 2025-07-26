@@ -1,50 +1,70 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Target, Users, Lightbulb, Award, Calendar, MapPin } from "lucide-react"
+import { Target, Users, Lightbulb, Award, Heart, Code, Rocket, BookOpen } from "lucide-react"
 import Image from "next/image"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Về Ban Công Nghệ</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Tìm hiểu chi tiết về BCN - nơi tập hợp những sinh viên đam mê công nghệ, cùng nhau học tập và phát triển
-            trong môi trường chuyên nghiệp
-          </p>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 text-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-200 mb-6">
+              Về Ban Công Nghệ
+            </Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6">Câu Chuyện Của BCN</h1>
+            <p className="text-xl text-blue-100 leading-relaxed">
+              Ban Công Nghệ (BCN) được thành lập với sứ mệnh tạo ra một cộng đồng học tập và phát triển công nghệ mạnh
+              mẽ tại Trường Đại học Công nghiệp TP.HCM (IUH)
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Mission & Vision */}
-        <section className="mb-16">
+      {/* Mission & Vision */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Sứ mệnh & Tầm nhìn</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-8">Sứ Mệnh & Tầm Nhìn</h2>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div className="flex gap-4">
-                  <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Target className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Sứ mệnh</h3>
-                    <p className="text-gray-600">
-                      Tạo ra một cộng đồng học tập mạnh mẽ, nơi sinh viên có thể phát triển kỹ năng công nghệ thông qua
-                      các dự án thực tế và học hỏi từ nhau.
+                    <h3 className="text-xl font-semibold mb-2">Sứ Mệnh</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Tạo ra một môi trường học tập và phát triển công nghệ tích cực, nơi sinh viên có thể nâng cao kỹ
+                      năng lập trình, làm việc nhóm và triển khai các dự án thực tế.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Lightbulb className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Tầm nhìn</h3>
-                    <p className="text-gray-600">
-                      Trở thành bộ phận công nghệ hàng đầu trong các trường đại học, đào tạo ra những lập trình viên tài
-                      năng và có trách nhiệm với xã hội.
+                    <h3 className="text-xl font-semibold mb-2">Tầm Nhìn</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Trở thành cộng đồng công nghệ hàng đầu tại IUH, đào tạo ra những lập trình viên chất lượng cao và
+                      đóng góp tích cực vào sự phát triển của ngành công nghệ Việt Nam.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Award className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Giá Trị Cốt Lõi</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Học tập liên tục, chia sẻ kiến thức, hợp tác nhóm, sáng tạo và đổi mới, cùng nhau phát triển và
+                      thành công.
                     </p>
                   </div>
                 </div>
@@ -53,234 +73,264 @@ export default function AboutPage() {
 
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=400&width=500"
+                src="/placeholder.svg?height=500&width=600"
                 alt="BCN Mission"
-                width={500}
-                height={400}
+                width={600}
+                height={500}
                 className="rounded-2xl shadow-lg"
               />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Organization Model */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Mô hình tổ chức</h2>
-            <p className="text-xl text-gray-600">
-              BCN được tổ chức theo mô hình phân cấp rõ ràng, tạo cơ hội phát triển cho mọi thành viên
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center border-2 border-blue-200 bg-blue-50">
-              <CardContent className="p-6">
-                <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Leader</h3>
-                <p className="text-gray-600 text-sm mb-4">Lãnh đạo BCN, định hướng chiến lược và phát triển tổ chức</p>
-                <Badge variant="secondary">1 người</Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-green-200 bg-green-50">
-              <CardContent className="p-6">
-                <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Core Team</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Đội ngũ cốt cán, hỗ trợ leader trong việc quản lý và phát triển
-                </p>
-                <Badge variant="secondary">3-5 người</Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-purple-200 bg-purple-50">
-              <CardContent className="p-6">
-                <div className="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Nhóm Web</h3>
-                <p className="text-gray-600 text-sm mb-4">Chuyên về phát triển website và ứng dụng web</p>
-                <Badge variant="secondary">10-15 người</Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-orange-200 bg-orange-50">
-              <CardContent className="p-6">
-                <div className="bg-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Nhóm App</h3>
-                <p className="text-gray-600 text-sm mb-4">Chuyên về phát triển ứng dụng di động</p>
-                <Badge variant="secondary">8-12 người</Badge>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* Work Culture */}
-        <section className="mb-16 bg-gray-50 rounded-2xl p-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Văn hóa làm việc</h2>
-            <p className="text-xl text-gray-600">
-              Những giá trị cốt lõi định hình cách chúng tôi làm việc và phát triển
+      {/* Organization Model */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Mô Hình Hoạt Động</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              BCN hoạt động theo mô hình phân cấp rõ ràng, tạo cơ hội phát triển cho mọi thành viên
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Hợp tác</h3>
-              <p className="text-gray-600">
-                Làm việc nhóm hiệu quả, chia sẻ kiến thức và hỗ trợ lẫn nhau trong mọi dự án
-              </p>
-            </div>
+            {/* CTV Level */}
+            <Card className="text-center hover:shadow-lg transition-shadow">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Cộng Tác Viên (CTV)</h3>
+                <div className="space-y-3 text-left">
+                  <p className="text-gray-600">• Tham gia các buổi học và workshop</p>
+                  <p className="text-gray-600">• Học hỏi kỹ năng cơ bản</p>
+                  <p className="text-gray-600">• Tham gia dự án nhỏ</p>
+                  <p className="text-gray-600">• Thời gian: 3-6 tháng</p>
+                </div>
+                <Badge className="mt-4 bg-blue-100 text-blue-800">Cấp độ 1</Badge>
+              </CardContent>
+            </Card>
 
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Lightbulb className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Sáng tạo</h3>
-              <p className="text-gray-600">Khuyến khích tư duy sáng tạo, đổi mới và tìm kiếm những giải pháp tối ưu</p>
-            </div>
+            {/* Member Level */}
+            <Card className="text-center hover:shadow-lg transition-shadow border-2 border-green-200">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Code className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Thành Viên Chính Thức</h3>
+                <div className="space-y-3 text-left">
+                  <p className="text-gray-600">• Tham gia dự án lớn</p>
+                  <p className="text-gray-600">• Có chuyên môn Web/App</p>
+                  <p className="text-gray-600">• Mentor cho CTV mới</p>
+                  <p className="text-gray-600">• Thời gian: 6+ tháng</p>
+                </div>
+                <Badge className="mt-4 bg-green-100 text-green-800">Cấp độ 2</Badge>
+              </CardContent>
+            </Card>
 
-            <div className="text-center">
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Chất lượng</h3>
-              <p className="text-gray-600">Cam kết mang đến những sản phẩm chất lượng cao và có giá trị thực tế</p>
-            </div>
+            {/* Core Team Level */}
+            <Card className="text-center hover:shadow-lg transition-shadow">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Rocket className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Core Team & Leader</h3>
+                <div className="space-y-3 text-left">
+                  <p className="text-gray-600">• Quản lý và điều hành BCN</p>
+                  <p className="text-gray-600">• Dẫn dắt các dự án lớn</p>
+                  <p className="text-gray-600">• Đào tạo thành viên</p>
+                  <p className="text-gray-600">• Kết nối đối tác bên ngoài</p>
+                </div>
+                <Badge className="mt-4 bg-purple-100 text-purple-800">Cấp độ 3</Badge>
+              </CardContent>
+            </Card>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Activities Gallery */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Hoạt động của BCN</h2>
-            <p className="text-xl text-gray-600">
-              Những khoảnh khắc đáng nhớ trong hành trình phát triển của chúng tôi
+      {/* Culture & Values */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Văn Hóa Làm Việc</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Những giá trị và nguyên tắc mà BCN luôn theo đuổi trong mọi hoạt động
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="relative group overflow-hidden rounded-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Team Building"
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <p className="text-white font-semibold">Team Building</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="h-10 w-10 text-blue-600" />
               </div>
+              <h3 className="text-lg font-semibold mb-2">Học Tập Liên Tục</h3>
+              <p className="text-gray-600 text-sm">Luôn cập nhật kiến thức mới và không ngừng phát triển bản thân</p>
             </div>
 
-            <div className="relative group overflow-hidden rounded-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Workshop"
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <p className="text-white font-semibold">Workshop</p>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="h-10 w-10 text-green-600" />
               </div>
+              <h3 className="text-lg font-semibold mb-2">Chia Sẻ Kiến Thức</h3>
+              <p className="text-gray-600 text-sm">Sẵn sàng chia sẻ và hỗ trợ nhau trong quá trình học tập</p>
             </div>
 
-            <div className="relative group overflow-hidden rounded-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Tech Event"
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <p className="text-white font-semibold">Tech Event</p>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-10 w-10 text-purple-600" />
               </div>
+              <h3 className="text-lg font-semibold mb-2">Tinh Thần Đội Nhóm</h3>
+              <p className="text-gray-600 text-sm">Làm việc hiệu quả trong nhóm và tôn trọng ý kiến của mọi người</p>
             </div>
 
-            <div className="relative group overflow-hidden rounded-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Project Demo"
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <p className="text-white font-semibold">Project Demo</p>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Lightbulb className="h-10 w-10 text-orange-600" />
               </div>
-            </div>
-
-            <div className="relative group overflow-hidden rounded-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Study Session"
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <p className="text-white font-semibold">Study Session</p>
-              </div>
-            </div>
-
-            <div className="relative group overflow-hidden rounded-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Celebration"
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <p className="text-white font-semibold">Celebration</p>
-              </div>
+              <h3 className="text-lg font-semibold mb-2">Sáng Tạo & Đổi Mới</h3>
+              <p className="text-gray-600 text-sm">Khuyến khích tư duy sáng tạo và áp dụng công nghệ mới</p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Contact Info */}
-        <section className="bg-blue-600 text-white rounded-2xl p-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">Liên hệ với BCN</h2>
-            <p className="text-xl text-blue-100">
-              Bạn có câu hỏi hoặc muốn tìm hiểu thêm về BCN? Hãy liên hệ với chúng tôi!
-            </p>
+      {/* Activities Gallery */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Hoạt Động Của BCN</h2>
+            <p className="text-xl text-gray-600">Những khoảnh khắc đáng nhớ trong hành trình phát triển của BCN</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center">
-                <MapPin className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Địa chỉ</h3>
-                <p className="text-blue-100">Trường Đại học Công nghiệp TP.HCM</p>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Workshop Công Nghệ",
+                description: "Các buổi học về công nghệ mới và kỹ năng lập trình",
+                image: "/placeholder.svg?height=250&width=400",
+              },
+              {
+                title: "Team Building",
+                description: "Các hoạt động gắn kết và xây dựng tinh thần đội nhóm",
+                image: "/placeholder.svg?height=250&width=400",
+              },
+              {
+                title: "Hackathon BCN",
+                description: "Cuộc thi lập trình 24h với những ý tưởng sáng tạo",
+                image: "/placeholder.svg?height=250&width=400",
+              },
+              {
+                title: "Tech Talk",
+                description: "Chia sẻ kinh nghiệm từ các chuyên gia trong ngành",
+                image: "/placeholder.svg?height=250&width=400",
+              },
+              {
+                title: "Dự Án Thực Tế",
+                description: "Triển khai các dự án có ý nghĩa thực tiễn",
+                image: "/placeholder.svg?height=250&width=400",
+              },
+              {
+                title: "Networking Event",
+                description: "Kết nối với các doanh nghiệp và cơ hội việc làm",
+                image: "/placeholder.svg?height=250&width=400",
+              },
+            ].map((activity, index) => (
+              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-video relative">
+                  <Image
+                    src={activity.image || "/placeholder.svg"}
+                    alt={activity.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-2">{activity.title}</h3>
+                  <p className="text-gray-600">{activity.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center">
-                <Calendar className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Thời gian hoạt động</h3>
-                <p className="text-blue-100">Thứ 2 - Thứ 6: 8:00 - 17:00</p>
-              </div>
+      {/* Timeline */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Lịch Sử Phát Triển</h2>
+            <p className="text-xl text-gray-600">Hành trình phát triển của BCN qua các năm</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {[
+                {
+                  year: "2022",
+                  title: "Thành Lập BCN",
+                  description:
+                    "Ban Công Nghệ được thành lập với 5 thành viên đầu tiên, bắt đầu với những dự án nhỏ và buổi học chia sẻ kiến thức.",
+                },
+                {
+                  year: "2023",
+                  title: "Mở Rộng Hoạt Động",
+                  description:
+                    "Tổ chức các workshop định kỳ, tuyển thêm thành viên và triển khai các dự án lớn hơn. Chia thành 2 nhóm chuyên môn: Web và App.",
+                },
+                {
+                  year: "2024",
+                  title: "Phát Triển Mạnh Mẽ",
+                  description:
+                    "Đạt 20+ thành viên, hoàn thành 10+ dự án, tổ chức Hackathon đầu tiên và thiết lập quan hệ đối tác với các doanh nghiệp.",
+                },
+                {
+                  year: "2025",
+                  title: "Tương Lai",
+                  description:
+                    "Mục tiêu trở thành cộng đồng công nghệ hàng đầu tại IUH, mở rộng ra các trường đại học khác và tạo ra nhiều cơ hội hơn cho sinh viên.",
+                },
+              ].map((milestone, index) => (
+                <div key={index} className="flex gap-8 items-start">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                      {milestone.year}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2">{milestone.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{milestone.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* Contact Info */}
+      <section className="py-20 bg-blue-600 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Liên Hệ Với BCN</h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Bạn có câu hỏi hoặc muốn tìm hiểu thêm về BCN? Hãy liên hệ với chúng tôi!
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div>
+              <h3 className="font-semibold mb-2">Email</h3>
+              <p className="text-blue-100">bcn@student.iuh.edu.vn</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Facebook</h3>
+              <p className="text-blue-100">fb.com/bcn.iuh</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Địa chỉ</h3>
+              <p className="text-blue-100">Trường ĐH Công nghiệp TP.HCM</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

@@ -11,40 +11,48 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Users, Code, Smartphone, Palette, Megaphone, Star } from "lucide-react"
+import { Users, Code, Smartphone, Palette, Megaphone, CheckCircle, ArrowRight, Star } from "lucide-react"
 
 const positions = [
   {
     id: "web-dev",
-    title: "CTV Phát triển Web",
+    title: "CTV Phát Triển Web",
     icon: Code,
-    description: "Tham gia phát triển các website và ứng dụng web sử dụng công nghệ hiện đại",
-    requirements: ["HTML, CSS, JavaScript cơ bản", "Hiểu biết về React hoặc Vue.js", "Đam mê học hỏi công nghệ mới"],
-    benefits: ["Học hỏi từ senior developers", "Tham gia dự án thực tế", "Cơ hội thực tập tại các công ty"],
+    description: "Tham gia phát triển các ứng dụng web với React, Next.js, Node.js",
+    requirements: [
+      "Kiến thức cơ bản HTML, CSS, JavaScript",
+      "Đam mê học hỏi công nghệ web",
+      "Có thể commit 10-15h/tuần",
+    ],
+    benefits: ["Học các framework hiện đại", "Tham gia dự án thực tế", "Mentor 1-1 từ senior"],
+    color: "bg-blue-100 text-blue-800",
   },
   {
     id: "app-dev",
-    title: "CTV Phát triển App",
+    title: "CTV Phát Triển App",
     icon: Smartphone,
-    description: "Phát triển ứng dụng di động cho iOS và Android sử dụng React Native hoặc Flutter",
-    requirements: ["Kiến thức lập trình cơ bản", "Quan tâm đến mobile development", "Khả năng làm việc nhóm tốt"],
-    benefits: ["Học React Native/Flutter", "Phát triển app thực tế", "Kết nối với cộng đồng mobile dev"],
+    description: "Phát triển ứng dụng di động với React Native, Flutter",
+    requirements: ["Kiến thức lập trình cơ bản", "Quan tâm đến mobile development", "Sẵn sàng học công nghệ mới"],
+    benefits: ["Học React Native/Flutter", "Publish app lên store", "Kinh nghiệm mobile dev"],
+    color: "bg-green-100 text-green-800",
   },
   {
     id: "designer",
-    title: "CTV Thiết kế",
+    title: "CTV Thiết Kế UI/UX",
     icon: Palette,
-    description: "Thiết kế UI/UX cho các sản phẩm của BCN, tạo ra trải nghiệm người dùng tuyệt vời",
-    requirements: ["Kiến thức về UI/UX design", "Sử dụng Figma hoặc Adobe XD", "Tư duy sáng tạo và thẩm mỹ"],
-    benefits: ["Làm việc với designer chuyên nghiệp", "Thiết kế cho sản phẩm thực tế", "Xây dựng portfolio mạnh"],
+    description: "Thiết kế giao diện và trải nghiệm người dùng cho các sản phẩm",
+    requirements: ["Có khiếu thẩm mỹ", "Biết sử dụng Figma hoặc Adobe XD", "Hiểu về UX principles"],
+    benefits: ["Làm việc với designer senior", "Tham gia design system", "Portfolio chất lượng"],
+    color: "bg-purple-100 text-purple-800",
   },
   {
     id: "marketing",
-    title: "CTV Truyền thông",
+    title: "CTV Truyền Thông",
     icon: Megaphone,
-    description: "Quản lý social media, viết content và tổ chức sự kiện cho BCN",
-    requirements: ["Kỹ năng viết content tốt", "Hiểu biết về social media", "Khả năng tổ chức sự kiện"],
-    benefits: ["Phát triển kỹ năng marketing", "Quản lý brand của BCN", "Kết nối với cộng đồng sinh viên"],
+    description: "Quản lý social media, viết content, tổ chức sự kiện",
+    requirements: ["Kỹ năng viết content tốt", "Hiểu về social media", "Có tính sáng tạo"],
+    benefits: ["Học digital marketing", "Xây dựng personal brand", "Networking rộng"],
+    color: "bg-orange-100 text-orange-800",
   },
 ]
 
@@ -61,153 +69,224 @@ export default function JoinPage() {
     portfolio: "",
     experience: "",
     motivation: "",
+    availability: "",
     agreeTerms: false,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", { ...formData, position: selectedPosition })
-    alert("Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.")
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
   }
 
-  const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission
+    console.log("Form submitted:", { ...formData, position: selectedPosition })
+    alert("Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.")
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Tham gia BCN</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Tham Gia BCN</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Gia nhập Ban Công Nghệ và bắt đầu hành trình phát triển sự nghiệp công nghệ của bạn. Chúng tôi luôn chào đón
-            những thành viên mới có đam mê và nhiệt huyết!
+            Gia nhập cộng đồng BCN và cùng chúng tôi xây dựng những sản phẩm công nghệ tuyệt vời
           </p>
         </div>
 
         {/* Why Join BCN */}
         <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Tại sao nên tham gia BCN?</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center border-2 border-blue-200 bg-blue-50">
-              <CardContent className="p-6">
-                <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Code className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Dự án thực tế</h3>
-                <p className="text-gray-600 text-sm">
-                  Tham gia các dự án có tác động thực tế, nâng cao kỹ năng lập trình
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-green-200 bg-green-50">
-              <CardContent className="p-6">
-                <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Cộng đồng mạnh</h3>
-                <p className="text-gray-600 text-sm">Kết nối với những người bạn cùng chí hướng và học hỏi lẫn nhau</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-purple-200 bg-purple-50">
-              <CardContent className="p-6">
-                <div className="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Mentor chất lượng</h3>
-                <p className="text-gray-600 text-sm">Được hướng dẫn bởi các senior có kinh nghiệm trong ngành</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-orange-200 bg-orange-50">
-              <CardContent className="p-6">
-                <div className="bg-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Cơ hội nghề nghiệp</h3>
-                <p className="text-gray-600 text-sm">Kết nối với nhà tuyển dụng và cơ hội thực tập tại các công ty</p>
-              </CardContent>
-            </Card>
+          <h2 className="text-3xl font-bold text-center mb-12">Tại Sao Nên Tham Gia BCN?</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: Code,
+                title: "Dự Án Thực Tế",
+                description: "Tham gia các dự án có ý nghĩa, xây dựng portfolio ấn tượng",
+              },
+              {
+                icon: Users,
+                title: "Cộng Đồng Mạnh",
+                description: "Kết nối với những người bạn cùng đam mê công nghệ",
+              },
+              {
+                icon: Star,
+                title: "Mentor Chất Lượng",
+                description: "Được hướng dẫn bởi các anh chị có kinh nghiệm",
+              },
+              {
+                icon: CheckCircle,
+                title: "Cơ Hội Nghề Nghiệp",
+                description: "Tiếp cận với các cơ hội thực tập và việc làm",
+              },
+            ].map((benefit, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <benefit.icon className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
+                  <p className="text-gray-600 text-sm">{benefit.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
 
         {/* Available Positions */}
         <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Vị trí đang tuyển</h2>
-            <p className="text-xl text-gray-600">Chọn vị trí phù hợp với sở thích và kỹ năng của bạn</p>
-          </div>
-
+          <h2 className="text-3xl font-bold text-center mb-12">Vị Trí Đang Tuyển</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {positions.map((position) => {
-              const Icon = position.icon
-              return (
-                <Card key={position.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-blue-600" />
-                      </div>
+            {positions.map((position) => (
+              <Card
+                key={position.id}
+                className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                  selectedPosition === position.id ? "ring-2 ring-blue-500 shadow-lg" : ""
+                }`}
+                onClick={() => setSelectedPosition(position.id)}
+              >
+                <CardHeader>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center ${position.color}`}>
+                      <position.icon className="h-6 w-6" />
+                    </div>
+                    <div className="flex-1">
                       <CardTitle className="text-xl">{position.title}</CardTitle>
+                      {selectedPosition === position.id && <Badge className="mt-1">Đã chọn</Badge>}
                     </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-gray-600">{position.description}</p>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-gray-600">{position.description}</p>
 
-                    <div>
-                      <h4 className="font-semibold text-sm text-gray-700 mb-2">Yêu cầu:</h4>
-                      <ul className="space-y-1">
-                        {position.requirements.map((req, index) => (
-                          <li key={index} className="text-sm text-gray-600 flex items-start gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            {req}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">Yêu cầu:</h4>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      {position.requirements.map((req, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                          {req}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                    <div>
-                      <h4 className="font-semibold text-sm text-gray-700 mb-2">Lợi ích:</h4>
-                      <ul className="space-y-1">
-                        {position.benefits.map((benefit, index) => (
-                          <li key={index} className="text-sm text-gray-600 flex items-start gap-2">
-                            <Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                            {benefit}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              )
-            })}
+                  <div>
+                    <h4 className="font-semibold mb-2">Lợi ích:</h4>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      {position.benefits.map((benefit, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
 
         {/* Application Form */}
-        <section className="max-w-2xl mx-auto">
-          <Card>
+        <section>
+          <Card className="max-w-4xl mx-auto">
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Đăng ký tham gia BCN</CardTitle>
+              <CardTitle className="text-2xl text-center">Đơn Đăng Ký Tham Gia BCN</CardTitle>
               <p className="text-center text-gray-600">
-                Điền thông tin của bạn để chúng tôi có thể liên hệ và đánh giá
+                Vui lòng điền đầy đủ thông tin để chúng tôi có thể đánh giá hồ sơ của bạn
               </p>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Personal Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Thông Tin Cá Nhân</h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="fullName">Họ và tên *</Label>
+                      <Input
+                        id="fullName"
+                        value={formData.fullName}
+                        onChange={(e) => handleInputChange("fullName", e.target.value)}
+                        placeholder="Nguyễn Văn A"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="studentId">Mã số sinh viên *</Label>
+                      <Input
+                        id="studentId"
+                        value={formData.studentId}
+                        onChange={(e) => handleInputChange("studentId", e.target.value)}
+                        placeholder="20123456"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="email">Email *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
+                        placeholder="example@student.iuh.edu.vn"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="phone">Số điện thoại *</Label>
+                      <Input
+                        id="phone"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        placeholder="0123456789"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="major">Ngành học *</Label>
+                      <Input
+                        id="major"
+                        value={formData.major}
+                        onChange={(e) => handleInputChange("major", e.target.value)}
+                        placeholder="Công nghệ thông tin"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="year">Năm học *</Label>
+                      <Select value={formData.year} onValueChange={(value) => handleInputChange("year", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Chọn năm học" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1">Năm 1</SelectItem>
+                          <SelectItem value="2">Năm 2</SelectItem>
+                          <SelectItem value="3">Năm 3</SelectItem>
+                          <SelectItem value="4">Năm 4</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Position Selection */}
-                <div className="space-y-2">
-                  <Label htmlFor="position">Vị trí ứng tuyển *</Label>
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Vị Trí Ứng Tuyển</h3>
                   <Select value={selectedPosition} onValueChange={setSelectedPosition}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Chọn vị trí bạn muốn ứng tuyển" />
+                      <SelectValue placeholder="Chọn vị trí muốn ứng tuyển" />
                     </SelectTrigger>
                     <SelectContent>
                       {positions.map((position) => (
@@ -219,176 +298,128 @@ export default function JoinPage() {
                   </Select>
                 </div>
 
-                {/* Personal Information */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="fullName">Họ và tên *</Label>
-                    <Input
-                      id="fullName"
-                      value={formData.fullName}
-                      onChange={(e) => handleInputChange("fullName", e.target.value)}
-                      placeholder="Nguyễn Văn A"
+                {/* Technical Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Thông Tin Kỹ Thuật</h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="github">GitHub Profile</Label>
+                      <Input
+                        id="github"
+                        value={formData.github}
+                        onChange={(e) => handleInputChange("github", e.target.value)}
+                        placeholder="https://github.com/username"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="portfolio">Portfolio/Website</Label>
+                      <Input
+                        id="portfolio"
+                        value={formData.portfolio}
+                        onChange={(e) => handleInputChange("portfolio", e.target.value)}
+                        placeholder="https://yourportfolio.com"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Experience & Motivation */}
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="experience">Kinh nghiệm lập trình/thiết kế (nếu có)</Label>
+                    <Textarea
+                      id="experience"
+                      value={formData.experience}
+                      onChange={(e) => handleInputChange("experience", e.target.value)}
+                      placeholder="Mô tả ngắn gọn về kinh nghiệm, dự án đã làm, công nghệ đã sử dụng..."
+                      rows={4}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="motivation">Tại sao bạn muốn tham gia BCN? *</Label>
+                    <Textarea
+                      id="motivation"
+                      value={formData.motivation}
+                      onChange={(e) => handleInputChange("motivation", e.target.value)}
+                      placeholder="Chia sẻ động lực, mục tiêu và những gì bạn mong muốn đạt được khi tham gia BCN..."
+                      rows={4}
                       required
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="studentId">Mã số sinh viên *</Label>
-                    <Input
-                      id="studentId"
-                      value={formData.studentId}
-                      onChange={(e) => handleInputChange("studentId", e.target.value)}
-                      placeholder="20123456"
+
+                  <div>
+                    <Label htmlFor="availability">Thời gian có thể tham gia hoạt động BCN *</Label>
+                    <Textarea
+                      id="availability"
+                      value={formData.availability}
+                      onChange={(e) => handleInputChange("availability", e.target.value)}
+                      placeholder="Ví dụ: Thứ 2, 4, 6 buổi tối; Cuối tuần; Khoảng 10-15h/tuần..."
+                      rows={3}
                       required
                     />
                   </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                      placeholder="example@student.iuh.edu.vn"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Số điện thoại</Label>
-                    <Input
-                      id="phone"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
-                      placeholder="0123456789"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="major">Ngành học *</Label>
-                    <Input
-                      id="major"
-                      value={formData.major}
-                      onChange={(e) => handleInputChange("major", e.target.value)}
-                      placeholder="Công nghệ thông tin"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="year">Năm học *</Label>
-                    <Select value={formData.year} onValueChange={(value) => handleInputChange("year", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Chọn năm học" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1">Năm 1</SelectItem>
-                        <SelectItem value="2">Năm 2</SelectItem>
-                        <SelectItem value="3">Năm 3</SelectItem>
-                        <SelectItem value="4">Năm 4</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {/* Links */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="github">GitHub Profile</Label>
-                    <Input
-                      id="github"
-                      value={formData.github}
-                      onChange={(e) => handleInputChange("github", e.target.value)}
-                      placeholder="https://github.com/username"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="portfolio">Portfolio/CV</Label>
-                    <Input
-                      id="portfolio"
-                      value={formData.portfolio}
-                      onChange={(e) => handleInputChange("portfolio", e.target.value)}
-                      placeholder="Link portfolio hoặc CV"
-                    />
-                  </div>
-                </div>
-
-                {/* Experience */}
-                <div className="space-y-2">
-                  <Label htmlFor="experience">Kinh nghiệm và kỹ năng</Label>
-                  <Textarea
-                    id="experience"
-                    value={formData.experience}
-                    onChange={(e) => handleInputChange("experience", e.target.value)}
-                    placeholder="Mô tả về kinh nghiệm lập trình, các dự án đã làm, kỹ năng hiện tại..."
-                    rows={4}
-                  />
-                </div>
-
-                {/* Motivation */}
-                <div className="space-y-2">
-                  <Label htmlFor="motivation">Lý do muốn tham gia BCN *</Label>
-                  <Textarea
-                    id="motivation"
-                    value={formData.motivation}
-                    onChange={(e) => handleInputChange("motivation", e.target.value)}
-                    placeholder="Chia sẻ lý do bạn muốn tham gia BCN và mục tiêu của bạn..."
-                    rows={4}
-                    required
-                  />
                 </div>
 
                 {/* Terms Agreement */}
-                <div className="flex items-center space-x-2">
+                <div className="flex items-start space-x-2">
                   <Checkbox
-                    id="terms"
+                    id="agreeTerms"
                     checked={formData.agreeTerms}
                     onCheckedChange={(checked) => handleInputChange("agreeTerms", checked as boolean)}
                   />
-                  <Label htmlFor="terms" className="text-sm">
-                    Tôi đồng ý với các điều khoản và cam kết tham gia đầy đủ các hoạt động của BCN *
+                  <Label htmlFor="agreeTerms" className="text-sm leading-relaxed">
+                    Tôi đồng ý với các điều khoản và cam kết tham gia đầy đủ các hoạt động của BCN. Tôi hiểu rằng việc
+                    tham gia BCN đòi hỏi sự nghiêm túc và trách nhiệm.
                   </Label>
                 </div>
 
-                <Button
-                  type="submit"
-                  className="w-full"
-                  size="lg"
-                  disabled={
-                    !selectedPosition ||
-                    !formData.fullName ||
-                    !formData.studentId ||
-                    !formData.email ||
-                    !formData.major ||
-                    !formData.year ||
-                    !formData.motivation ||
-                    !formData.agreeTerms
-                  }
-                >
-                  Gửi đăng ký
-                </Button>
+                {/* Submit Button */}
+                <div className="flex gap-4 pt-6">
+                  <Button type="submit" size="lg" className="flex-1" disabled={!formData.agreeTerms}>
+                    Gửi Đơn Đăng Ký
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
               </form>
             </CardContent>
           </Card>
         </section>
 
-        {/* Contact Info */}
-        <section className="mt-16 text-center">
-          <div className="bg-gray-50 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Cần hỗ trợ?</h3>
-            <p className="text-gray-600 mb-6">
-              Nếu bạn có bất kỳ câu hỏi nào về quá trình đăng ký hoặc về BCN, đừng ngại liên hệ với chúng tôi!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Badge variant="outline" className="px-4 py-2">
-                Email: bcn@iuh.edu.vn
-              </Badge>
-              <Badge variant="outline" className="px-4 py-2">
-                Facebook: Ban Công Nghệ IUH
-              </Badge>
-            </div>
+        {/* Next Steps */}
+        <section className="mt-16 bg-gray-50 rounded-lg p-8">
+          <h3 className="text-2xl font-bold text-center mb-8">Quy Trình Tuyển Chọn</h3>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Nộp Đơn",
+                description: "Điền form đăng ký và gửi hồ sơ",
+              },
+              {
+                step: "2",
+                title: "Sơ Tuyển",
+                description: "BCN sẽ review hồ sơ trong 3-5 ngày",
+              },
+              {
+                step: "3",
+                title: "Phỏng Vấn",
+                description: "Phỏng vấn trực tiếp hoặc online",
+              },
+              {
+                step: "4",
+                title: "Kết Quả",
+                description: "Thông báo kết quả và onboarding",
+              },
+            ].map((step, index) => (
+              <div key={index} className="text-center">
+                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">
+                  {step.step}
+                </div>
+                <h4 className="font-semibold mb-2">{step.title}</h4>
+                <p className="text-gray-600 text-sm">{step.description}</p>
+              </div>
+            ))}
           </div>
         </section>
       </div>

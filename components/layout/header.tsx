@@ -1,21 +1,23 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Code2 } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const navigation = [
-  { name: "Trang chủ", href: "/" },
-  { name: "Dự án", href: "/projects" },
-  { name: "Thành viên", href: "/members" },
+  { name: "Trang Chủ", href: "/" },
+  { name: "Dự Án", href: "/projects" },
+  { name: "Thành Viên", href: "/members" },
   { name: "Về BCN", href: "/about" },
-  { name: "Tham gia", href: "/join" },
+  { name: "Tham Gia", href: "/join" },
 ]
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -23,13 +25,10 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-blue-600 p-2 rounded-lg">
-              <Code2 className="h-6 w-6 text-white" />
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Code2 className="h-5 w-5 text-white" />
             </div>
-            <div className="hidden sm:block">
-              <div className="font-bold text-xl text-gray-900">BCN</div>
-              <div className="text-xs text-gray-500">Ban Công Nghệ IUH</div>
-            </div>
+            <span className="font-bold text-xl">BCN</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -38,7 +37,9 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
+                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                  pathname === item.href ? "text-blue-600" : "text-gray-600"
+                }`}
               >
                 {item.name}
               </Link>
@@ -46,17 +47,17 @@ export default function Header() {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex">
             <Button asChild>
-              <Link href="/join">Tham gia BCN</Link>
+              <Link href="/join">Tham Gia BCN</Link>
             </Button>
           </div>
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
+              <Button variant="ghost" size="sm">
+                <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80">
@@ -65,17 +66,21 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-lg font-medium text-gray-600 hover:text-blue-600 transition-colors"
                     onClick={() => setIsOpen(false)}
+                    className={`text-lg font-medium transition-colors hover:text-blue-600 ${
+                      pathname === item.href ? "text-blue-600" : "text-gray-600"
+                    }`}
                   >
                     {item.name}
                   </Link>
                 ))}
-                <Button asChild className="mt-4">
-                  <Link href="/join" onClick={() => setIsOpen(false)}>
-                    Tham gia BCN
-                  </Link>
-                </Button>
+                <div className="pt-4">
+                  <Button asChild className="w-full">
+                    <Link href="/join" onClick={() => setIsOpen(false)}>
+                      Tham Gia BCN
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </SheetContent>
           </Sheet>

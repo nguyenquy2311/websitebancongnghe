@@ -4,21 +4,23 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ExternalLink, Github, Filter } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Github, ExternalLink, Search, Filter } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
-// Sample projects data
+// Mock data for projects
 const projects = [
   {
-    id: 1,
-    name: "IUH Student Portal",
-    description: "Hệ thống quản lý sinh viên hiện đại với giao diện thân thiện",
-    image: "/placeholder.svg?height=300&width=400",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
+    id: "iuh-student-portal",
+    title: "IUH Student Portal",
+    description:
+      "Hệ thống quản lý sinh viên với giao diện hiện đại, tích hợp đầy đủ các tính năng cần thiết cho sinh viên và giảng viên.",
+    image: "/placeholder.svg?height=200&width=400",
+    techStack: ["React", "Node.js", "MongoDB", "Express"],
     category: "Web",
-    year: 2024,
+    year: "2024",
     type: "Nhóm",
     members: [
       { name: "Nguyễn Văn A", avatar: "/placeholder.svg?height=40&width=40" },
@@ -29,13 +31,13 @@ const projects = [
     demoUrl: "https://student-portal-demo.vercel.app",
   },
   {
-    id: 2,
-    name: "BCN Mobile App",
-    description: "Ứng dụng di động cho thành viên BCN, quản lý hoạt động và sự kiện",
-    image: "/placeholder.svg?height=300&width=400",
-    techStack: ["React Native", "Firebase", "TypeScript"],
+    id: "bcn-mobile-app",
+    title: "BCN Mobile App",
+    description: "Ứng dụng di động kết nối thành viên BCN, quản lý hoạt động và chia sẻ thông tin nội bộ.",
+    image: "/placeholder.svg?height=200&width=400",
+    techStack: ["React Native", "Firebase", "Redux", "Expo"],
     category: "App",
-    year: 2024,
+    year: "2024",
     type: "Nhóm",
     members: [
       { name: "Phạm Văn D", avatar: "/placeholder.svg?height=40&width=40" },
@@ -45,184 +47,233 @@ const projects = [
     demoUrl: null,
   },
   {
-    id: 3,
-    name: "E-commerce Dashboard",
-    description: "Dashboard quản lý bán hàng online với analytics chi tiết",
-    image: "/placeholder.svg?height=300&width=400",
-    techStack: ["Vue.js", "Node.js", "MongoDB", "Chart.js"],
+    id: "event-management-system",
+    title: "Event Management System",
+    description: "Hệ thống quản lý sự kiện cho CLB sinh viên, từ đăng ký tham gia đến theo dõi hoạt động.",
+    image: "/placeholder.svg?height=200&width=400",
+    techStack: ["Next.js", "PostgreSQL", "Tailwind CSS", "Prisma"],
     category: "Web",
-    year: 2023,
-    type: "Cá nhân",
-    members: [{ name: "Võ Văn F", avatar: "/placeholder.svg?height=40&width=40" }],
-    githubUrl: "https://github.com/bcn-iuh/ecommerce-dashboard",
-    demoUrl: "https://ecommerce-dashboard-demo.vercel.app",
-  },
-  {
-    id: 4,
-    name: "Smart Attendance System",
-    description: "Hệ thống điểm danh thông minh sử dụng AI và computer vision",
-    image: "/placeholder.svg?height=300&width=400",
-    techStack: ["Python", "OpenCV", "TensorFlow", "Flask"],
-    category: "AI",
-    year: 2023,
+    year: "2023",
     type: "Nhóm",
     members: [
+      { name: "Vũ Văn F", avatar: "/placeholder.svg?height=40&width=40" },
       { name: "Đặng Thị G", avatar: "/placeholder.svg?height=40&width=40" },
       { name: "Bùi Văn H", avatar: "/placeholder.svg?height=40&width=40" },
     ],
-    githubUrl: "https://github.com/bcn-iuh/smart-attendance",
+    githubUrl: "https://github.com/bcn-iuh/event-management",
+    demoUrl: "https://event-management-demo.vercel.app",
+  },
+  {
+    id: "personal-portfolio-template",
+    title: "Personal Portfolio Template",
+    description: "Template portfolio cá nhân dành cho sinh viên IT, dễ dàng tùy chỉnh và triển khai.",
+    image: "/placeholder.svg?height=200&width=400",
+    techStack: ["Vue.js", "Nuxt.js", "SCSS", "Netlify"],
+    category: "Web",
+    year: "2023",
+    type: "Cá nhân",
+    members: [{ name: "Ngô Văn I", avatar: "/placeholder.svg?height=40&width=40" }],
+    githubUrl: "https://github.com/bcn-iuh/portfolio-template",
+    demoUrl: "https://portfolio-template-demo.netlify.app",
+  },
+  {
+    id: "task-management-app",
+    title: "Task Management App",
+    description: "Ứng dụng quản lý công việc nhóm với tính năng real-time collaboration và notification.",
+    image: "/placeholder.svg?height=200&width=400",
+    techStack: ["Flutter", "Dart", "Supabase", "GetX"],
+    category: "App",
+    year: "2023",
+    type: "Nhóm",
+    members: [
+      { name: "Cao Thị J", avatar: "/placeholder.svg?height=40&width=40" },
+      { name: "Lý Văn K", avatar: "/placeholder.svg?height=40&width=40" },
+    ],
+    githubUrl: "https://github.com/bcn-iuh/task-management",
     demoUrl: null,
+  },
+  {
+    id: "bcn-website",
+    title: "BCN Website",
+    description: "Website chính thức của Ban Công Nghệ, giới thiệu thông tin và hoạt động của BCN.",
+    image: "/placeholder.svg?height=200&width=400",
+    techStack: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
+    category: "Web",
+    year: "2024",
+    type: "Nhóm",
+    members: [
+      { name: "Đinh Văn L", avatar: "/placeholder.svg?height=40&width=40" },
+      { name: "Tô Thị M", avatar: "/placeholder.svg?height=40&width=40" },
+    ],
+    githubUrl: "https://github.com/bcn-iuh/bcn-website",
+    demoUrl: "https://bcn-iuh.vercel.app",
   },
 ]
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Tất cả")
-  const [selectedYear, setSelectedYear] = useState("Tất cả")
-  const [selectedType, setSelectedType] = useState("Tất cả")
-
-  const categories = ["Tất cả", "Web", "App", "AI"]
-  const years = ["Tất cả", "2024", "2023", "2022"]
-  const types = ["Tất cả", "Nhóm", "Cá nhân"]
+  const [searchTerm, setSearchTerm] = useState("")
+  const [categoryFilter, setCategoryFilter] = useState("all")
+  const [yearFilter, setYearFilter] = useState("all")
+  const [typeFilter, setTypeFilter] = useState("all")
 
   const filteredProjects = projects.filter((project) => {
-    return (
-      (selectedCategory === "Tất cả" || project.category === selectedCategory) &&
-      (selectedYear === "Tất cả" || project.year.toString() === selectedYear) &&
-      (selectedType === "Tất cả" || project.type === selectedType)
-    )
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.techStack.some((tech) => tech.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    const matchesCategory = categoryFilter === "all" || project.category === categoryFilter
+    const matchesYear = yearFilter === "all" || project.year === yearFilter
+    const matchesType = typeFilter === "all" || project.type === typeFilter
+
+    return matchesSearch && matchesCategory && matchesYear && matchesType
   })
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Dự án của BCN</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Dự Án BCN</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Khám phá các sản phẩm và dự án mà thành viên BCN đã triển khai, từ website đến ứng dụng mobile và các giải
-            pháp AI
+            Khám phá các sản phẩm và dự án công nghệ mà thành viên BCN đã phát triển
           </p>
         </div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-4 mb-4">
             <Filter className="h-5 w-5 text-gray-500" />
-            <h3 className="font-semibold text-gray-900">Bộ lọc</h3>
+            <h3 className="font-semibold">Bộ lọc dự án</h3>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Danh mục</label>
-              <div className="flex flex-wrap gap-2">
-                {categories.map((category) => (
-                  <Button
-                    key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
-                  </Button>
-                ))}
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Tìm kiếm dự án..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Năm</label>
-              <div className="flex flex-wrap gap-2">
-                {years.map((year) => (
-                  <Button
-                    key={year}
-                    variant={selectedYear === year ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedYear(year)}
-                  >
-                    {year}
-                  </Button>
-                ))}
-              </div>
-            </div>
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Loại dự án" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả loại</SelectItem>
+                <SelectItem value="Web">Web</SelectItem>
+                <SelectItem value="App">Mobile App</SelectItem>
+              </SelectContent>
+            </Select>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Loại</label>
-              <div className="flex flex-wrap gap-2">
-                {types.map((type) => (
-                  <Button
-                    key={type}
-                    variant={selectedType === type ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedType(type)}
-                  >
-                    {type}
-                  </Button>
-                ))}
-              </div>
-            </div>
+            <Select value={yearFilter} onValueChange={setYearFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Năm thực hiện" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả năm</SelectItem>
+                <SelectItem value="2024">2024</SelectItem>
+                <SelectItem value="2023">2023</SelectItem>
+                <SelectItem value="2022">2022</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={typeFilter} onValueChange={setTypeFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Loại nhóm" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả</SelectItem>
+                <SelectItem value="Nhóm">Nhóm</SelectItem>
+                <SelectItem value="Cá nhân">Cá nhân</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
-            <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="relative">
+            <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
+              <div className="aspect-video relative overflow-hidden">
                 <Image
                   src={project.image || "/placeholder.svg"}
-                  alt={project.name}
-                  width={400}
-                  height={300}
-                  className="w-full h-48 object-cover"
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
+                <div className="absolute top-4 left-4">
+                  <Badge variant={project.category === "Web" ? "default" : "secondary"}>{project.category}</Badge>
+                </div>
                 <div className="absolute top-4 right-4">
-                  <Badge variant="secondary">{project.category}</Badge>
+                  <Badge variant="outline" className="bg-white/90">
+                    {project.year}
+                  </Badge>
                 </div>
               </div>
 
               <CardHeader>
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-xl">{project.name}</CardTitle>
-                  <Badge variant="outline">{project.year}</Badge>
+                <div className="flex items-start justify-between">
+                  <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                    <Link href={`/projects/${project.id}`} className="hover:text-blue-600">
+                      {project.title}
+                    </Link>
+                  </CardTitle>
+                  <Badge variant="outline" className="ml-2">
+                    {project.type}
+                  </Badge>
                 </div>
-                <p className="text-gray-600">{project.description}</p>
               </CardHeader>
 
               <CardContent className="space-y-4">
+                <p className="text-gray-600 text-sm leading-relaxed">{project.description}</p>
+
                 {/* Tech Stack */}
-                <div>
-                  <h4 className="font-medium text-sm text-gray-700 mb-2">Tech Stack</h4>
-                  <div className="flex flex-wrap gap-1">
-                    {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech) => (
+                    <Badge key={tech} variant="secondary" className="text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
                 </div>
 
-                {/* Members */}
-                <div>
-                  <h4 className="font-medium text-sm text-gray-700 mb-2">Thành viên</h4>
-                  <div className="flex -space-x-2">
+                {/* Team Members */}
+                <div className="space-y-2">
+                  <p className="text-sm font-medium text-gray-700">Thành viên tham gia:</p>
+                  <div className="flex items-center gap-2">
                     {project.members.map((member, index) => (
-                      <Avatar key={index} className="border-2 border-white w-8 h-8">
-                        <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
-                        <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
+                      <div key={index} className="flex items-center gap-1">
+                        <Image
+                          src={member.avatar || "/placeholder.svg"}
+                          alt={member.name}
+                          width={24}
+                          height={24}
+                          className="rounded-full"
+                        />
+                        <span className="text-xs text-gray-600">{member.name}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Links */}
+                {/* Action Buttons */}
                 <div className="flex gap-2 pt-2">
-                  <Button asChild variant="outline" size="sm">
-                    <Link href={project.githubUrl} target="_blank">
-                      <Github className="h-4 w-4 mr-2" />
-                      GitHub
-                    </Link>
+                  <Button asChild size="sm" className="flex-1">
+                    <Link href={`/projects/${project.id}`}>Chi Tiết</Link>
                   </Button>
+                  {project.githubUrl && (
+                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                      <Link href={project.githubUrl} target="_blank">
+                        <Github className="h-4 w-4 mr-2" />
+                        GitHub
+                      </Link>
+                    </Button>
+                  )}
                   {project.demoUrl && (
-                    <Button asChild size="sm">
+                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
                       <Link href={project.demoUrl} target="_blank">
                         <ExternalLink className="h-4 w-4 mr-2" />
                         Demo
@@ -235,11 +286,44 @@ export default function ProjectsPage() {
           ))}
         </div>
 
+        {/* No Results */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Không tìm thấy dự án nào phù hợp với bộ lọc</p>
+            <div className="text-gray-400 mb-4">
+              <Search className="h-16 w-16 mx-auto" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Không tìm thấy dự án</h3>
+            <p className="text-gray-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
           </div>
         )}
+
+        {/* Stats */}
+        <div className="mt-16 bg-gray-50 rounded-lg p-8">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">{projects.length}</div>
+              <div className="text-gray-600">Tổng dự án</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                {projects.filter((p) => p.category === "Web").length}
+              </div>
+              <div className="text-gray-600">Dự án Web</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">
+                {projects.filter((p) => p.category === "App").length}
+              </div>
+              <div className="text-gray-600">Ứng dụng Mobile</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">
+                {new Set(projects.flatMap((p) => p.members.map((m) => m.name))).size}
+              </div>
+              <div className="text-gray-600">Thành viên tham gia</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -8,14 +8,13 @@ import Footer from "@/components/layout/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Ban Công Nghệ IUH - BCN",
-  description:
-    "Ban Công Nghệ - Nơi tập hợp những sinh viên đam mê công nghệ, cùng nhau học tập và phát triển dự án thực tế",
-  keywords: "BCN, Ban Công Nghệ, IUH, lập trình, công nghệ, sinh viên",
+  title: "BCN - Ban Công Nghệ IUH",
+  description: "Ban Công Nghệ - Nơi ươm mầm tài năng công nghệ tại Trường Đại học Công nghiệp TP.HCM",
+  keywords: "BCN, Ban Công Nghệ, IUH, lập trình, công nghệ, sinh viên, dự án",
   authors: [{ name: "Ban Công Nghệ IUH" }],
   openGraph: {
-    title: "Ban Công Nghệ IUH - BCN",
-    description: "Nơi tập hợp những sinh viên đam mê công nghệ, cùng nhau học tập và phát triển dự án thực tế",
+    title: "BCN - Ban Công Nghệ IUH",
+    description: "Nơi ươm mầm tài năng công nghệ tại IUH",
     type: "website",
     locale: "vi_VN",
   },

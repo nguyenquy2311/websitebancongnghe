@@ -1,282 +1,361 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Github, Linkedin, ExternalLink, Filter } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Github, Linkedin, ExternalLink, Mail, Filter } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
-// Sample members data
+// Mock data for members
 const members = [
   {
-    id: 1,
-    name: "Nguyễn Văn An",
+    id: "nguyen-van-anh",
+    name: "Nguyễn Văn Anh",
     role: "Leader",
     group: "Leader",
-    avatar: "/placeholder.svg?height=100&width=100",
-    description: "Full-stack developer với 3 năm kinh nghiệm. Đam mê xây dựng sản phẩm có tác động tích cực.",
-    skills: ["React", "Node.js", "Python", "AWS"],
-    joinYear: 2022,
-    github: "https://github.com/nguyenvanan",
-    linkedin: "https://linkedin.com/in/nguyenvanan",
-    portfolio: "https://nguyenvanan.dev",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "Passionate về Full-stack Development và Project Management. Mục tiêu trở thành Tech Lead tại các công ty công nghệ hàng đầu.",
+    skills: ["React", "Node.js", "Python", "Leadership"],
+    joinYear: "2022",
+    github: "https://github.com/nguyenvananh",
+    linkedin: "https://linkedin.com/in/nguyenvananh",
+    portfolio: "https://nguyenvananh.dev",
+    email: "anh.nguyen@student.iuh.edu.vn",
   },
   {
-    id: 2,
+    id: "tran-thi-binh",
     name: "Trần Thị Bình",
     role: "Core Team",
-    group: "Core Team",
-    avatar: "/placeholder.svg?height=100&width=100",
-    description: "UI/UX Designer và Frontend Developer. Yêu thích tạo ra những trải nghiệm người dùng tuyệt vời.",
-    skills: ["Figma", "React", "TypeScript", "Tailwind CSS"],
-    joinYear: 2022,
+    group: "Core",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "Frontend Developer với đam mê UI/UX Design. Yêu thích tạo ra những giao diện người dùng đẹp và thân thiện.",
+    skills: ["React", "Vue.js", "Figma", "Tailwind CSS"],
+    joinYear: "2022",
     github: "https://github.com/tranthibinh",
     linkedin: "https://linkedin.com/in/tranthibinh",
     portfolio: null,
+    email: "binh.tran@student.iuh.edu.vn",
   },
   {
-    id: 3,
+    id: "le-van-cuong",
     name: "Lê Văn Cường",
     role: "Web Developer",
-    group: "Web Team",
-    avatar: "/placeholder.svg?height=100&width=100",
-    description: "Frontend developer chuyên về React và Vue.js. Luôn cập nhật những công nghệ mới nhất.",
-    skills: ["React", "Vue.js", "JavaScript", "CSS"],
-    joinYear: 2023,
+    group: "Web",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "Backend Developer chuyên về API development và database design. Mong muốn trở thành Solution Architect.",
+    skills: ["Node.js", "Express", "MongoDB", "PostgreSQL"],
+    joinYear: "2023",
     github: "https://github.com/levancuong",
     linkedin: "https://linkedin.com/in/levancuong",
-    portfolio: "https://levancuong.portfolio.dev",
+    portfolio: "https://levancuong.dev",
+    email: "cuong.le@student.iuh.edu.vn",
   },
   {
-    id: 4,
+    id: "pham-thi-dung",
     name: "Phạm Thị Dung",
     role: "App Developer",
-    group: "App Team",
-    avatar: "/placeholder.svg?height=100&width=100",
-    description: "Mobile developer với kinh nghiệm phát triển ứng dụng React Native và Flutter.",
-    skills: ["React Native", "Flutter", "Firebase", "TypeScript"],
-    joinYear: 2023,
+    group: "App",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "Mobile App Developer với kinh nghiệm React Native và Flutter. Đam mê tạo ra những ứng dụng mobile hữu ích.",
+    skills: ["React Native", "Flutter", "Dart", "Firebase"],
+    joinYear: "2023",
     github: "https://github.com/phamthidung",
     linkedin: "https://linkedin.com/in/phamthidung",
     portfolio: null,
+    email: "dung.pham@student.iuh.edu.vn",
   },
   {
-    id: 5,
+    id: "hoang-van-em",
     name: "Hoàng Văn Em",
-    role: "Backend Developer",
-    group: "Web Team",
-    avatar: "/placeholder.svg?height=100&width=100",
-    description: "Backend developer chuyên về Node.js và Python. Đam mê xây dựng hệ thống scalable.",
-    skills: ["Node.js", "Python", "MongoDB", "PostgreSQL"],
-    joinYear: 2024,
+    role: "Web Developer",
+    group: "Web",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "Frontend Developer yêu thích JavaScript và các framework hiện đại. Mục tiêu trở thành Senior Frontend Developer.",
+    skills: ["JavaScript", "React", "Next.js", "TypeScript"],
+    joinYear: "2024",
     github: "https://github.com/hoangvanem",
     linkedin: "https://linkedin.com/in/hoangvanem",
-    portfolio: null,
+    portfolio: "https://hoangvanem.vercel.app",
+    email: "em.hoang@student.iuh.edu.vn",
   },
   {
-    id: 6,
-    name: "Võ Thị Phương",
+    id: "vu-thi-phuong",
+    name: "Vũ Thị Phương",
     role: "Designer",
-    group: "Core Team",
-    avatar: "/placeholder.svg?height=100&width=100",
-    description: "Graphic designer và UI/UX designer. Tạo ra những thiết kế đẹp mắt và thân thiện với người dùng.",
-    skills: ["Figma", "Adobe Creative Suite", "Sketch", "Prototyping"],
-    joinYear: 2024,
+    group: "Web",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "UI/UX Designer với đam mê tạo ra những trải nghiệm người dùng tuyệt vời. Chuyên về Design System và User Research.",
+    skills: ["Figma", "Adobe XD", "Photoshop", "User Research"],
+    joinYear: "2023",
     github: null,
-    linkedin: "https://linkedin.com/in/vothiphuong",
-    portfolio: "https://vothiphuong.design",
+    linkedin: "https://linkedin.com/in/vuthiphuong",
+    portfolio: "https://vuthiphuong.design",
+    email: "phuong.vu@student.iuh.edu.vn",
+  },
+  {
+    id: "dang-van-giang",
+    name: "Đặng Văn Giang",
+    role: "App Developer",
+    group: "App",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "iOS Developer với kinh nghiệm Swift và SwiftUI. Đam mê phát triển ứng dụng iOS native với performance cao.",
+    skills: ["Swift", "SwiftUI", "iOS", "Xcode"],
+    joinYear: "2024",
+    github: "https://github.com/dangvangiang",
+    linkedin: "https://linkedin.com/in/dangvangiang",
+    portfolio: null,
+    email: "giang.dang@student.iuh.edu.vn",
+  },
+  {
+    id: "bui-thi-hoa",
+    name: "Bùi Thị Hoa",
+    role: "Web Developer",
+    group: "Web",
+    avatar: "/placeholder.svg?height=150&width=150",
+    description:
+      "Full-stack Developer với kinh nghiệm cả Frontend và Backend. Yêu thích làm việc với các công nghệ mới và thử thách bản thân.",
+    skills: ["Python", "Django", "React", "PostgreSQL"],
+    joinYear: "2024",
+    github: "https://github.com/buithihoa",
+    linkedin: "https://linkedin.com/in/buithihoa",
+    portfolio: "https://buithihoa.dev",
+    email: "hoa.bui@student.iuh.edu.vn",
   },
 ]
 
-export default function MembersPage() {
-  const [selectedGroup, setSelectedGroup] = useState("Tất cả")
-  const [selectedRole, setSelectedRole] = useState("Tất cả")
-  const [selectedYear, setSelectedYear] = useState("Tất cả")
+const groups = [
+  { id: "all", name: "Tất cả", color: "bg-gray-100 text-gray-800" },
+  { id: "Leader", name: "Leader", color: "bg-red-100 text-red-800" },
+  { id: "Core", name: "Core Team", color: "bg-blue-100 text-blue-800" },
+  { id: "Web", name: "Nhóm Web", color: "bg-green-100 text-green-800" },
+  { id: "App", name: "Nhóm App", color: "bg-purple-100 text-purple-800" },
+]
 
-  const groups = ["Tất cả", "Leader", "Core Team", "Web Team", "App Team"]
-  const roles = ["Tất cả", "Leader", "Core Team", "Web Developer", "App Developer", "Backend Developer", "Designer"]
-  const years = ["Tất cả", "2024", "2023", "2022"]
+const roles = ["Tất cả", "Leader", "Core Team", "Web Developer", "App Developer", "Designer"]
+
+export default function MembersPage() {
+  const [groupFilter, setGroupFilter] = useState("all")
+  const [roleFilter, setRoleFilter] = useState("Tất cả")
+  const [yearFilter, setYearFilter] = useState("all")
 
   const filteredMembers = members.filter((member) => {
-    return (
-      (selectedGroup === "Tất cả" || member.group === selectedGroup) &&
-      (selectedRole === "Tất cả" || member.role === selectedRole) &&
-      (selectedYear === "Tất cả" || member.joinYear.toString() === selectedYear)
-    )
+    const matchesGroup = groupFilter === "all" || member.group === groupFilter
+    const matchesRole = roleFilter === "Tất cả" || member.role === roleFilter
+    const matchesYear = yearFilter === "all" || member.joinYear === yearFilter
+
+    return matchesGroup && matchesRole && matchesYear
   })
 
-  const groupedMembers = groups.slice(1).reduce(
-    (acc, group) => {
-      acc[group] = filteredMembers.filter((member) => member.group === group)
-      return acc
-    },
-    {} as Record<string, typeof members>,
-  )
+  const getGroupColor = (group: string) => {
+    const groupInfo = groups.find((g) => g.id === group)
+    return groupInfo?.color || "bg-gray-100 text-gray-800"
+  }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Thành viên BCN</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Thành Viên BCN</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Làm quen với những thành viên tài năng của Ban Công Nghệ, những người đang cùng nhau xây dựng tương lai công
-            nghệ
+            Gặp gỡ đội ngũ tài năng của Ban Công Nghệ - những người đang cùng nhau xây dựng tương lai công nghệ
           </p>
+        </div>
+
+        {/* Group Navigation */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {groups.map((group) => (
+            <Button
+              key={group.id}
+              variant={groupFilter === group.id ? "default" : "outline"}
+              onClick={() => setGroupFilter(group.id)}
+              className="rounded-full"
+            >
+              {group.name}
+              <Badge variant="secondary" className="ml-2">
+                {group.id === "all" ? members.length : members.filter((m) => m.group === group.id).length}
+              </Badge>
+            </Button>
+          ))}
         </div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-4 mb-4">
             <Filter className="h-5 w-5 text-gray-500" />
-            <h3 className="font-semibold text-gray-900">Bộ lọc</h3>
+            <h3 className="font-semibold">Bộ lọc thành viên</h3>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nhóm</label>
-              <div className="flex flex-wrap gap-2">
-                {groups.map((group) => (
-                  <Button
-                    key={group}
-                    variant={selectedGroup === group ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedGroup(group)}
-                  >
-                    {group}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Vai trò</label>
-              <div className="flex flex-wrap gap-2">
+            <Select value={roleFilter} onValueChange={setRoleFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Vai trò" />
+              </SelectTrigger>
+              <SelectContent>
                 {roles.map((role) => (
-                  <Button
-                    key={role}
-                    variant={selectedRole === role ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedRole(role)}
-                  >
+                  <SelectItem key={role} value={role}>
                     {role}
-                  </Button>
+                  </SelectItem>
                 ))}
-              </div>
-            </div>
+              </SelectContent>
+            </Select>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Năm tham gia</label>
-              <div className="flex flex-wrap gap-2">
-                {years.map((year) => (
-                  <Button
-                    key={year}
-                    variant={selectedYear === year ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedYear(year)}
-                  >
-                    {year}
-                  </Button>
-                ))}
-              </div>
-            </div>
+            <Select value={yearFilter} onValueChange={setYearFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Năm tham gia" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả năm</SelectItem>
+                <SelectItem value="2024">2024</SelectItem>
+                <SelectItem value="2023">2023</SelectItem>
+                <SelectItem value="2022">2022</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Button
+              variant="outline"
+              onClick={() => {
+                setGroupFilter("all")
+                setRoleFilter("Tất cả")
+                setYearFilter("all")
+              }}
+            >
+              Xóa bộ lọc
+            </Button>
           </div>
         </div>
 
-        {/* Members by Group */}
-        {selectedGroup === "Tất cả" ? (
-          Object.entries(groupedMembers).map(
-            ([group, groupMembers]) =>
-              groupMembers.length > 0 && (
-                <div key={group} className="mb-12">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">{group}</h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {groupMembers.map((member) => (
-                      <MemberCard key={member.id} member={member} />
+        {/* Members Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredMembers.map((member) => (
+            <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                {/* Avatar and Basic Info */}
+                <div className="text-center mb-4">
+                  <div className="relative w-24 h-24 mx-auto mb-4">
+                    <Image
+                      src={member.avatar || "/placeholder.svg"}
+                      alt={member.name}
+                      fill
+                      className="rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-1 hover:text-blue-600 transition-colors">
+                    <Link href={`/members/${member.id}`}>{member.name}</Link>
+                  </h3>
+                  <Badge className={getGroupColor(member.group)}>{member.role}</Badge>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm text-gray-600 mb-4 leading-relaxed">{member.description}</p>
+
+                {/* Skills */}
+                <div className="mb-4">
+                  <p className="text-xs font-medium text-gray-700 mb-2">Kỹ năng:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {member.skills.map((skill) => (
+                      <Badge key={skill} variant="secondary" className="text-xs">
+                        {skill}
+                      </Badge>
                     ))}
                   </div>
                 </div>
-              ),
-          )
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredMembers.map((member) => (
-              <MemberCard key={member.id} member={member} />
-            ))}
-          </div>
-        )}
 
+                {/* Join Year */}
+                <div className="mb-4">
+                  <p className="text-xs text-gray-500">Tham gia BCN từ năm {member.joinYear}</p>
+                </div>
+
+                {/* Social Links */}
+                <div className="flex gap-2">
+                  <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                    <Link href={`/members/${member.id}`}>Xem Profile</Link>
+                  </Button>
+
+                  <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                    <Link href={`mailto:${member.email}`}>
+                      <Mail className="h-4 w-4" />
+                    </Link>
+                  </Button>
+
+                  {member.github && (
+                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                      <Link href={member.github} target="_blank">
+                        <Github className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  )}
+
+                  {member.linkedin && (
+                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                      <Link href={member.linkedin} target="_blank">
+                        <Linkedin className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  )}
+
+                  {member.portfolio && (
+                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                      <Link href={member.portfolio} target="_blank">
+                        <ExternalLink className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* No Results */}
         {filteredMembers.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Không tìm thấy thành viên nào phù hợp với bộ lọc</p>
+            <div className="text-gray-400 mb-4">
+              <Filter className="h-16 w-16 mx-auto" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Không tìm thấy thành viên</h3>
+            <p className="text-gray-600">Thử thay đổi bộ lọc để xem thêm thành viên</p>
           </div>
         )}
-      </div>
-    </div>
-  )
-}
 
-function MemberCard({ member }: { member: (typeof members)[0] }) {
-  return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      <CardContent className="p-6">
-        <div className="text-center mb-4">
-          <Avatar className="w-20 h-20 mx-auto mb-4">
-            <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
-            <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-          <h3 className="text-xl font-semibold text-gray-900">{member.name}</h3>
-          <Badge variant="secondary" className="mt-2">
-            {member.role}
-          </Badge>
-        </div>
-
-        <p className="text-gray-600 text-sm mb-4 text-center">{member.description}</p>
-
-        {/* Skills */}
-        <div className="mb-4">
-          <h4 className="font-medium text-sm text-gray-700 mb-2">Kỹ năng</h4>
-          <div className="flex flex-wrap gap-1">
-            {member.skills.map((skill) => (
-              <Badge key={skill} variant="outline" className="text-xs">
-                {skill}
-              </Badge>
-            ))}
+        {/* Stats */}
+        <div className="mt-16 bg-gray-50 rounded-lg p-8">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">{members.length}</div>
+              <div className="text-gray-600">Tổng thành viên</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                {members.filter((m) => m.group === "Web").length}
+              </div>
+              <div className="text-gray-600">Nhóm Web</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">
+                {members.filter((m) => m.group === "App").length}
+              </div>
+              <div className="text-gray-600">Nhóm App</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">
+                {new Set(members.flatMap((m) => m.skills)).size}
+              </div>
+              <div className="text-gray-600">Kỹ năng đa dạng</div>
+            </div>
           </div>
         </div>
-
-        {/* Join Year */}
-        <div className="mb-4">
-          <p className="text-sm text-gray-500">Tham gia từ: {member.joinYear}</p>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex gap-2 justify-center">
-          {member.github && (
-            <Button asChild variant="outline" size="sm">
-              <Link href={member.github} target="_blank">
-                <Github className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-          {member.linkedin && (
-            <Button asChild variant="outline" size="sm">
-              <Link href={member.linkedin} target="_blank">
-                <Linkedin className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-          {member.portfolio && (
-            <Button asChild variant="outline" size="sm">
-              <Link href={member.portfolio} target="_blank">
-                <ExternalLink className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }
