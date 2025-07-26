@@ -1,91 +1,61 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Code2 } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import Navbar from '@/components/AppNavbar/AppNavbar';
 
-const navigation = [
-  { name: "Trang Chủ", href: "/" },
-  { name: "Dự Án", href: "/projects" },
-  { name: "Thành Viên", href: "/members" },
-  { name: "Về BCN", href: "/about" },
-  { name: "Tham Gia", href: "/join" },
-]
-
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
-
+const AppHeader: React.FC = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <Code2 className="h-5 w-5 text-white" />
-            </div>
-            <span className="font-bold text-xl">BCN</span>
+    <header className="py-4 shadow-sm">
+      <div className="mx-auto flex justify-between items-center gap-5 px-8 md:px-[120px] sm:px-[15px] sm:gap-4">
+        
+        {/* Left: Logo */}
+        <div className="flex items-center gap-6">
+          <Link href="/">
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={195}
+              height={40}
+              className="h-auto w-auto"
+              priority
+            />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  pathname === item.href ? "text-blue-600" : "text-gray-600"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+        </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex">
-            <Button asChild>
-              <Link href="/join">Tham Gia BCN</Link>
-            </Button>
+          {/* Desktop Navbar */}
+          <Navbar />
+
+        {/* Right: Auth + Mobile icon */}
+        <div className="flex items-center gap-4">
+          {/* Mobile menu icon */}
+          <button className="md:hidden inline-block">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+              fill="#00838f"
+            >
+              <path d="M120-680v-80h720v80H120Zm0 480v-80h720v80H120Zm0-240v-80h720v80H120Z" />
+            </svg>
+          </button>
+
+          {/* Auth buttons */}
+          <div className="flex items-center gap-3">
+            <Link href="/login" className="text-sm font-normal text-gray-600 hover:text-cyan-800 transition-colors">
+              Đăng nhập
+            </Link>
+            <Link href="/register" className="text-sm font-normal bg-cyan-600 text-white px-3 py-1 rounded hover:bg-cyan-700 transition-colors">
+              Đăng ký
+            </Link>
           </div>
-
-          {/* Mobile Menu */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="sm">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80">
-              <div className="flex flex-col space-y-4 mt-8">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`text-lg font-medium transition-colors hover:text-blue-600 ${
-                      pathname === item.href ? "text-blue-600" : "text-gray-600"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <div className="pt-4">
-                  <Button asChild className="w-full">
-                    <Link href="/join" onClick={() => setIsOpen(false)}>
-                      Tham Gia BCN
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
+
+export default AppHeader;
