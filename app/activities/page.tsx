@@ -204,7 +204,7 @@ export default function ActivitiesPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar */}
-          <div className="sticky top-16 self-start max-h-[calc(100vh-40px)] overflow-auto lg:col-span-1 space-y-6">
+            <div className="lg:sticky lg:top-16 lg:self-start lg:max-h-[calc(100vh-40px)] lg:overflow-auto lg:col-span-1 space-y-6">
             {/* Upcoming Events */}
             <Card>
               <CardHeader>
