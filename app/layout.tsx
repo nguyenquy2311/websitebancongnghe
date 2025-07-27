@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="vi">
       <body className={inter.className}>
         <Header />
-        <main>{children}</main>
+        <main className="mt-[64px]">{children}</main>
         <Footer />
       </body>
     </html>

@@ -1,3 +1,4 @@
+// components/layout/AppHeader.tsx
 'use client';
 
 import Image from 'next/image';
@@ -56,7 +57,7 @@ const AppHeader = () => {
   };
 
   return (
-    <header className="py-4 shadow-sm px-2 sm:px-10 xl:px-[60px] ">
+    <header className="header fixed top-0 z-50 w-full bg-[rgba(234,233,238,0.95)] backdrop-blur-md border-white/20 shadow-lg px-4 md:px-10 lg:px-[60px] xl:px-[150px] py-3">
       <div className="mx-auto flex justify-between items-center px-4">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
@@ -73,9 +74,9 @@ const AppHeader = () => {
           />
         </div>
 
-        {/* Avatar + menu icon */}
+        {/* Avatar + menu icon + Auth button */}
         <div className="relative flex items-center gap-3" ref={dropdownRef}>
-          {/* User Avatar */}
+          {/* Avatar (desktop) */}
           {!loading && user && (
             <div
               className="flex items-center gap-2 xl:cursor-pointer"
@@ -88,13 +89,23 @@ const AppHeader = () => {
                   {user.name[0].toUpperCase()}
                 </div>
               )}
-              <span className="text-sm font-medium text-gray-800 hidden sm:inline">
-                {user.name}
-              </span>
+              <span className="text-md font-medium text-gray-800 hidden sm:inline">{user.name}</span>
             </div>
           )}
 
-          {/* Dropdown (desktop) */}
+          {/* Đăng nhập/Đăng ký (desktop only, chưa login) */}
+          {!loading && !user && (
+            <div className="hidden xl:flex gap-2">
+              <Link
+                href="/login"
+                className="text-md px-4 py-2 font-normal text-gray-600 hover:text-cyan-800 transition-colors"
+              >
+                Đăng nhập
+              </Link>
+            </div>
+          )}
+
+          {/* Dropdown menu (chỉ desktop) */}
           {dropdownOpen && user && (
             <ul className="absolute right-0 top-12 bg-white border rounded shadow-md z-50 w-48 hidden xl:block">
               <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
@@ -112,7 +123,7 @@ const AppHeader = () => {
             </ul>
           )}
 
-          {/* Menu icon */}
+          {/* Menu icon (mobile) */}
           <button
             className="text-xl text-cyan-700 xl:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}

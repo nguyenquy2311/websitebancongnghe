@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* globals.css hoặc file css chung */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+*{
+  font-family: 'Quicksand', sans-serif;
+}
 
 @layer utilities {
   .text-balance {
@@ -83,8 +93,5 @@
 @layer base {
   * {
     @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
