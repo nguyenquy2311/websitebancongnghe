@@ -785,8 +785,8 @@ video {
 .top-1\/2 {
   top: 50%;
 }
-.top-12 {
-  top: 3rem;
+.top-14 {
+  top: 3.5rem;
 }
 .top-2 {
   top: 0.5rem;
@@ -809,6 +809,12 @@ video {
 .top-full {
   top: 100%;
 }
+.top-12 {
+  top: 3rem;
+}
+.top-20 {
+  top: 5rem;
+}
 .z-10 {
   z-index: 10;
 }
@@ -824,14 +830,20 @@ video {
 .z-\[1\] {
   z-index: 1;
 }
+.z-40 {
+  z-index: 40;
+}
 .order-2 {
   order: 2;
 }
 .order-3 {
   order: 3;
 }
-.order-1 {
-  order: 1;
+.m-\[auto\] {
+  margin: auto;
+}
+.m-\[auto\1C\] {
+  margin: auto;
 }
 .-mx-1 {
   margin-left: -0.25rem;
@@ -934,6 +946,21 @@ video {
 }
 .mt-auto {
   margin-top: auto;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-\[\] {
+  margin-top: ;
+}
+.mt-5 {
+  margin-top: 1.25rem;
+}
+.mt-\[20px\] {
+  margin-top: 20px;
+}
+.mt-10 {
+  margin-top: 2.5rem;
 }
 .block {
   display: block;
@@ -1056,6 +1083,12 @@ video {
 }
 .max-h-screen {
   max-height: 100vh;
+}
+.max-h-0 {
+  max-height: 0px;
+}
+.max-h-96 {
+  max-height: 24rem;
 }
 .min-h-0 {
   min-height: 0px;
@@ -1561,6 +1594,14 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(254 240 138 / var(--tw-border-opacity, 1));
 }
+.border-cyan-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(8 145 178 / var(--tw-border-opacity, 1));
+}
+.border-red-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(252 165 165 / var(--tw-border-opacity, 1));
+}
 .border-l-transparent {
   border-left-color: transparent;
 }
@@ -1836,6 +1877,22 @@ video {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.px-\[\] {
+  padding-left: ;
+  padding-right: ;
+}
+.px-\[60px\] {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -1892,6 +1949,9 @@ video {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 .text-left {
   text-align: left;
@@ -2145,6 +2205,9 @@ video {
 }
 .opacity-90 {
   opacity: 0.9;
+}
+.opacity-100 {
+  opacity: 1;
 }
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
@@ -2500,6 +2563,11 @@ video {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-gray-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-accent-foreground:hover {
@@ -3492,6 +3560,14 @@ video {
     margin-top: 0px;
   }
 
+  .sm\:block {
+    display: block;
+  }
+
+  .sm\:inline {
+    display: inline;
+  }
+
   .sm\:flex {
     display: flex;
   }
@@ -3529,6 +3605,16 @@ video {
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .sm\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .sm\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .sm\:text-left {
@@ -3593,6 +3679,21 @@ video {
   .md\:px-\[60px\] {
     padding-left: 60px;
     padding-right: 60px;
+  }
+
+  .md\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .md\:px-\[\] {
+    padding-left: ;
+    padding-right: ;
   }
 
   .md\:text-sm {
@@ -3678,6 +3779,14 @@ video {
 
 @media (min-width: 1280px) {
 
+  .xl\:static {
+    position: static;
+  }
+
+  .xl\:block {
+    display: block;
+  }
+
   .xl\:flex {
     display: flex;
   }
@@ -3686,8 +3795,67 @@ video {
     display: none;
   }
 
+  .xl\:cursor-pointer {
+    cursor: pointer;
+  }
+
   .xl\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .xl\:flex-row {
+    flex-direction: row;
+  }
+
+  .xl\:items-center {
+    align-items: center;
+  }
+
+  .xl\:gap-4 {
+    gap: 1rem;
+  }
+
+  .xl\:gap-6 {
+    gap: 1.5rem;
+  }
+
+  .xl\:rounded-none {
+    border-radius: 0px;
+  }
+
+  .xl\:bg-transparent {
+    background-color: transparent;
+  }
+
+  .xl\:p-0 {
+    padding: 0px;
+  }
+
+  .xl\:px-\[60px\] {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .xl\:pb-0 {
+    padding-bottom: 0px;
+  }
+
+  .xl\:pb-\[\] {
+    padding-bottom: ;
+  }
+
+  .xl\:pb-\[0\] {
+    padding-bottom: 0;
+  }
+
+  .xl\:pb-4 {
+    padding-bottom: 1rem;
+  }
+
+  .xl\:shadow-none {
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
 }
 

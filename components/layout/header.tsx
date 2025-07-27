@@ -16,6 +16,7 @@ const AppHeader = () => {
   const [user, setUser] = useState<{ name: string; avatarUrl?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -51,80 +52,51 @@ const AppHeader = () => {
   const handleLogout = () => {
     removeToken();
     setUser(null);
-    router.refresh();
-    router.push('/login');
+    window.location.href = '/login';
   };
 
   return (
-    <header className="py-4 shadow-sm">
-      <div className="mx-auto flex justify-between items-center px-4 md:px-[60px]">
+    <header className="py-4 shadow-sm px-2 sm:px-10 xl:px-[60px] ">
+      <div className="mx-auto flex justify-between items-center px-4">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={195}
-            height={40}
-            className="h-auto w-auto"
-            priority
-          />
+          <Image src="/logo.svg" alt="Logo" width={195} height={40} className="h-auto w-auto" priority />
         </Link>
 
-        {/* Navbar (ẩn ở dưới xl) */}
+        {/* Navbar - chỉ hiện trên xl */}
         <div className="hidden xl:flex">
-          <Navbar />
+          <Navbar
+            isMobile={false}
+            user={user}
+            onLogout={handleLogout}
+            closeMobile={() => setMobileOpen(false)}
+          />
         </div>
 
-        {/* Right section: User Info + Menu Icon */}
+        {/* Avatar + menu icon */}
         <div className="relative flex items-center gap-3" ref={dropdownRef}>
-          {/* User Info */}
-          <div className="order-1">
-            {loading ? null : !user ? (
-              <div className="flex items-center gap-3">
-                <Link href="/login" className="text-sm text-gray-600 hover:text-cyan-800">
-                  Đăng nhập
-                </Link>
-                <Link
-                  href="/register"
-                  className="text-sm bg-cyan-600 text-white px-3 py-1 rounded hover:bg-cyan-700"
-                >
-                  Đăng ký
-                </Link>
-              </div>
-            ) : (
-              <div
-                className="flex items-center gap-2 cursor-pointer"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                {user.avatarUrl ? (
-                  <Image
-                    src={user.avatarUrl}
-                    alt="Avatar"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-cyan-700 text-white flex items-center justify-center text-sm">
-                    {user.name[0].toUpperCase()}
-                  </div>
-                )}
-                <span className="text-sm font-medium text-gray-800">{user.name}</span>
-              </div>
-            )}
-          </div>
+          {/* User Avatar */}
+          {!loading && user && (
+            <div
+              className="flex items-center gap-2 xl:cursor-pointer"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              {user.avatarUrl ? (
+                <Image src={user.avatarUrl} alt="Avatar" width={32} height={32} className="rounded-full" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-cyan-700 text-white flex items-center justify-center text-sm">
+                  {user.name[0].toUpperCase()}
+                </div>
+              )}
+              <span className="text-sm font-medium text-gray-800 hidden sm:inline">
+                {user.name}
+              </span>
+            </div>
+          )}
 
-          {/* Mobile Menu Icon */}
-          <button
-            className="order-2 xl:hidden text-xl text-cyan-700"
-            aria-label="Menu"
-          >
-            <FontAwesomeIcon icon={faBars} />
-          </button>
-
-          {/* Dropdown menu */}
+          {/* Dropdown (desktop) */}
           {dropdownOpen && user && (
-            <ul className="absolute right-0 top-12 bg-white border rounded shadow-md z-50 w-48">
+            <ul className="absolute right-0 top-12 bg-white border rounded shadow-md z-50 w-48 hidden xl:block">
               <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                 <Link href="/profile">Thông tin cá nhân</Link>
               </li>
@@ -139,8 +111,29 @@ const AppHeader = () => {
               </li>
             </ul>
           )}
+
+          {/* Menu icon */}
+          <button
+            className="text-xl text-cyan-700 xl:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
         </div>
       </div>
+
+      {/* Navbar mobile */}
+      {mobileOpen && (
+        <div className="xl:hidden px-4 pt-8 pb-5 animate-slide-down">
+          <Navbar
+            isMobile={true}
+            user={user}
+            onLogout={handleLogout}
+            closeMobile={() => setMobileOpen(false)}
+          />
+        </div>
+      )}
     </header>
   );
 };
