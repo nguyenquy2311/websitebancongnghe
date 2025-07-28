@@ -1,8 +1,4 @@
 {
-<<<<<<< Updated upstream
-  "/page": "app/page.js"
-=======
   "/page": "app/page.js",
   "/activities/page": "app/activities/page.js"
->>>>>>> Stashed changes
 }
