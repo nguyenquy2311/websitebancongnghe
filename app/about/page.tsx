@@ -288,7 +288,7 @@ export default function AboutPage() {
                     Liên hệ ngay
                   </a>
                 </div>
-                <Image className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]" src="/images/homepage/page1/image.webp" alt="" width={343} height={600} />
+                <Image className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]" src="/images/homepage/image.webp"  alt="" width={343} height={600} />
               </div>
             </div>
 

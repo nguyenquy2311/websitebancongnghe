@@ -4,13 +4,14 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Code, Users, Rocket, Target, Award, BookOpen } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import imgPage1 from '/public/images/homepage/page1/image.webp';
+import img1 from '/public/images/homepage/image.webp';
+import img2 from '/public/images/homepage/img2.webp';
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="h-[calc(100dvh-64px)] flex items-center  w-full overflow-hidden overflow-y-auto  max-sm:pt-[70px] max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
-        <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0 max-sm:px-10">
+        <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0  max-sm:gap-8 max-sm:px-10">
           <div className="w-[678px] max-xl:w-[90vw] max-xl:max-w-[650px] max-sm:max-w-full max-xl:text-center">
             <h1 className="font-quicksand font-normal text-[57px] leading-[64px] tracking-[-0.0025em] text-gray-600 max-xl:hover:text-cyan-700 transition-colors max-sm:leading-[55px] max-sm:text-[2.8rem]">
               Muốn trở thành thành viên Ban Công Nghệ?
@@ -26,52 +27,41 @@ export default function HomePage() {
               Liên hệ ngay
             </a>
           </div>
-          <Image className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]" src={imgPage1} alt="" width={343} height={600} />
+          <Image className="w-[343px] h-[600px] max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-0" src={img1} alt="" width={343} height={600} />
         </div>
       </div>
 
       {/* Quick Navigation */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
-              <Link href="/projects">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-                    <Code className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Dự Án</h3>
-                  <p className="text-gray-600">Khám phá các sản phẩm công nghệ mà BCN đã triển khai</p>
-                </CardContent>
-              </Link>
-            </Card>
+      <div className="flex items-center w-full overflow-hidden overflow-y-auto max-sm:pt-[70px] max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
+        <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col-reverse max-xl:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:my-10">
+          {/* Image */}
+          <div className="w-[686px] h-auto md:mt-12 xl:mt-0 max-xl:w-[70vw] max-xl:mt-6 max-sm:w-full max-sm:my-[50px]">
+            <Image
+              src={img2}
+              alt="Khóa học"
+              className="w-full h-full object-contain"
+            />
+          </div>
 
-            <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
-              <Link href="/members">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                    <Users className="h-8 w-8 text-green-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Thành Viên</h3>
-                  <p className="text-gray-600">Gặp gỡ đội ngũ tài năng của Ban Công Nghệ</p>
-                </CardContent>
-              </Link>
-            </Card>
-
-            <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
-              <Link href="/join">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
-                    <Rocket className="h-8 w-8 text-purple-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Tuyển Dụng</h3>
-                  <p className="text-gray-600">Gia nhập BCN và phát triển kỹ năng công nghệ</p>
-                </CardContent>
-              </Link>
-            </Card>
+          {/* Content */}
+          <div className="w-[600px] max-xl:w-[90vw] max-xl:max-w-[550px] max-sm:max-w-full text-center">
+            <h2 className="font-quicksand font-normal text-[48px] leading-[58px] tracking-[-0.0025em] text-gray-600 max-sm:leading-[48px] max-sm:text-[2.2rem]">
+              BAN CÔNG NGHỆ
+            </h2>
+            <p className="font-quicksand font-normal text-base leading-6 tracking-[0.005em] text-gray-500 my-8 max-xl:my-5 max-xl:max-w-[500px] max-sm:max-w-full max-xl:mx-auto max-sm:text-[1.05rem] max-sm:leading-[1.6rem] max-sm:my-4 max-sm:text-center">
+              Ban Công Nghệ Sinh Viên IT thuộc Đoàn Khoa Công Nghệ Thông Tin là nơi kết nối các bạn sinh viên đam mê công nghệ. 
+              Chúng tôi tập trung vào việc phát triển phần mềm, tổ chức các hoạt động đào tạo kỹ năng IT, 
+              và tạo ra một cộng đồng học hỏi, hợp tác. Với mục tiêu giúp sinh viên nâng cao kỹ năng công nghệ, 
+              tham gia các dự án thực tế và phát triển nghề nghiệp, Ban Công Nghệ luôn chào đón những bạn trẻ nhiệt huyết 
+              gia nhập để cùng nhau sáng tạo và học hỏi.
+            </p>
+            <button className="m-auto flex justify-center items-center w-[157px] h-10 bg-cyan-700 shadow-[-9px_-6px_25px_#ffffff,_6px_7px_30px_rgba(0,0,0,0.25)] backdrop-blur-sm rounded font-quicksand font-medium text-sm leading-5 tracking-[0.001em] text-white transition-all duration-300 ease-in-out hover:bg-cyan-400 hover:scale-10 hover:shadow-xl active:scale-95 active:bg-gray-200 active:text-gray-500 active:shadow-[inset_-4px_-4px_4px_rgba(255,255,255,0.75),_inset_4px_4px_4px_rgba(0,0,0,0.25)] max-xl:mx-auto max-sm:mt-6 max-sm:w-[fit-content] max-sm:px-[20px] max-sm:h-[50px] max-sm:text-[18px]">
+              Bắt đầu ngay
+            </button>
           </div>
         </div>
-      </section>
+      </div>
+
 
       {/* Why Join BCN */}
       <section className="py-20">

@@ -11,14 +11,15 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isMobile, user, onLogout, closeMobile }) => {
-  const linkClass = 'text-sm font-medium text-gray-600 hover:text-cyan-800 transition-colors';
+  const linkClass = 'flex py-2 text-sm font-medium text-gray-600 hover:text-cyan-800 transition-colors';
+
 
   const handleClick = () => {
     if (isMobile) closeMobile();
   };
 
   return (
-    <ul className={`${isMobile ? 'flex flex-col gap-3' : 'flex items-center gap-6'}`}>
+    <ul className={`${isMobile ? 'flex flex-col' : 'flex items-center gap-6'}`}>
       {navigation.map((item) => (
         <li key={item.href}>
           <Link href={item.href} className={linkClass} onClick={handleClick}>
