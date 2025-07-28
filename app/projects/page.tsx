@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Github, ExternalLink, Search } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Github, ExternalLink, Search, Filter } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -140,106 +141,56 @@ export default function ProjectsPage() {
         </div>
 
         {/* Filters */}
-        <div className="space-y-8 mb-8">
-          {/* Category, Year, Type Filters in one row */}
-          <div className="space-y-6">
-            {/* Category Filter */}
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">Loại dự án</h3>
-              <div className="flex flex-wrap justify-center gap-3">
-                {["all", "Web", "App"].map((category) => (
-                  <Button
-                    key={category}
-                    variant={categoryFilter === category ? "default" : "outline"}
-                    onClick={() => setCategoryFilter(category)}
-                    className="rounded-full text-sm"
-                  >
-                    {category === "all" ? "Tất cả" : category}
-                    <Badge variant="secondary" className="ml-2 text-xs">
-                      {category === "all" 
-                        ? projects.length 
-                        : projects.filter((p) => p.category === category).length
-                      }
-                    </Badge>
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Year and Type in same row */}
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Year Filter */}
-              <div className="text-center">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Năm thực hiện</h3>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {["all", "2024", "2023", "2022"].map((year) => (
-                    <Button
-                      key={year}
-                      variant={yearFilter === year ? "default" : "outline"}
-                      onClick={() => setYearFilter(year)}
-                      className="rounded-full text-sm"
-                      size="sm"
-                    >
-                      {year === "all" ? "Tất cả" : year}
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {year === "all" 
-                          ? projects.length 
-                          : projects.filter((p) => p.year === year).length
-                        }
-                      </Badge>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Type Filter */}
-              <div className="text-center">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Loại nhóm</h3>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {["all", "Nhóm", "Cá nhân"].map((type) => (
-                    <Button
-                      key={type}
-                      variant={typeFilter === type ? "default" : "outline"}
-                      onClick={() => setTypeFilter(type)}
-                      className="rounded-full text-sm"
-                      size="sm"
-                    >
-                      {type === "all" ? "Tất cả" : type}
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {type === "all" 
-                          ? projects.length 
-                          : projects.filter((p) => p.type === type).length
-                        }
-                      </Badge>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
+        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
+          <div className="flex items-center gap-4 mb-4">
+            <Filter className="h-5 w-5 text-gray-500" />
+            <h3 className="font-semibold">Bộ lọc dự án</h3>
           </div>
 
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                type="text"
-                placeholder="Tìm kiếm dự án theo tên, mô tả hoặc công nghệ..."
+                placeholder="Tìm kiếm dự án..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-3 w-full rounded-full border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+                className="pl-10"
               />
-              {searchTerm && (
-                <Button
-                  onClick={() => setSearchTerm("")}
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  ✕
-                </Button>
-              )}
             </div>
+
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Loại dự án" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả loại</SelectItem>
+                <SelectItem value="Web">Web</SelectItem>
+                <SelectItem value="App">Mobile App</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={yearFilter} onValueChange={setYearFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Năm thực hiện" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả năm</SelectItem>
+                <SelectItem value="2024">2024</SelectItem>
+                <SelectItem value="2023">2023</SelectItem>
+                <SelectItem value="2022">2022</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={typeFilter} onValueChange={setTypeFilter}>
+              <SelectTrigger>
+                <SelectValue placeholder="Loại nhóm" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tất cả</SelectItem>
+                <SelectItem value="Nhóm">Nhóm</SelectItem>
+                <SelectItem value="Cá nhân">Cá nhân</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
@@ -342,21 +293,7 @@ export default function ProjectsPage() {
               <Search className="h-16 w-16 mx-auto" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Không tìm thấy dự án</h3>
-            <p className="text-gray-600">
-              {searchTerm 
-                ? `Không có kết quả nào cho "${searchTerm}". Thử tìm kiếm với từ khóa khác.`
-                : "Thử thay đổi bộ lọc để xem thêm dự án"
-              }
-            </p>
-            {searchTerm && (
-              <Button
-                onClick={() => setSearchTerm("")}
-                variant="outline"
-                className="mt-4"
-              >
-                Xóa tìm kiếm
-              </Button>
-            )}
+            <p className="text-gray-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
           </div>
         )}
 
