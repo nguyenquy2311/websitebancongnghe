@@ -4,8 +4,8 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Github, Linkedin, ExternalLink, Mail, Filter } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Github, Linkedin, ExternalLink, Mail, Filter, Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -144,16 +144,19 @@ const groups = [
 const roles = ["Tất cả", "Leader", "Core Team", "Web Developer", "App Developer", "Designer"]
 
 export default function MembersPage() {
-  const [groupFilter, setGroupFilter] = useState("all")
   const [roleFilter, setRoleFilter] = useState("Tất cả")
   const [yearFilter, setYearFilter] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
 
   const filteredMembers = members.filter((member) => {
-    const matchesGroup = groupFilter === "all" || member.group === groupFilter
     const matchesRole = roleFilter === "Tất cả" || member.role === roleFilter
     const matchesYear = yearFilter === "all" || member.joinYear === yearFilter
+    const matchesSearch = searchQuery === "" || 
+      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      member.description.toLowerCase().includes(searchQuery.toLowerCase())
 
-    return matchesGroup && matchesRole && matchesYear
+    return matchesRole && matchesYear && matchesSearch
   })
 
   const getGroupColor = (group: string) => {
@@ -172,65 +175,96 @@ export default function MembersPage() {
           </p>
         </div>
 
-        {/* Group Navigation */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          {groups.map((group) => (
-            <Button
-              key={group.id}
-              variant={groupFilter === group.id ? "default" : "outline"}
-              onClick={() => setGroupFilter(group.id)}
-              className="rounded-full"
-            >
-              {group.name}
-              <Badge variant="secondary" className="ml-2">
-                {group.id === "all" ? members.length : members.filter((m) => m.group === group.id).length}
-              </Badge>
-            </Button>
-          ))}
-        </div>
-
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Filter className="h-5 w-5 text-gray-500" />
-            <h3 className="font-semibold">Bộ lọc thành viên</h3>
+        <div className="space-y-6 mb-8">
+          {/* Role and Year Filters in same row */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Role Filter */}
+            <div className="text-center">
+              <h3 className="text-sm font-medium text-gray-700 mb-4">Vai trò</h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                {roles.map((role) => (
+                  <Button
+                    key={role}
+                    variant={roleFilter === role ? "default" : "outline"}
+                    onClick={() => setRoleFilter(role)}
+                    className="rounded-full text-sm"
+                    size="sm"
+                  >
+                    {role}
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {role === "Tất cả" 
+                        ? members.length 
+                        : members.filter((m) => m.role === role).length
+                      }
+                    </Badge>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Year Filter */}
+            <div className="text-center">
+              <h3 className="text-sm font-medium text-gray-700 mb-4">Năm tham gia</h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                {["all", "2024", "2023", "2022"].map((year) => (
+                  <Button
+                    key={year}
+                    variant={yearFilter === year ? "default" : "outline"}
+                    onClick={() => setYearFilter(year)}
+                    className="rounded-full text-sm"
+                    size="sm"
+                  >
+                    {year === "all" ? "Tất cả năm" : year}
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {year === "all" 
+                        ? members.length 
+                        : members.filter((m) => m.joinYear === year).length
+                      }
+                    </Badge>
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="Vai trò" />
-              </SelectTrigger>
-              <SelectContent>
-                {roles.map((role) => (
-                  <SelectItem key={role} value={role}>
-                    {role}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="Tìm kiếm theo tên, kỹ năng hoặc mô tả..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 py-3 w-full rounded-full border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+              />
+              {searchQuery && (
+                <Button
+                  onClick={() => setSearchQuery("")}
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </Button>
+              )}
+            </div>
+          </div>
 
-            <Select value={yearFilter} onValueChange={setYearFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="Năm tham gia" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Tất cả năm</SelectItem>
-                <SelectItem value="2024">2024</SelectItem>
-                <SelectItem value="2023">2023</SelectItem>
-                <SelectItem value="2022">2022</SelectItem>
-              </SelectContent>
-            </Select>
-
+          {/* Reset Button */}
+          <div className="text-center">
             <Button
               variant="outline"
               onClick={() => {
-                setGroupFilter("all")
                 setRoleFilter("Tất cả")
                 setYearFilter("all")
+                setSearchQuery("")
               }}
+              className="rounded-full"
             >
-              Xóa bộ lọc
+              <Filter className="h-4 w-4 mr-2" />
+              Xóa tất cả bộ lọc
             </Button>
           </div>
         </div>
@@ -326,7 +360,25 @@ export default function MembersPage() {
               <Filter className="h-16 w-16 mx-auto" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Không tìm thấy thành viên</h3>
-            <p className="text-gray-600">Thử thay đổi bộ lọc để xem thêm thành viên</p>
+            <p className="text-gray-600 mb-4">
+              {searchQuery 
+                ? `Không có kết quả nào cho "${searchQuery}". Thử tìm kiếm với từ khóa khác hoặc thay đổi bộ lọc.`
+                : "Thử thay đổi bộ lọc để xem thêm thành viên"
+              }
+            </p>
+            {(searchQuery || roleFilter !== "Tất cả" || yearFilter !== "all") && (
+              <Button
+                onClick={() => {
+                  setRoleFilter("Tất cả")
+                  setYearFilter("all")
+                  setSearchQuery("")
+                }}
+                variant="outline"
+                className="rounded-full"
+              >
+                Xóa tất cả bộ lọc
+              </Button>
+            )}
           </div>
         )}
 

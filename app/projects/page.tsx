@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Github, ExternalLink, Search, Filter } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -141,56 +140,163 @@ export default function ProjectsPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Filter className="h-5 w-5 text-gray-500" />
-            <h3 className="font-semibold">Bộ lọc dự án</h3>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <Input
-                placeholder="Tìm kiếm dự án..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+        <div className="space-y-6 mb-8">
+          {/* Filter Tags in grid layout */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Category Filter */}
+            <div className="text-center">
+              <h3 className="text-sm font-medium text-gray-700 mb-4">Loại dự án</h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                <Button
+                  variant={categoryFilter === "all" ? "default" : "outline"}
+                  onClick={() => setCategoryFilter("all")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Tất cả
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={categoryFilter === "Web" ? "default" : "outline"}
+                  onClick={() => setCategoryFilter("Web")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Web
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.category === "Web").length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={categoryFilter === "App" ? "default" : "outline"}
+                  onClick={() => setCategoryFilter("App")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Mobile App
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.category === "App").length}
+                  </Badge>
+                </Button>
+              </div>
             </div>
 
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="Loại dự án" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Tất cả loại</SelectItem>
-                <SelectItem value="Web">Web</SelectItem>
-                <SelectItem value="App">Mobile App</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* Year Filter */}
+            <div className="text-center">
+              <h3 className="text-sm font-medium text-gray-700 mb-4">Năm thực hiện</h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                <Button
+                  variant={yearFilter === "all" ? "default" : "outline"}
+                  onClick={() => setYearFilter("all")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Tất cả năm
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={yearFilter === "2024" ? "default" : "outline"}
+                  onClick={() => setYearFilter("2024")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  2024
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.year === "2024").length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={yearFilter === "2023" ? "default" : "outline"}
+                  onClick={() => setYearFilter("2023")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  2023
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.year === "2023").length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={yearFilter === "2022" ? "default" : "outline"}
+                  onClick={() => setYearFilter("2022")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  2022
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.year === "2022").length}
+                  </Badge>
+                </Button>
+              </div>
+            </div>
 
-            <Select value={yearFilter} onValueChange={setYearFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="Năm thực hiện" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Tất cả năm</SelectItem>
-                <SelectItem value="2024">2024</SelectItem>
-                <SelectItem value="2023">2023</SelectItem>
-                <SelectItem value="2022">2022</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* Type Filter */}
+            <div className="text-center">
+              <h3 className="text-sm font-medium text-gray-700 mb-4">Loại nhóm</h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                <Button
+                  variant={typeFilter === "all" ? "default" : "outline"}
+                  onClick={() => setTypeFilter("all")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Tất cả
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={typeFilter === "Nhóm" ? "default" : "outline"}
+                  onClick={() => setTypeFilter("Nhóm")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Nhóm
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.type === "Nhóm").length}
+                  </Badge>
+                </Button>
+                <Button
+                  variant={typeFilter === "Cá nhân" ? "default" : "outline"}
+                  onClick={() => setTypeFilter("Cá nhân")}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  Cá nhân
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {projects.filter((p) => p.type === "Cá nhân").length}
+                  </Badge>
+                </Button>
+              </div>
+            </div>
+          </div>
 
-            <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="Loại nhóm" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Tất cả</SelectItem>
-                <SelectItem value="Nhóm">Nhóm</SelectItem>
-                <SelectItem value="Cá nhân">Cá nhân</SelectItem>
-              </SelectContent>
-            </Select>
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="Tìm kiếm dự án theo tên, mô tả hoặc công nghệ..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-3 w-full rounded-full border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+              />
+              {searchTerm && (
+                <Button
+                  onClick={() => setSearchTerm("")}
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </Button>
+              )}
+            </div>
           </div>
         </div>
 
