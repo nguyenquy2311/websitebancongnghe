@@ -1,6 +1,6 @@
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[2].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[13].oneOf[2].use[2]!./node_modules/next/font/google/target.css?{"path":"app/layout.tsx","import":"Inter","arguments":[{"subsets":["latin"]}],"variableName":"inter"} ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[2].use[1]!./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[13].oneOf[2].use[2]!./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/font/google/target.css?{"path":"app\\layout.tsx","import":"Inter","arguments":[{"subsets":["latin"]}],"variableName":"inter"} ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /* cyrillic-ext */
 @font-face {
   font-family: 'Inter';
@@ -67,9 +67,9 @@
 }.__className_e8ce0c {font-family: 'Inter', 'Inter Fallback';font-style: normal
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/globals.css ***!
-  \*************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/globals.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -2423,9 +2423,6 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-.duration-100 {
-  transition-duration: 100ms;
-}
 .duration-1000 {
   transition-duration: 1000ms;
 }
@@ -2475,9 +2472,6 @@ video {
 }
 .zoom-in-95 {
   --tw-enter-scale: .95;
-}
-.duration-100 {
-  animation-duration: 100ms;
 }
 .duration-1000 {
   animation-duration: 1000ms;
@@ -2755,6 +2749,12 @@ body {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.hover\:shadow-xl:hover {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .hover\:after\:bg-sidebar-border:hover::after {
   content: var(--tw-content);
   background-color: hsl(var(--sidebar-border));
@@ -2840,6 +2840,12 @@ body {
 
 .focus-visible\:ring-offset-background:focus-visible {
   --tw-ring-offset-color: hsl(var(--background));
+}
+
+.active\:scale-95:active {
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .active\:bg-gray-200:active {
@@ -3743,10 +3749,6 @@ body {
     max-width: 650px;
   }
 
-  .max-xl\:max-w-\[450px\] {
-    max-width: 450px;
-  }
-
   .max-xl\:flex-col {
     flex-direction: column;
   }
@@ -3767,11 +3769,6 @@ body {
 
 @media not all and (min-width: 640px) {
 
-  .max-sm\:mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .max-sm\:my-5 {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
@@ -3786,28 +3783,16 @@ body {
     margin-top: 2.5rem;
   }
 
-  .max-sm\:mt-5 {
-    margin-top: 1.25rem;
-  }
-
   .max-sm\:mt-\[70px\] {
     margin-top: 70px;
-  }
-
-  .max-sm\:mt-2 {
-    margin-top: 0.5rem;
-  }
-
-  .max-sm\:mt-0 {
-    margin-top: 0px;
   }
 
   .max-sm\:aspect-\[9\/2\] {
     aspect-ratio: 9/2;
   }
 
-  .max-sm\:h-\[70px\] {
-    height: 70px;
+  .max-sm\:h-\[50px\] {
+    height: 50px;
   }
 
   .max-sm\:h-\[calc\(35vw\*9\/5\)\] {
@@ -3818,86 +3803,25 @@ body {
     height: auto;
   }
 
-  .max-sm\:h-fit {
-    height: fit-content;
-  }
-
-  .max-sm\:h-\[\] {
-    height: ;
-  }
-
-  .max-sm\:h-\[5\] {
-    height: 5;
-  }
-
-  .max-sm\:h-\[50\] {
-    height: 50;
-  }
-
-  .max-sm\:h-\[50px\] {
-    height: 50px;
-  }
-
   .max-sm\:min-h-screen {
     min-height: 100vh;
-  }
-
-  .max-sm\:w-\[250px\] {
-    width: 250px;
   }
 
   .max-sm\:w-\[35vw\] {
     width: 35vw;
   }
 
-  .max-sm\:w-\[80vw\] {
-    width: 80vw;
-  }
-
-  .max-sm\:w-\[200px\] {
-    width: 200px;
-  }
-
   .max-sm\:w-\[fit-content\] {
     width: fit-content;
-  }
-
-  .max-sm\:max-w-\[500px\] {
-    max-width: 500px;
-  }
-
-  .max-sm\:max-w-\[f\] {
-    max-width: f;
   }
 
   .max-sm\:max-w-full {
     max-width: 100%;
   }
 
-  .max-sm\:rounded-\[15px\] {
-    border-radius: 15px;
-  }
-
-  .max-sm\:border {
-    border-width: 1px;
-  }
-
-  .max-sm\:border-gray-200 {
-    --tw-border-opacity: 1;
-    border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
-  }
-
-  .max-sm\:p-0 {
-    padding: 0px;
-  }
-
-  .max-sm\:p-4 {
-    padding: 1rem;
-  }
-
-  .max-sm\:px-\[10px\] {
-    padding-left: 10px;
-    padding-right: 10px;
+  .max-sm\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .max-sm\:px-\[20px\] {
@@ -3908,16 +3832,6 @@ body {
   .max-sm\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
-  }
-
-  .max-sm\:px-5 {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .max-sm\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
   }
 
   .max-sm\:pb-8 {
@@ -3932,58 +3846,6 @@ body {
     text-align: center;
   }
 
-  .max-sm\:text-justify {
-    text-align: justify;
-  }
-
-  .max-sm\:text-\[28px\] {
-    font-size: 28px;
-  }
-
-  .max-sm\:text-\[30px\] {
-    font-size: 30px;
-  }
-
-  .max-sm\:text-\[60px\] {
-    font-size: 60px;
-  }
-
-  .max-sm\:text-\[40px\] {
-    font-size: 40px;
-  }
-
-  .max-sm\:text-\[10rem\] {
-    font-size: 10rem;
-  }
-
-  .max-sm\:text-\[1rem\] {
-    font-size: 1rem;
-  }
-
-  .max-sm\:text-\[2rem\] {
-    font-size: 2rem;
-  }
-
-  .max-sm\:text-\[3rem\] {
-    font-size: 3rem;
-  }
-
-  .max-sm\:text-\[2\.5rem\] {
-    font-size: 2.5rem;
-  }
-
-  .max-sm\:text-\[2\.8rem\] {
-    font-size: 2.8rem;
-  }
-
-  .max-sm\:text-\[1\.5rem\] {
-    font-size: 1.5rem;
-  }
-
-  .max-sm\:text-\[1\.2rem\] {
-    font-size: 1.2rem;
-  }
-
   .max-sm\:text-\[1\.1rem\] {
     font-size: 1.1rem;
   }
@@ -3992,47 +3854,16 @@ body {
     font-size: 18px;
   }
 
-  .max-sm\:leading-\[35px\] {
-    line-height: 35px;
-  }
-
-  .max-sm\:leading-\[55px\] {
-    line-height: 55px;
-  }
-
-  .max-sm\:leading-\[1\.2rem\] {
-    line-height: 1.2rem;
-  }
-
-  .max-sm\:leading-\[2rem\] {
-    line-height: 2rem;
-  }
-
-  .max-sm\:leading-\[1\.7rem\] {
-    line-height: 1.7rem;
+  .max-sm\:text-\[2\.8rem\] {
+    font-size: 2.8rem;
   }
 
   .max-sm\:leading-\[1\.6rem\] {
     line-height: 1.6rem;
   }
 
-  .max-sm\:text-\[\] {
-    color: ;
-  }
-
-  .max-sm\:text-\[0\.2\] {
-    color: 0.2;
-  }
-
-  .max-sm\:transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-  }
-
-  .max-sm\:duration-200 {
-    transition-duration: 200ms;
-    animation-duration: 200ms;
+  .max-sm\:leading-\[55px\] {
+    line-height: 55px;
   }
 }
 
@@ -4636,9 +4467,9 @@ body {
   background-color: transparent;
 }
 
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./node_modules/@fortawesome/fontawesome-svg-core/styles.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.2.4_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./node_modules/.pnpm/@fortawesome+fontawesome-svg-core@7.0.0/node_modules/@fortawesome/fontawesome-svg-core/styles.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 :root, :host {
   --fa-font-solid: normal 900 1em/1 "Font Awesome 7 Free";
   --fa-font-regular: normal 400 1em/1 "Font Awesome 7 Free";
