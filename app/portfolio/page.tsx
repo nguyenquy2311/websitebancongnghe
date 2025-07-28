@@ -279,7 +279,9 @@ export default function MembersPage() {
                 {/* Social Links */}
                 <div className="flex gap-2">
                   <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                    <Link href={`/members/${member.id}`}>Xem Profile</Link>
+                    <Link href={`/portfolio/${member.id}`}>
+                      Xem chi tiết
+                    </Link>
                   </Button>
 
                   <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
