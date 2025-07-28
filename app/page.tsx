@@ -10,22 +10,25 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="h-[calc(100dvh-64px)] flex items-center  w-full overflow-hidden overflow-y-auto  max-sm:pt-[70px] max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
-				<div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0 max-sm:px-10">
-					<div className="w-[678px] max-xl:w-[90vw] max-xl:max-w-[650px] max-sm:max-w-full max-xl:text-center">
-						<h1 className="font-quicksand font-normal text-[57px] leading-[64px] tracking-[-0.0025em] text-gray-600 max-xl:hover:text-cyan-700 transition-colors max-sm:leading-[55px] max-sm:text-[2.8rem]">
+        <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0 max-sm:px-10">
+          <div className="w-[678px] max-xl:w-[90vw] max-xl:max-w-[650px] max-sm:max-w-full max-xl:text-center">
+            <h1 className="font-quicksand font-normal text-[57px] leading-[64px] tracking-[-0.0025em] text-gray-600 max-xl:hover:text-cyan-700 transition-colors max-sm:leading-[55px] max-sm:text-[2.8rem]">
               Muốn trở thành thành viên Ban Công Nghệ?
             </h1>
-						<p className="font-quicksand font-normal text-base leading-6 tracking-[0.005em] text-gray-500 my-10 max-xl:my-5 max-xl:max-w-[500px] max-sm:max-w-full max-xl:mx-auto max-sm:text-[1.1rem] max-sm:leading-[1.6rem] max-sm:my-5 max-sm:text-center">
-							Bạn đang tìm kiếm những giải pháp công nghệ đột phá, sáng tạo và hiệu quả? Chúng tôi luôn sẵn sàng chia sẻ kiến thức, kinh nghiệm và các sản phẩm tiên tiến để giúp bạn nắm
-							bắt xu hướng công nghệ mới nhất.
-						</p>
-						<a href='#' className="flex justify-center items-center w-[157px] h-10 bg-cyan-700 shadow-[-9px_-6px_25px_#ffffff,_6px_7px_30px_rgba(0,0,0,0.25)] backdrop-blur-sm rounded font-quicksand font-medium text-sm leading-5 tracking-[0.001em] text-white transition-all duration-100 hover:bg-cyan-400 active:text-gray-500 active:bg-gray-200 active:shadow-[inset_-4px_-4px_4px_rgba(255,255,255,0.75),_inset_4px_4px_4px_rgba(0,0,0,0.25)] max-xl:mx-auto max-sm:mt-10 max-sm:w-[fit-content] max-sm:px-[20px] max-sm:h-[50px] max-sm:text-[18px]">
-							Liên hệ ngay
-						</a>
-					</div>
-					<Image className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:mt-0 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]" src={imgPage1} alt="" width={343} height={600} />
-				</div>
-			</div>
+            <p className="font-quicksand font-normal text-base leading-6 tracking-[0.005em] text-gray-500 my-10 max-xl:my-5 max-xl:max-w-[500px] max-sm:max-w-full max-xl:mx-auto max-sm:text-[1.1rem] max-sm:leading-[1.6rem] max-sm:my-5 max-sm:text-center">
+              Bạn đang tìm kiếm những giải pháp công nghệ đột phá, sáng tạo và hiệu quả? Chúng tôi luôn sẵn sàng chia sẻ kiến thức, kinh nghiệm và các sản phẩm tiên tiến để giúp bạn nắm
+              bắt xu hướng công nghệ mới nhất.
+            </p>
+            <a
+              href="#"
+              className="flex justify-center items-center w-[157px] h-10 bg-cyan-700 shadow-[-9px_-6px_25px_#ffffff,_6px_7px_30px_rgba(0,0,0,0.25)] backdrop-blur-sm rounded font-quicksand font-medium text-sm leading-5 tracking-[0.001em] text-white transition-all duration-200 ease-in-out hover:bg-cyan-400 hover:scale-10 hover:shadow-xl active:scale-95 active:bg-gray-200 active:text-gray-500 active:shadow-[inset_-4px_-4px_4px_rgba(255,255,255,0.75),_inset_4px_4px_4px_rgba(0,0,0,0.25)] max-xl:mx-auto max-sm:mt-10 max-sm:w-[fit-content] max-sm:px-[20px] max-sm:h-[50px] max-sm:text-[18px]"
+            >
+              Liên hệ ngay
+            </a>
+          </div>
+          <Image className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]" src={imgPage1} alt="" width={343} height={600} />
+        </div>
+      </div>
 
       {/* Quick Navigation */}
       <section className="py-16 bg-gray-50">
