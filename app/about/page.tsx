@@ -577,7 +577,7 @@ export default function AboutPage() {
                     {/* Profile Link */}
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
                       <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full" asChild>
-                        <Link href={`/members/${member.id}`}>
+                        <Link href={`/portfolio/${member.id}`}>
                           <ArrowRight className="h-4 w-4" />
                         </Link>
                       </Button>
