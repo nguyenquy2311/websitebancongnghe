@@ -1,3 +1,8 @@
+"use client"
+
+import React from "react"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -14,6 +19,8 @@ import {
   Database,
   Shield,
   Zap,
+  Quote,
+  ChevronRight,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -123,6 +130,70 @@ const services = [
   },
 ]
 
+// Dữ liệu cho phần quy trình làm việc mới
+const workProcessSteps = [
+  {
+    step: 1,
+    title: "Tư vấn ý tưởng",
+    contentTitle: "Tư vấn ý tưởng",
+    description:
+      "Chia sẻ mong muốn và ý tưởng của bạn với đội ngũ chuyên gia của chúng tôi. Chúng tôi sẽ lắng nghe, phân tích và đưa ra những gợi ý, giải pháp tối ưu nhất, phù hợp với cá tính và phong cách riêng của bạn.",
+    quote:
+      "Tại BCN, mỗi dự án bắt đầu từ một ý tưởng tuyệt vời, và chúng tôi đảm bảo sẽ cùng bạn hiện thực hóa nó một cách hoàn hảo nhất.",
+    quoteAuthor: "Nguyễn Văn Anh",
+    quoteAuthorTitle: "Sáng lập & Trưởng ban BCN",
+    image: "/placeholder.svg?height=400&width=600",
+  },
+  {
+    step: 2,
+    title: "Thiết kế riêng",
+    contentTitle: "Thiết kế riêng",
+    description:
+      "Dựa trên ý tưởng đã thống nhất, đội ngũ thiết kế của chúng tôi sẽ tạo ra bản phác thảo và mockup chi tiết, đảm bảo giao diện trực quan và trải nghiệm người dùng tối ưu.",
+    quote:
+      "Thiết kế không chỉ là vẻ đẹp, mà còn là cách giải quyết vấn đề. Chúng tôi tạo ra những trải nghiệm người dùng mượt mà và hiệu quả.",
+    quoteAuthor: "Trần Thị Bình",
+    quoteAuthorTitle: "Phó Ban & Trưởng nhóm UI/UX",
+    image: "/placeholder.svg?height=400&width=600",
+  },
+  {
+    step: 3,
+    title: "Báo giá & Hợp đồng",
+    contentTitle: "Báo giá & Hợp đồng",
+    description:
+      "Sau khi thống nhất thiết kế, chúng tôi sẽ gửi báo giá chi tiết và minh bạch. Mọi điều khoản sẽ được ghi rõ trong hợp đồng để đảm bảo quyền lợi cho cả hai bên.",
+    quote:
+      "Sự minh bạch là chìa khóa cho mọi mối quan hệ hợp tác. Chúng tôi cam kết mang đến giá trị tốt nhất với chi phí hợp lý.",
+    quoteAuthor: "Lê Văn Cường",
+    quoteAuthorTitle: "Trưởng nhóm Kỹ thuật",
+    image: "/placeholder.svg?height=400&width=600",
+  },
+  {
+    step: 4,
+    title: "Phát triển & Kiểm thử",
+    contentTitle: "Phát triển & Kiểm thử",
+    description:
+      "Đội ngũ lập trình viên của BCN sẽ bắt tay vào phát triển sản phẩm theo thiết kế đã duyệt. Chúng tôi áp dụng quy trình kiểm thử nghiêm ngặt để đảm bảo chất lượng và hiệu suất tối ưu.",
+    quote:
+      "Mỗi dòng code đều được viết với sự tỉ mỉ và chuyên nghiệp. Chúng tôi không chỉ xây dựng sản phẩm, mà còn xây dựng niềm tin.",
+    quoteAuthor: "Phạm Thị Dung",
+    quoteAuthorTitle: "Trưởng nhóm Mobile",
+    image: "/placeholder.svg?height=400&width=600",
+  },
+  {
+    step: 5,
+    title: "Bàn giao & Hỗ trợ",
+    contentTitle: "Bàn giao & Hỗ trợ",
+    description:
+      "Sản phẩm hoàn thiện sẽ được bàn giao cùng với tài liệu hướng dẫn chi tiết. Chúng tôi cam kết hỗ trợ kỹ thuật và bảo trì sau bàn giao để đảm bảo sản phẩm hoạt động ổn định.",
+    quote:
+      "Hành trình của chúng tôi không kết thúc khi sản phẩm được bàn giao. Chúng tôi luôn đồng hành cùng bạn để đảm bảo sự thành công lâu dài.",
+    quoteAuthor: "Hoàng Văn Em",
+    quoteAuthorTitle: "Quản lý Nội dung",
+    image: "/placeholder.svg?height=400&width=600",
+  },
+]
+
 const process = [
   {
     step: 1,
@@ -183,9 +254,30 @@ const testimonials = [
 ]
 
 export default function ServicesPage() {
+  const [activeStep, setActiveStep] = useState(1)
+  const currentStepData = workProcessSteps.find((step) => step.step === activeStep)
+
   return (
     <div className="min-h-screen">
-     
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 text-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-200 mb-6">
+              Dịch Vụ Công Nghệ
+            </Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6">Dịch Vụ Của BCN</h1>
+            <p className="text-xl text-blue-100 leading-relaxed mb-8">
+              Chúng tôi cung cấp các dịch vụ công nghệ chuyên nghiệp, từ phát triển website, mobile app đến tư vấn và
+              đào tạo
+            </p>
+            <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50" asChild>
+              <Link href="#services">Khám Phá Dịch Vụ</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Services Overview */}
       <section id="services" className="py-20">
         <div className="container mx-auto px-4">
@@ -266,34 +358,72 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-20 bg-gray-50">
+      {/* New Work Process Section */}
+      <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Quy Trình Làm Việc</h2>
-            <p className="text-xl text-gray-600">Quy trình chuyên nghiệp đảm bảo chất lượng và tiến độ dự án</p>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">Quy trình làm việc</h2>
+            <p className="text-xl text-gray-400">Quy trình chuyên nghiệp, hiệu quả cho trải nghiệm tốt nhất.</p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {process.map((step, index) => (
-                <div key={index} className="flex gap-8 items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
-                      {step.step}
-                    </div>
+          {/* Step Navigation */}
+          <div className="flex justify-center items-center gap-4 mb-12 flex-wrap">
+            {workProcessSteps.map((stepItem) => (
+              <React.Fragment key={stepItem.step}>
+                <div
+                  className="flex flex-col items-center group cursor-pointer"
+                  onClick={() => setActiveStep(stepItem.step)}
+                >
+                  <div
+                    className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300
+                      ${activeStep === stepItem.step ? "bg-blue-600 text-white shadow-lg" : "bg-gray-700 text-gray-300 group-hover:bg-gray-600 group-hover:text-white"}`}
+                  >
+                    {stepItem.step}
                   </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-semibold">{step.title}</h3>
-                      <Badge variant="outline">{step.duration}</Badge>
-                    </div>
-                    <p className="text-gray-600">{step.description}</p>
+                  <p
+                    className={`mt-2 text-sm font-medium text-center transition-colors duration-300
+                      ${activeStep === stepItem.step ? "text-blue-400" : "text-gray-400 group-hover:text-white"}`}
+                  >
+                    {stepItem.title}
+                  </p>
+                </div>
+                {stepItem.step < workProcessSteps.length && (
+                  <ChevronRight className="h-6 w-6 text-gray-500 mx-2 hidden sm:block" />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Step Content Card */}
+          {currentStepData && (
+            <Card className="max-w-6xl mx-auto bg-gray-800 text-white border-gray-700 overflow-hidden">
+              <CardContent className="p-0 grid md:grid-cols-2 gap-0">
+                {/* Left Content */}
+                <div className="p-8 md:p-12 flex flex-col justify-center transition-opacity duration-500 ease-in-out">
+                  <h3 className="text-4xl lg:text-5xl font-bold mb-6 text-blue-400">{currentStepData.contentTitle}</h3>
+                  <p className="text-lg text-gray-300 leading-relaxed mb-8">{currentStepData.description}</p>
+                  <div className="border-l-4 border-blue-500 pl-4 py-2 mb-6">
+                    <Quote className="h-6 w-6 text-blue-500 mb-2" />
+                    <blockquote className="text-md italic text-gray-400 leading-relaxed">
+                      "{currentStepData.quote}"
+                    </blockquote>
+                    <p className="mt-4 font-semibold text-blue-300">{currentStepData.quoteAuthor}</p>
+                    <p className="text-sm text-gray-400">{currentStepData.quoteAuthorTitle}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+
+                {/* Right Image */}
+                <div className="relative aspect-video md:aspect-auto md:h-full transition-opacity duration-500 ease-in-out">
+                  <Image
+                    src={currentStepData.image || "/placeholder.svg"}
+                    alt={currentStepData.contentTitle}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </section>
 
