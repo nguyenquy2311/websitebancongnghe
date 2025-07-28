@@ -1,12 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Quicksand } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import '@/lib/fontawesome';
 
-const inter = Inter({ subsets: ["latin"] })
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BCN - Ban Công Nghệ IUH",
@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={inter.className}>
+      <body className={quicksand.className}>
         <Header />
         <main className="mt-[64px]">{children}</main>
         <Footer />

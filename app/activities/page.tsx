@@ -241,10 +241,10 @@ export default function ActivitiesPage() {
               <CardContent className="space-y-2">
                 {activityTypes.map((type) => (
                   <Button
-                    key={type.id}
-                    variant={typeFilter === type.id ? "default" : "ghost"}
-                    className="w-full justify-start"
-                    onClick={() => setTypeFilter(type.id)}
+                      key={type.id}
+                      variant={typeFilter === type.id ? "secondary" : "ghost"}
+                      className="w-full justify-start"
+                      onClick={() => setTypeFilter(type.id)}
                   >
                     <type.icon className="h-4 w-4 mr-2" />
                     {type.name}
@@ -393,7 +393,7 @@ export default function ActivitiesPage() {
                       {/* Action Buttons */}
                       <div className="flex gap-3">
                         {activity.status === "upcoming" && (
-                          <Button size="sm" className="flex-1">
+                          <Button variant="default" className="flex-1">
                             Đăng Ký Tham Gia
                           </Button>
                         )}
@@ -421,24 +421,18 @@ export default function ActivitiesPage() {
         </div>
       </div>
 
+      {/* rgba(234, 233, 238, 0.95) */}
+
       {/* CTA Section */}
-      <section className="py-20 bg-green-600 text-white">
+      <section className="py-20 bg-[rgba(234,233,238,0.95)] text-black">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Tham Gia Cộng Đồng BCN</h2>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
             Đừng bỏ lỡ các hoạt động thú vị và bổ ích. Tham gia BCN để cập nhật thông tin sớm nhất!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-green-600 hover:bg-green-50" asChild>
+            <Button size="lg" className="bg-white hover:text-white hover:bg-cyan-700 text-black" asChild>
               <Link href="/join">Tham Gia BCN</Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-green-600 bg-transparent"
-              asChild
-            >
-              <Link href="/contact">Đề Xuất Hoạt Động</Link>
             </Button>
           </div>
         </div>
