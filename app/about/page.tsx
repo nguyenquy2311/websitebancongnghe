@@ -358,15 +358,17 @@ export default function AboutPage() {
                   contentStyle={{
                     background: "#fff",
                     color: "#333",
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)", // giảm shadow cho mượt
                     border: "1px solid #e5e7eb",
+                    willChange: "transform, opacity",
+                    transform: "translateZ(0)",
                   }}
                   contentArrowStyle={{ borderRight: "7px solid #fff" }}
                   date={item.date}
-                  iconStyle={{ background: item.color, color: "#fff" }}
+                  iconStyle={{ background: item.color, color: "#fff", willChange: "transform", transform: "translateZ(0)" }}
                   icon={<item.icon />}
                 >
-                  <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex flex-col md:flex-row gap-4" style={{ willChange: "transform", transform: "translateZ(0)" }}>
                     <div className="flex-1">
                       <h3 className="vertical-timeline-element-title text-xl font-bold">{item.title}</h3>
                       <h4 className="vertical-timeline-element-subtitle text-blue-600 font-medium mb-3">
@@ -374,8 +376,8 @@ export default function AboutPage() {
                       </h4>
                       <p className="text-gray-700 leading-relaxed">{item.description}</p>
                     </div>
-                    <div className="w-full md:w-48 h-32 relative rounded-lg overflow-hidden">
-                      <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
+                    <div className="w-full md:w-48 h-32 relative rounded-lg overflow-hidden" style={{ willChange: "transform", transform: "translateZ(0)" }}>
+                      <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" style={{ willChange: "transform", transform: "translateZ(0)" }} />
                     </div>
                   </div>
                 </VerticalTimelineElement>
