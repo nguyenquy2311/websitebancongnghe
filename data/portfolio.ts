@@ -1,4 +1,7 @@
 import type { StaticImageData } from "next/image"
+import TT from "./images/do-thanh-tuong.png"
+import MinhVu from "./images/nguyen-minh-vu.png"
+import MinhQuy from "./images/nguyen-mai-minh-quy.png"
 
 // Define a type for member data for better type safety
 export type Member = {
@@ -6,6 +9,7 @@ export type Member = {
   name: string
   role: string
   group: string
+  department: string
   avatar: string | StaticImageData
   coverImage?: string | StaticImageData
   description: string
@@ -39,10 +43,11 @@ export type Member = {
 export const members: Member[] = [
   {
     id: "nguyen-huu-khang",
-    name: "Nguyễn Hữu Khang ngu",
+    name: "Đỗ Thanh Tường",
     role: "Leader",
     group: "Leader",
-    avatar: "/placeholder.svg?height=200&width=200&text=Nguyễn+Văn+Anh",
+    department: "Ban Điều hành",
+    avatar: TT.src,
     coverImage: "/placeholder.svg?height=300&width=800&text=Nguyễn+Văn+Anh+Cover",
     description:
       "Passionate về Full-stack Development và Project Management. Có 3+ năm kinh nghiệm phát triển web và dẫn dắt đội nhóm. Mục tiêu trở thành Tech Lead tại các công ty công nghệ hàng đầu.",
@@ -99,11 +104,12 @@ export const members: Member[] = [
     },
   },
   {
-    id: "tran-thi-binh",
-    name: "Trần Thị Bình",
+    id: "nguyen-mai-minh-quy",
+    name: "Nguyễn Mai Minh Quý",
     role: "Core Team",
     group: "Core",
-    avatar: "/placeholder.svg?height=200&width=200&text=Trần+Thị+Bình",
+    department: "Ban Điều Hành",
+    avatar: MinhQuy.src,
     coverImage: "/placeholder.svg?height=300&width=800&text=Trần+Thị+Bình+Cover",
     description:
       "Frontend Developer với đam mê UI/UX Design. Yêu thích tạo ra những giao diện người dùng đẹp và thân thiện.",
@@ -151,11 +157,12 @@ export const members: Member[] = [
     },
   },
   {
-    id: "le-van-cuong",
-    name: "Lê Văn Cường",
+    id: "nguyen-minh-vu",
+    name: "Nguyễn Minh Vũ",
     role: "Web Developer",
     group: "Web",
-    avatar: "/placeholder.svg?height=200&width=200&text=Lê+Văn+Cường",
+    department: "Ban Phát triển Web",
+    avatar: MinhVu.src,
     coverImage: "/placeholder.svg?height=300&width=800&text=Lê+Văn+Cường+Cover",
     description:
       "Backend Developer chuyên về API development và database design. Mong muốn trở thành Solution Architect.",
@@ -202,191 +209,196 @@ export const members: Member[] = [
       linesOfCode: "40K+",
     },
   },
-  {
-    id: "pham-thi-dung",
-    name: "Phạm Thị Dung",
-    role: "App Developer",
-    group: "App",
-    avatar: "/placeholder.svg?height=200&width=200&text=Phạm+Thị+Dung",
-    coverImage: "/placeholder.svg?height=300&width=800&text=Phạm+Thị+Dung+Cover",
-    description:
-      "Mobile App Developer với kinh nghiệm React Native và Flutter. Đam mê tạo ra những ứng dụng mobile hữu ích.",
-    longBio:
-      "Dung là một Mobile App Developer tài năng với kinh nghiệm phát triển ứng dụng trên cả hai nền tảng iOS và Android. Cô chuyên về React Native và Flutter, có khả năng tạo ra những ứng dụng mobile với hiệu suất cao và trải nghiệm người dùng tuyệt vời. Dung luôn theo dõi các xu hướng mobile development mới nhất.",
-    skills: ["React Native", "Flutter", "Dart", "Firebase", "iOS", "Android"],
-    joinYear: "2023",
-    location: "TP. Hồ Chí Minh",
-    education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
-    github: "https://github.com/phamthidung",
-    linkedin: "https://linkedin.com/in/phamthidung",
-    portfolio: null,
-    email: "dung.pham@student.iuh.edu.vn",
-    achievements: [
-      "Mobile Lead của BCN",
-      "Phát triển 5+ ứng dụng mobile",
-      "Cross-platform Specialist",
-      "Google Play Developer",
-    ],
-    projects: [
-      {
-        id: "bcn-mobile-app",
-        title: "BCN Mobile App",
-        role: "Lead Mobile Developer",
-        description: "Phát triển ứng dụng mobile chính thức của BCN",
-        image: "/placeholder.svg?height=150&width=250",
-        techStack: ["React Native", "Firebase", "Redux"],
-        status: "In Progress",
-      },
-      {
-        id: "student-helper-app",
-        title: "Student Helper App",
-        role: "Flutter Developer",
-        description: "Ứng dụng hỗ trợ sinh viên trong học tập",
-        image: "/placeholder.svg?height=150&width=250",
-        techStack: ["Flutter", "Dart", "SQLite"],
-        status: "Completed",
-      },
-    ],
-    stats: {
-      projectsCompleted: 5,
-      yearsExperience: 1,
-      teamMembers: 6,
-      linesOfCode: "25K+",
-    },
-  },
-  {
-    id: "hoang-van-em",
-    name: "Hoàng Văn Em",
-    role: "Web Developer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=200&width=200&text=Hoàng+Văn+Em",
-    coverImage: "/placeholder.svg?height=300&width=800&text=Hoàng+Văn+Em+Cover",
-    description:
-      "Frontend Developer yêu thích JavaScript và các framework hiện đại. Mục tiêu trở thành Senior Frontend Developer.",
-    longBio:
-      "Em là một Frontend Developer trẻ tuổi nhưng đầy nhiệt huyết với JavaScript và các framework hiện đại. Anh có khả năng học hỏi nhanh chóng và áp dụng các công nghệ mới vào dự án. Em luôn chú trọng đến chất lượng code và trải nghiệm người dùng trong mọi sản phẩm mình tham gia.",
-    skills: ["JavaScript", "React", "Next.js", "TypeScript", "Tailwind CSS", "Git"],
-    joinYear: "2024",
-    location: "TP. Hồ Chí Minh",
-    education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
-    github: "https://github.com/hoangvanem",
-    linkedin: "https://linkedin.com/in/hoangvanem",
-    portfolio: "https://hoangvanem.vercel.app",
-    email: "em.hoang@student.iuh.edu.vn",
-    achievements: [
-      "Frontend Developer của BCN",
-      "Hoàn thành 3+ dự án web",
-      "JavaScript Enthusiast",
-      "Open Source Contributor",
-    ],
-    projects: [
-      {
-        id: "personal-portfolio-template",
-        title: "Personal Portfolio Template",
-        role: "Full-stack Developer",
-        description: "Website portfolio cá nhân với Next.js",
-        image: "/placeholder.svg?height=150&width=250",
-        techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
-        status: "Completed",
-      },
-      {
-        id: "todo-app",
-        title: "Advanced Todo App",
-        role: "Frontend Developer",
-        description: "Ứng dụng quản lý công việc với React",
-        image: "/placeholder.svg?height=150&width=250",
-        techStack: ["React", "TypeScript", "Local Storage"],
-        status: "Completed",
-      },
-    ],
-    stats: {
-      projectsCompleted: 3,
-      yearsExperience: 1,
-      teamMembers: 4,
-      linesOfCode: "15K+",
-    },
-  },
-  {
-    id: "vu-thi-phuong",
-    name: "Vũ Thị Phương",
-    role: "Designer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=200&width=200&text=Vũ+Thị+Phương",
-    coverImage: "/placeholder.svg?height=300&width=800&text=Vũ+Thị+Phương+Cover",
-    description:
-      "UI/UX Designer với đam mê tạo ra những trải nghiệm người dùng tuyệt vời. Chuyên về Design System và User Research.",
-    longBio:
-      "Phương là một UI/UX Designer với tầm nhìn sáng tạo và khả năng nghiên cứu người dùng sâu sắc. Cô chuyên về việc tạo ra các Design System nhất quán và tiến hành User Research để hiểu rõ nhu cầu người dùng. Phương luôn đặt trải nghiệm người dùng lên hàng đầu trong mọi thiết kế.",
-    skills: ["Figma", "Adobe XD", "Photoshop", "User Research", "Prototyping", "Design Systems"],
-    joinYear: "2023",
-    location: "TP. Hồ Chí Minh",
-    education: "Đại học Công nghiệp TP.HCM - Thiết kế Đồ họa",
-    github: null,
-    linkedin: "https://linkedin.com/in/vuthiphuong",
-    portfolio: "https://vuthiphuong.design",
-    email: "phuong.vu@student.iuh.edu.vn",
-    achievements: ["UI/UX Designer của BCN", "Thiết kế 8+ giao diện", "User Research Expert", "Design System Creator"],
-    projects: [
-      {
-        id: "design-system",
-        title: "BCN Design System",
-        role: "Lead Designer",
-        description: "Tạo design system thống nhất cho các dự án BCN",
-        image: "/placeholder.svg?height=150&width=250",
-        techStack: ["Figma", "Design Tokens", "Component Library"],
-        status: "In Progress",
-      },
-      {
-        id: "user-research",
-        title: "Student App UX Research",
-        role: "UX Researcher",
-        description: "Nghiên cứu trải nghiệm người dùng cho ứng dụng sinh viên",
-        image: "/placeholder.svg?height=150&width=250",
-        techStack: ["User Interviews", "Surveys", "Analytics"],
-        status: "Completed",
-      },
-    ],
-    stats: {
-      projectsCompleted: 4,
-      yearsExperience: 1,
-      teamMembers: 5,
-      linesOfCode: "N/A",
-    },
-  },
-  {
-    id: "dang-van-giang",
-    name: "Đặng Văn Giang",
-    role: "App Developer",
-    group: "App",
-    avatar: "/placeholder.svg?height=150&width=150&text=Đặng+Văn+Giang",
-    description:
-      "iOS Developer với kinh nghiệm Swift và SwiftUI. Đam mê phát triển ứng dụng iOS native với performance cao.",
-    skills: ["Swift", "SwiftUI", "iOS", "Xcode"],
-    joinYear: "2024",
-    location: "TP. Hồ Chí Minh",
-    education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
-    github: "https://github.com/dangvangiang",
-    linkedin: "https://linkedin.com/in/dangvangiang",
-    portfolio: null,
-    email: "giang.dang@student.iuh.edu.vn",
-  },
-  {
-    id: "bui-thi-hoa",
-    name: "Bùi Thị Hoa",
-    role: "Web Developer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=150&width=150&text=Bùi+Thị+Hoa",
-    description:
-      "Full-stack Developer với kinh nghiệm cả Frontend và Backend. Yêu thích làm việc với các công nghệ mới và thử thách bản thân.",
-    skills: ["Python", "Django", "React", "PostgreSQL"],
-    joinYear: "2024",
-    location: "TP. Hồ Chí Minh",
-    education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
-    github: "https://github.com/buithihoa",
-    linkedin: "https://linkedin.com/in/buithihoa",
-    portfolio: "https://buithihoa.dev",
-    email: "hoa.bui@student.iuh.edu.vn",
-  },
+  // {
+  //   id: "chung-ngo-minh-hoang",
+  //   name: "Chung Ngô Minh Hoàng",
+  //   role: "App Developer",
+  //   group: "App",
+  //   department: "Ban Phát triển Web",
+  //   avatar: "/placeholder.svg?height=200&width=200&text=Phạm+Thị+Dung",
+  //   coverImage: "/placeholder.svg?height=300&width=800&text=Phạm+Thị+Dung+Cover",
+  //   description:
+  //     "Mobile App Developer với kinh nghiệm React Native và Flutter. Đam mê tạo ra những ứng dụng mobile hữu ích.",
+  //   longBio:
+  //     "Dung là một Mobile App Developer tài năng với kinh nghiệm phát triển ứng dụng trên cả hai nền tảng iOS và Android. Cô chuyên về React Native và Flutter, có khả năng tạo ra những ứng dụng mobile với hiệu suất cao và trải nghiệm người dùng tuyệt vời. Dung luôn theo dõi các xu hướng mobile development mới nhất.",
+  //   skills: ["React Native", "Flutter", "Dart", "Firebase", "iOS", "Android"],
+  //   joinYear: "2023",
+  //   location: "TP. Hồ Chí Minh",
+  //   education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
+  //   github: "https://github.com/phamthidung",
+  //   linkedin: "https://linkedin.com/in/phamthidung",
+  //   portfolio: null,
+  //   email: "dung.pham@student.iuh.edu.vn",
+  //   achievements: [
+  //     "Mobile Lead của BCN",
+  //     "Phát triển 5+ ứng dụng mobile",
+  //     "Cross-platform Specialist",
+  //     "Google Play Developer",
+  //   ],
+  //   projects: [
+  //     {
+  //       id: "bcn-mobile-app",
+  //       title: "BCN Mobile App",
+  //       role: "Lead Mobile Developer",
+  //       description: "Phát triển ứng dụng mobile chính thức của BCN",
+  //       image: "/placeholder.svg?height=150&width=250",
+  //       techStack: ["React Native", "Firebase", "Redux"],
+  //       status: "In Progress",
+  //     },
+  //     {
+  //       id: "student-helper-app",
+  //       title: "Student Helper App",
+  //       role: "Flutter Developer",
+  //       description: "Ứng dụng hỗ trợ sinh viên trong học tập",
+  //       image: "/placeholder.svg?height=150&width=250",
+  //       techStack: ["Flutter", "Dart", "SQLite"],
+  //       status: "Completed",
+  //     },
+  //   ],
+  //   stats: {
+  //     projectsCompleted: 5,
+  //     yearsExperience: 1,
+  //     teamMembers: 6,
+  //     linesOfCode: "25K+",
+  //   },
+  // },
+  // {
+  //   id: "hoang-van-em",
+  //   name: "Hoàng Văn Em",
+  //   role: "Web Developer",
+  //   group: "Web",
+  //   department: "Ban Phát triển Frontend",
+  //   avatar: "/placeholder.svg?height=200&width=200&text=Hoàng+Văn+Em",
+  //   coverImage: "/placeholder.svg?height=300&width=800&text=Hoàng+Văn+Em+Cover",
+  //   description:
+  //     "Frontend Developer yêu thích JavaScript và các framework hiện đại. Mục tiêu trở thành Senior Frontend Developer.",
+  //   longBio:
+  //     "Em là một Frontend Developer trẻ tuổi nhưng đầy nhiệt huyết với JavaScript và các framework hiện đại. Anh có khả năng học hỏi nhanh chóng và áp dụng các công nghệ mới vào dự án. Em luôn chú trọng đến chất lượng code và trải nghiệm người dùng trong mọi sản phẩm mình tham gia.",
+  //   skills: ["JavaScript", "React", "Next.js", "TypeScript", "Tailwind CSS", "Git"],
+  //   joinYear: "2024",
+  //   location: "TP. Hồ Chí Minh",
+  //   education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
+  //   github: "https://github.com/hoangvanem",
+  //   linkedin: "https://linkedin.com/in/hoangvanem",
+  //   portfolio: "https://hoangvanem.vercel.app",
+  //   email: "em.hoang@student.iuh.edu.vn",
+  //   achievements: [
+  //     "Frontend Developer của BCN",
+  //     "Hoàn thành 3+ dự án web",
+  //     "JavaScript Enthusiast",
+  //     "Open Source Contributor",
+  //   ],
+  //   projects: [
+  //     {
+  //       id: "personal-portfolio-template",
+  //       title: "Personal Portfolio Template",
+  //       role: "Full-stack Developer",
+  //       description: "Website portfolio cá nhân với Next.js",
+  //       image: "/placeholder.svg?height=150&width=250",
+  //       techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
+  //       status: "Completed",
+  //     },
+  //     {
+  //       id: "todo-app",
+  //       title: "Advanced Todo App",
+  //       role: "Frontend Developer",
+  //       description: "Ứng dụng quản lý công việc với React",
+  //       image: "/placeholder.svg?height=150&width=250",
+  //       techStack: ["React", "TypeScript", "Local Storage"],
+  //       status: "Completed",
+  //     },
+  //   ],
+  //   stats: {
+  //     projectsCompleted: 3,
+  //     yearsExperience: 1,
+  //     teamMembers: 4,
+  //     linesOfCode: "15K+",
+  //   },
+  // },
+  // {
+  //   id: "vu-thi-phuong",
+  //   name: "Vũ Thị Phương",
+  //   role: "Designer",
+  //   group: "Web",
+  //   department: "Ban Thiết kế",
+  //   avatar: "/placeholder.svg?height=200&width=200&text=Vũ+Thị+Phương",
+  //   coverImage: "/placeholder.svg?height=300&width=800&text=Vũ+Thị+Phương+Cover",
+  //   description:
+  //     "UI/UX Designer với đam mê tạo ra những trải nghiệm người dùng tuyệt vời. Chuyên về Design System và User Research.",
+  //   longBio:
+  //     "Phương là một UI/UX Designer với tầm nhìn sáng tạo và khả năng nghiên cứu người dùng sâu sắc. Cô chuyên về việc tạo ra các Design System nhất quán và tiến hành User Research để hiểu rõ nhu cầu người dùng. Phương luôn đặt trải nghiệm người dùng lên hàng đầu trong mọi thiết kế.",
+  //   skills: ["Figma", "Adobe XD", "Photoshop", "User Research", "Prototyping", "Design Systems"],
+  //   joinYear: "2023",
+  //   location: "TP. Hồ Chí Minh",
+  //   education: "Đại học Công nghiệp TP.HCM - Thiết kế Đồ họa",
+  //   github: null,
+  //   linkedin: "https://linkedin.com/in/vuthiphuong",
+  //   portfolio: "https://vuthiphuong.design",
+  //   email: "phuong.vu@student.iuh.edu.vn",
+  //   achievements: ["UI/UX Designer của BCN", "Thiết kế 8+ giao diện", "User Research Expert", "Design System Creator"],
+  //   projects: [
+  //     {
+  //       id: "design-system",
+  //       title: "BCN Design System",
+  //       role: "Lead Designer",
+  //       description: "Tạo design system thống nhất cho các dự án BCN",
+  //       image: "/placeholder.svg?height=150&width=250",
+  //       techStack: ["Figma", "Design Tokens", "Component Library"],
+  //       status: "In Progress",
+  //     },
+  //     {
+  //       id: "user-research",
+  //       title: "Student App UX Research",
+  //       role: "UX Researcher",
+  //       description: "Nghiên cứu trải nghiệm người dùng cho ứng dụng sinh viên",
+  //       image: "/placeholder.svg?height=150&width=250",
+  //       techStack: ["User Interviews", "Surveys", "Analytics"],
+  //       status: "Completed",
+  //     },
+  //   ],
+  //   stats: {
+  //     projectsCompleted: 4,
+  //     yearsExperience: 1,
+  //     teamMembers: 5,
+  //     linesOfCode: "N/A",
+  //   },
+  // },
+  // {
+  //   id: "dang-van-giang",
+  //   name: "Đặng Văn Giang",
+  //   role: "App Developer",
+  //   group: "App",
+  //   department: "Ban Phát triển Ứng dụng",
+  //   avatar: "/placeholder.svg?height=150&width=150&text=Đặng+Văn+Giang",
+  //   description:
+  //     "iOS Developer với kinh nghiệm Swift và SwiftUI. Đam mê phát triển ứng dụng iOS native với performance cao.",
+  //   skills: ["Swift", "SwiftUI", "iOS", "Xcode"],
+  //   joinYear: "2024",
+  //   location: "TP. Hồ Chí Minh",
+  //   education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
+  //   github: "https://github.com/dangvangiang",
+  //   linkedin: "https://linkedin.com/in/dangvangiang",
+  //   portfolio: null,
+  //   email: "giang.dang@student.iuh.edu.vn",
+  // },
+  // {
+  //   id: "bui-thi-hoa",
+  //   name: "Bùi Thị Hoa",
+  //   role: "Web Developer",
+  //   group: "Web",
+  //   department: "Ban Phát triển Frontend",
+  //   avatar: "/placeholder.svg?height=150&width=150&text=Bùi+Thị+Hoa",
+  //   description:
+  //     "Full-stack Developer với kinh nghiệm cả Frontend và Backend. Yêu thích làm việc với các công nghệ mới và thử thách bản thân.",
+  //   skills: ["Python", "Django", "React", "PostgreSQL"],
+  //   joinYear: "2024",
+  //   location: "TP. Hồ Chí Minh",
+  //   education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
+  //   github: "https://github.com/buithihoa",
+  //   linkedin: "https://linkedin.com/in/buithihoa",
+  //   portfolio: "https://buithihoa.dev",
+  //   email: "hoa.bui@student.iuh.edu.vn",
+  // },
 ]
 
 export const memberGroups = [
@@ -398,3 +410,25 @@ export const memberGroups = [
 ]
 
 export const memberRoles = ["Tất cả", "Leader", "Core Team", "Web Developer", "App Developer", "Designer"]
+
+import FitImage from "./images/activitygallery/fit.jpg";
+import a from "./images/activitygallery/2.jpg";
+import b from "./images/activitygallery/3.jpg";
+import c from "./images/activitygallery/4.jpg";
+import d from "./images/activitygallery/5.jpg";
+import e from "./images/activitygallery/6.jpg";
+import f from "./images/activitygallery/7.jpg";
+import g from "./images/activitygallery/8.jpg";
+
+
+
+export const activityGallery = [
+  { src: FitImage.src, alt: "Workshop React" },
+  { src: a.src, alt: "Team Building" },
+  { src: b.src, alt: "Hackathon" },
+  { src: c.src, alt: "Tech Talk" },
+  { src: d.src, alt: "Project Demo" },
+  { src: e.src, alt: "Networking Event" },
+  { src: f.src, alt: "Code Review Session" },
+  { src: g.src, alt: "Member Graduation" },
+]

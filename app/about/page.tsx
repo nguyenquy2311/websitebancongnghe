@@ -31,84 +31,9 @@ import Link from "next/link"
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component"
 import "react-vertical-timeline-component/style.min.css"
 import img2 from '/public/images/homepage/img2.webp';
+import { members, memberGroups, memberRoles, activityGallery } from "@/data/portfolio";
+import { timelineData } from "@/data/timeline"
 
-// Core team data
-const coreTeam = [
-  {
-    id: "nguyen-van-anh",
-    name: "Nguyễn Văn Anh",
-    role: "Founder & Leader",
-    department: "Ban Điều hành",
-    avatar: "/placeholder.svg?height=400&width=300&text=Nguyen+Van+Anh",
-    description: "Đam mê Phát triển Full-stack và Quản lý Dự án. Dẫn dắt BCN từ những ngày đầu thành lập.",
-    github: "https://github.com/nguyenvananh",
-    linkedin: "https://linkedin.com/in/nguyenvananh",
-    email: "anh.nguyen@student.iuh.edu.vn",
-    achievements: ["Sáng lập BCN", "Hoàn thành 10+ dự án", "Diễn giả tại 5+ sự kiện"],
-  },
-  {
-    id: "tran-thi-binh",
-    name: "Trần Thị Bình",
-    role: "Phó Ban",
-    department: "Ban Điều hành",
-    avatar: "/placeholder.svg?height=400&width=300&text=Tran+Thi+Binh",
-    description: "Frontend Developer và UI/UX Designer. Chịu trách nhiệm về chiến lược sản phẩm và đào tạo thành viên.",
-    github: "https://github.com/tranthibinh",
-    linkedin: "https://linkedin.com/in/tranthibinh",
-    email: "binh.tran@student.iuh.edu.vn",
-    achievements: ["Trưởng nhóm UI/UX", "Mentoring 20+ thành viên", "Người xây dựng Design System"],
-  },
-  {
-    id: "le-van-cuong",
-    name: "Lê Văn Cường",
-    role: "Trưởng nhóm Kỹ thuật",
-    department: "Nhóm Web",
-    avatar: "/placeholder.svg?height=400&width=300&text=Le+Van+Cuong",
-    description:
-      "Backend Developer chuyên về phát triển API và kiến trúc hệ thống. Đảm bảo chất lượng kỹ thuật cho các dự án.",
-    github: "https://github.com/levancuong",
-    linkedin: "https://linkedin.com/in/levancuong",
-    email: "cuong.le@student.iuh.edu.vn",
-    achievements: ["Chuyên gia Backend", "Trưởng nhóm Code Review", "Kiến trúc sư Hệ thống"],
-  },
-  {
-    id: "pham-thi-dung",
-    name: "Phạm Thị Dung",
-    role: "Trưởng nhóm Mobile",
-    department: "Nhóm App",
-    avatar: "/placeholder.svg?height=400&width=300&text=Pham+Thi+Dung",
-    description:
-      "Mobile App Developer với chuyên môn về React Native và Flutter. Dẫn dắt đội ngũ phát triển ứng dụng di động.",
-    github: "https://github.com/phamthidung",
-    linkedin: "https://linkedin.com/in/phamthidung",
-    email: "dung.pham@student.iuh.edu.vn",
-    achievements: ["Chuyên gia Mobile", "5+ ứng dụng đã xuất bản", "Chuyên gia đa nền tảng"],
-  },
-  {
-    id: "hoang-van-em",
-    name: "Hoàng Văn Em",
-    role: "Quản lý Nội dung",
-    department: "Ban Nội dung",
-    avatar: "/placeholder.svg?height=400&width=300&text=Hoang+Van+Em",
-    description:
-      "Chuyên gia Chiến lược Nội dung và Viết tài liệu kỹ thuật. Quản lý nội dung và tài liệu kỹ thuật cho BCN.",
-    github: "https://github.com/hoangvanem",
-    linkedin: "https://linkedin.com/in/hoangvanem",
-    email: "em.hoang@student.iuh.edu.vn",
-    achievements: ["Chiến lược gia Nội dung", "Người viết tài liệu kỹ thuật", "Trưởng nhóm Tài liệu"],
-  },
-  {
-    id: "vu-thi-phuong",
-    name: "Vũ Thị Phương",
-    role: "Trưởng nhóm Marketing",
-    department: "Ban Truyền thông",
-    avatar: "/placeholder.svg?height=400&width=300&text=Vu+Thi+Phuong",
-    description: "Chuyên gia Digital Marketing và Quản lý Mạng xã hội. Xây dựng thương hiệu và cộng đồng cho BCN.",
-    linkedin: "https://linkedin.com/in/vuthiphuong",
-    email: "phuong.vu@student.iuh.edu.vn",
-    achievements: ["Người xây dựng thương hiệu", "Quản lý cộng đồng", "Người tổ chức sự kiện"],
-  },
-]
 
 // Organization structure
 const organizationStructure = [
@@ -162,89 +87,7 @@ const organizationStructure = [
   },
 ]
 
-// Timeline data
-const timelineData = [
-  {
-    date: "Tháng 9 năm 2022",
-    title: "Thành lập BCN",
-    subtitle: "Khởi đầu hành trình",
-    description:
-      "Ban Công Nghệ được thành lập với 5 thành viên đầu tiên, bắt nguồn từ mong muốn tạo ra một cộng đồng học tập công nghệ tại IUH.",
-    icon: Rocket,
-    color: "rgb(33, 150, 243)",
-    image: "/placeholder.svg?height=200&width=300&text=BCN+Foundation",
-  },
-  {
-    date: "Tháng 12 năm 2022",
-    title: "Workshop đầu tiên",
-    subtitle: "Bắt đầu chia sẻ kiến thức",
-    description:
-      "Tổ chức workshop đầu tiên về HTML/CSS với 15 sinh viên tham dự, đánh dấu bước đi đầu tiên trong việc chia sẻ kiến thức.",
-    icon: BookOpen,
-    color: "rgb(33, 150, 243)",
-    image: "/placeholder.svg?height=200&width=300&text=First+Workshop",
-  },
-  {
-    date: "Tháng 3 năm 2023",
-    title: "Mở rộng đội ngũ",
-    subtitle: "Phát triển cộng đồng",
-    description:
-      "BCN chính thức mở rộng với hơn 20 thành viên, chia thành hai nhóm chuyên môn: Phát triển Web và Phát triển Ứng dụng Di động.",
-    icon: Users,
-    color: "rgb(33, 150, 243)",
-    image: "/placeholder.svg?height=200&width=300&text=Team+Expansion",
-  },
-  {
-    date: "Tháng 6 năm 2023",
-    title: "Dự án nội bộ đầu tiên",
-    subtitle: "Từ lý thuyết đến thực hành",
-    description:
-      "Ra mắt dự án nội bộ đầu tiên - Cổng thông tin sinh viên IUH, đánh dấu sự chuyển đổi từ học tập sang phát triển dự án thực tế.",
-    icon: Code,
-    color: "rgb(76, 175, 80)",
-    image: "/placeholder.svg?height=200&width=300&text=First+Project",
-  },
-  {
-    date: "Tháng 10 năm 2023",
-    title: "BCN Hackathon 2023",
-    subtitle: "Sự kiện lớn đầu tiên",
-    description:
-      "Tổ chức hackathon đầu tiên với hơn 50 sinh viên tham gia, thu hút sự chú ý từ cộng đồng sinh viên IUH.",
-    icon: Trophy,
-    color: "rgb(255, 193, 7)",
-    image: "/placeholder.svg?height=200&width=300&text=Hackathon+2023",
-  },
-  {
-    date: "Tháng 2 năm 2024",
-    title: "Hợp tác Doanh nghiệp",
-    subtitle: "Mở rộng cơ hội",
-    description:
-      "Thiết lập quan hệ đối tác với các công ty công nghệ, mở ra cơ hội thực tập và việc làm cho thành viên.",
-    icon: Building,
-    color: "rgb(156, 39, 176)",
-    image: "/placeholder.svg?height=200&width=300&text=Partnership",
-  },
-  {
-    date: "Tháng 6 năm 2024",
-    title: "Thành viên đầu tiên có việc làm",
-    subtitle: "Thành tựu đầu tiên",
-    description:
-      "Thành viên đầu tiên của BCN đã có được vị trí thực tập tại một công ty công nghệ lớn, khẳng định chất lượng đào tạo.",
-    icon: Star,
-    color: "rgb(76, 175, 80)",
-    image: "/placeholder.svg?height=200&width=300&text=First+Internship",
-  },
-  {
-    date: "Tháng 12 năm 2024",
-    title: "Hơn 50 thành viên",
-    subtitle: "Cộng đồng ngày càng lớn mạnh",
-    description:
-      "BCN đạt mốc hơn 50 thành viên với hơn 15 dự án đã hoàn thành, trở thành một trong những cộng đồng công nghệ lớn nhất tại IUH.",
-    icon: TrendingUp,
-    color: "rgb(33, 150, 243)",
-    image: "/placeholder.svg?height=200&width=300&text=50+Members",
-  },
-]
+
 
 // Achievements data
 const achievements = [
@@ -257,16 +100,7 @@ const achievements = [
 ]
 
 // Activity gallery
-const activityGallery = [
-  { src: "/placeholder.svg?height=300&width=400&text=Workshop+React", alt: "Workshop React" },
-  { src: "/placeholder.svg?height=300&width=400&text=Team+Building", alt: "Team Building" },
-  { src: "/placeholder.svg?height=300&width=400&text=Hackathon", alt: "Hackathon" },
-  { src: "/placeholder.svg?height=300&width=400&text=Tech+Talk", alt: "Tech Talk" },
-  { src: "/placeholder.svg?height=300&width=400&text=Project+Demo", alt: "Project Demo" },
-  { src: "/placeholder.svg?height=300&width=400&text=Networking", alt: "Networking Event" },
-  { src: "/placeholder.svg?height=300&width=400&text=Code+Review", alt: "Code Review Session" },
-  { src: "/placeholder.svg?height=300&width=400&text=Graduation", alt: "Member Graduation" },
-]
+
 
 export default function AboutPage() {
   return (
@@ -442,7 +276,7 @@ export default function AboutPage() {
       </section> */}
 
       {/* Organization Structure */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -485,7 +319,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Core Team */}
       <section className="py-20">
@@ -497,7 +331,7 @@ export default function AboutPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {coreTeam.map((member) => (
+              {members.map((member) => (
                 <div
                   key={member.id}
                   className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
@@ -535,7 +369,7 @@ export default function AboutPage() {
                       <div className="mb-4">
                         <h4 className="font-medium text-xs text-blue-200 mb-2">Thành tựu nổi bật:</h4>
                         <div className="flex flex-wrap gap-1">
-                          {member.achievements.slice(0, 2).map((achievement, idx) => (
+                          {member.achievements?.slice(0, 2).map((achievement, idx) => (
                             <Badge
                               key={idx}
                               variant="secondary"
@@ -660,8 +494,31 @@ export default function AboutPage() {
                         <AvatarFallback>A</AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-semibold text-gray-900">Nguyễn Văn Anh</p>
+                        <p className="font-semibold text-gray-900">Nguyễn Hữu Khang</p>
                         <p className="text-sm text-gray-600">Sáng lập & Trưởng ban BCN</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardContent className="p-8 md:p-12">
+                <div className="flex items-start gap-6">
+                  <Quote className="h-12 w-12 text-blue-600 flex-shrink-0 mt-2" />
+                  <div>
+                    <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 italic">
+                      "Chúng tôi tin rằng mỗi sinh viên đều xứng đáng có cơ hội học hỏi và phát triển trong một môi
+                      trường năng động, sáng tạo và thực tiễn. BCN không chỉ là nơi để code, mà còn là nơi để rèn luyện
+                      tư duy, kỹ năng làm việc nhóm và tinh thần khởi nghiệp. Chúng tôi hy vọng mỗi thành viên BCN sẽ
+                      trở thành những chuyên gia công nghệ có tâm, có tầm và có khả năng đóng góp tích cực cho xã hội."
+                    </blockquote>
+                    <div className="flex items-center gap-4">
+                      <Avatar className="w-12 h-12">
+                        <AvatarImage src="/placeholder.svg?height=48&width=48&text=NVA" alt="Nguyễn Văn Anh" />
+                        <AvatarFallback>A</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-semibold text-gray-900">Nguyễn Mai Minh Quý</p>
+                        <p className="text-sm text-gray-600">Con gà của BCN</p>
                       </div>
                     </div>
                   </div>
@@ -706,20 +563,20 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section className="py-20 bg-[#EBEAEF] text-black">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">📬 Tham gia hành trình của BCN</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Tham gia hành trình của BCN</h2>
+          <p className="text-xl text-grey-100 mb-8 max-w-2xl mx-auto">
             Hãy trở thành một phần câu chuyện của BCN và cùng chúng tôi xây dựng tương lai công nghệ
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50" asChild>
+            <Button size="lg" className="bg-[#0E7490] text-white hover:bg-[#22D3EE]" asChild>
               <Link href="/join">
                 Tham gia BCN
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button
+            {/* <Button
               variant="outline"
               size="lg"
               className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
@@ -734,7 +591,7 @@ export default function AboutPage() {
               asChild
             >
               <Link href="/contact">Liên hệ hợp tác</Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>
