@@ -272,7 +272,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="h-screen flex items-center w-full overflow-hidden overflow-y-auto max-sm:pt-[70px] max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
+      <div className="h-screen flex items-center w-full overflow-hidden overflow-y-auto max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
         <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col-reverse max-xl:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:my-10">
           {/* Content */}
           <div className="w-[600px] max-xl:w-[90vw] max-xl:max-w-[550px] max-sm:max-w-full text-center">
