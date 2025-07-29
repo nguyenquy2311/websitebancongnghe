@@ -95,3 +95,11 @@ body {
     @apply border-border;
   }
 }
+
+.bg-primary{
+  @apply bg-cyan-700;
+}
+
+.bg-secondary{
+  @apply bg-[rgba(234,233,238,0.95)];
+}
