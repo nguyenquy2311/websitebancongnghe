@@ -6,11 +6,7 @@ import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import '@/lib/fontawesome';
 
-<<<<<<< HEAD
-const quicksand = Quicksand({ subsets: ["latin"] })
-=======
 const quicksand = Quicksand({ subsets: ["latin"] });
->>>>>>> 214e74a59eae760b4600ed564270383323c43c37
 
 export const metadata: Metadata = {
   title: "BCN - Ban Công Nghệ IUH",
