@@ -8,140 +8,9 @@ import { Input } from "@/components/ui/input"
 import { Github, Linkedin, ExternalLink, Mail, Filter, Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { members, memberGroups, memberRoles } from "@/data/portfolio";
 
-// Mock data for members
-const members = [
-  {
-    id: "nguyen-van-anh",
-    name: "Nguyễn Văn Anh",
-    role: "Leader",
-    group: "Leader",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "Passionate về Full-stack Development và Project Management. Mục tiêu trở thành Tech Lead tại các công ty công nghệ hàng đầu.",
-    skills: ["React", "Node.js", "Python", "Leadership"],
-    joinYear: "2022",
-    github: "https://github.com/nguyenvananh",
-    linkedin: "https://linkedin.com/in/nguyenvananh",
-    portfolio: "https://nguyenvananh.dev",
-    email: "anh.nguyen@student.iuh.edu.vn",
-  },
-  {
-    id: "tran-thi-binh",
-    name: "Trần Thị Bình",
-    role: "Core Team",
-    group: "Core",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "Frontend Developer với đam mê UI/UX Design. Yêu thích tạo ra những giao diện người dùng đẹp và thân thiện.",
-    skills: ["React", "Vue.js", "Figma", "Tailwind CSS"],
-    joinYear: "2022",
-    github: "https://github.com/tranthibinh",
-    linkedin: "https://linkedin.com/in/tranthibinh",
-    portfolio: null,
-    email: "binh.tran@student.iuh.edu.vn",
-  },
-  {
-    id: "le-van-cuong",
-    name: "Lê Văn Cường",
-    role: "Web Developer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "Backend Developer chuyên về API development và database design. Mong muốn trở thành Solution Architect.",
-    skills: ["Node.js", "Express", "MongoDB", "PostgreSQL"],
-    joinYear: "2023",
-    github: "https://github.com/levancuong",
-    linkedin: "https://linkedin.com/in/levancuong",
-    portfolio: "https://levancuong.dev",
-    email: "cuong.le@student.iuh.edu.vn",
-  },
-  {
-    id: "pham-thi-dung",
-    name: "Phạm Thị Dung",
-    role: "App Developer",
-    group: "App",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "Mobile App Developer với kinh nghiệm React Native và Flutter. Đam mê tạo ra những ứng dụng mobile hữu ích.",
-    skills: ["React Native", "Flutter", "Dart", "Firebase"],
-    joinYear: "2023",
-    github: "https://github.com/phamthidung",
-    linkedin: "https://linkedin.com/in/phamthidung",
-    portfolio: null,
-    email: "dung.pham@student.iuh.edu.vn",
-  },
-  {
-    id: "hoang-van-em",
-    name: "Hoàng Văn Em",
-    role: "Web Developer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "Frontend Developer yêu thích JavaScript và các framework hiện đại. Mục tiêu trở thành Senior Frontend Developer.",
-    skills: ["JavaScript", "React", "Next.js", "TypeScript"],
-    joinYear: "2024",
-    github: "https://github.com/hoangvanem",
-    linkedin: "https://linkedin.com/in/hoangvanem",
-    portfolio: "https://hoangvanem.vercel.app",
-    email: "em.hoang@student.iuh.edu.vn",
-  },
-  {
-    id: "vu-thi-phuong",
-    name: "Vũ Thị Phương",
-    role: "Designer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "UI/UX Designer với đam mê tạo ra những trải nghiệm người dùng tuyệt vời. Chuyên về Design System và User Research.",
-    skills: ["Figma", "Adobe XD", "Photoshop", "User Research"],
-    joinYear: "2023",
-    github: null,
-    linkedin: "https://linkedin.com/in/vuthiphuong",
-    portfolio: "https://vuthiphuong.design",
-    email: "phuong.vu@student.iuh.edu.vn",
-  },
-  {
-    id: "dang-van-giang",
-    name: "Đặng Văn Giang",
-    role: "App Developer",
-    group: "App",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "iOS Developer với kinh nghiệm Swift và SwiftUI. Đam mê phát triển ứng dụng iOS native với performance cao.",
-    skills: ["Swift", "SwiftUI", "iOS", "Xcode"],
-    joinYear: "2024",
-    github: "https://github.com/dangvangiang",
-    linkedin: "https://linkedin.com/in/dangvangiang",
-    portfolio: null,
-    email: "giang.dang@student.iuh.edu.vn",
-  },
-  {
-    id: "bui-thi-hoa",
-    name: "Bùi Thị Hoa",
-    role: "Web Developer",
-    group: "Web",
-    avatar: "/placeholder.svg?height=150&width=150",
-    description:
-      "Full-stack Developer với kinh nghiệm cả Frontend và Backend. Yêu thích làm việc với các công nghệ mới và thử thách bản thân.",
-    skills: ["Python", "Django", "React", "PostgreSQL"],
-    joinYear: "2024",
-    github: "https://github.com/buithihoa",
-    linkedin: "https://linkedin.com/in/buithihoa",
-    portfolio: "https://buithihoa.dev",
-    email: "hoa.bui@student.iuh.edu.vn",
-  },
-]
 
-const groups = [
-  { id: "all", name: "Tất cả", color: "bg-gray-100 text-gray-800" },
-  { id: "Leader", name: "Leader", color: "bg-red-100 text-red-800" },
-  { id: "Core", name: "Core Team", color: "bg-blue-100 text-blue-800" },
-  { id: "Web", name: "Nhóm Web", color: "bg-green-100 text-green-800" },
-  { id: "App", name: "Nhóm App", color: "bg-purple-100 text-purple-800" },
-]
-
-const roles = ["Tất cả", "Leader", "Core Team", "Web Developer", "App Developer", "Designer"]
 
 export default function MembersPage() {
   const [roleFilter, setRoleFilter] = useState("Tất cả")
@@ -160,7 +29,7 @@ export default function MembersPage() {
   })
 
   const getGroupColor = (group: string) => {
-    const groupInfo = groups.find((g) => g.id === group)
+    const groupInfo = memberGroups.find((g) => g.id === group)
     return groupInfo?.color || "bg-gray-100 text-gray-800"
   }
 
@@ -183,7 +52,7 @@ export default function MembersPage() {
             <div className="text-center">
               <h3 className="text-sm font-medium text-gray-700 mb-4">Vai trò</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {roles.map((role) => (
+                {memberRoles.map((role) => (
                   <Button
                     key={role}
                     variant={roleFilter === role ? "default" : "outline"}
@@ -285,7 +154,7 @@ export default function MembersPage() {
                     />
                   </div>
                   <h3 className="text-lg font-semibold mb-1 hover:text-blue-600 transition-colors">
-                    <Link href={`/members/${member.id}`}>{member.name}</Link>
+                    <Link href={`/portfolio/${member.id}`}>{member.name}</Link>
                   </h3>
                   <Badge className={getGroupColor(member.group)}>{member.role}</Badge>
                 </div>
