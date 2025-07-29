@@ -7,177 +7,7 @@ import { Progress } from "@/components/ui/progress"
 import { Github, ExternalLink, Calendar, Users, Target, Lightbulb, CheckCircle, Clock, Star, Award } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-
-// Mock data - in real app, this would come from a database
-const projects = [
-  {
-    id: "iuh-student-portal",
-    title: "IUH Student Portal",
-    shortDescription:
-      "Hệ thống quản lý sinh viên với giao diện hiện đại, tích hợp đầy đủ các tính năng cần thiết cho sinh viên và giảng viên.",
-    longDescription:
-      "IUH Student Portal là một hệ thống quản lý sinh viên toàn diện được phát triển để hiện đại hóa quy trình quản lý học tập tại trường. Hệ thống cung cấp giao diện trực quan, dễ sử dụng cho cả sinh viên và giảng viên, tích hợp các tính năng từ đăng ký môn học, xem điểm số, đến quản lý thời khóa biểu.",
-    image: "/placeholder.svg?height=400&width=800",
-    gallery: [
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-    ],
-    techStack: ["React", "Node.js", "MongoDB", "Express", "JWT", "Material-UI"],
-    category: "Web",
-    year: "2024",
-    type: "Nhóm",
-    status: "Completed",
-    duration: "6 tháng",
-    startDate: "2024-01-15",
-    endDate: "2024-07-15",
-    githubUrl: "https://github.com/bcn-iuh/student-portal",
-    demoUrl: "https://student-portal-demo.vercel.app",
-
-    // Project Goals & Objectives
-    goals: [
-      "Hiện đại hóa hệ thống quản lý sinh viên của trường",
-      "Tạo ra giao diện thân thiện và dễ sử dụng",
-      "Tích hợp đầy đủ các tính năng cần thiết",
-      "Đảm bảo bảo mật và hiệu suất cao",
-    ],
-
-    objectives: [
-      "Giảm 70% thời gian xử lý thủ tục hành chính",
-      "Tăng 90% sự hài lòng của sinh viên và giảng viên",
-      "Hỗ trợ 10,000+ sinh viên đồng thời",
-      "Đạt 99.9% uptime",
-    ],
-
-    // Project Process/Timeline
-    timeline: [
-      {
-        phase: "Nghiên cứu & Phân tích",
-        duration: "2 tuần",
-        description: "Khảo sát nhu cầu, phân tích yêu cầu và thiết kế hệ thống",
-        status: "completed",
-        tasks: [
-          "Khảo sát sinh viên và giảng viên",
-          "Phân tích hệ thống hiện tại",
-          "Thiết kế database schema",
-          "Lập kế hoạch dự án chi tiết",
-        ],
-      },
-      {
-        phase: "Thiết kế UI/UX",
-        duration: "3 tuần",
-        description: "Thiết kế giao diện người dùng và trải nghiệm",
-        status: "completed",
-        tasks: ["Wireframe và mockup", "Design system", "Prototype tương tác", "User testing"],
-      },
-      {
-        phase: "Phát triển Backend",
-        duration: "8 tuần",
-        description: "Xây dựng API và logic xử lý phía server",
-        status: "completed",
-        tasks: ["Thiết lập database", "Phát triển REST API", "Xác thực và phân quyền", "Testing và optimization"],
-      },
-      {
-        phase: "Phát triển Frontend",
-        duration: "6 tuần",
-        description: "Xây dựng giao diện người dùng",
-        status: "completed",
-        tasks: ["Component development", "State management", "API integration", "Responsive design"],
-      },
-      {
-        phase: "Testing & Deployment",
-        duration: "3 tuần",
-        description: "Kiểm thử và triển khai hệ thống",
-        status: "completed",
-        tasks: ["Unit testing", "Integration testing", "User acceptance testing", "Production deployment"],
-      },
-    ],
-
-    // Team Members with detailed roles
-    team: [
-      {
-        id: "nguyen-van-anh",
-        name: "Nguyễn Văn Anh",
-        role: "Tech Lead & Backend Developer",
-        avatar: "/placeholder.svg?height=80&width=80",
-        contributions: [
-          "Thiết kế kiến trúc hệ thống",
-          "Phát triển API chính",
-          "Quản lý database",
-          "Code review và mentoring",
-        ],
-        recognition: "Xuất sắc trong việc dẫn dắt đội nhóm và đảm bảo chất lượng code",
-      },
-      {
-        id: "tran-thi-binh",
-        name: "Trần Thị Bình",
-        role: "Frontend Developer & UI/UX Designer",
-        avatar: "/placeholder.svg?height=80&width=80",
-        contributions: [
-          "Thiết kế giao diện người dùng",
-          "Phát triển React components",
-          "Responsive design",
-          "User experience optimization",
-        ],
-        recognition: "Tạo ra giao diện đẹp và trải nghiệm người dùng tuyệt vời",
-      },
-      {
-        id: "le-van-cuong",
-        name: "Lê Văn Cường",
-        role: "Backend Developer",
-        avatar: "/placeholder.svg?height=80&width=80",
-        contributions: [
-          "Phát triển authentication system",
-          "Database optimization",
-          "API documentation",
-          "Performance monitoring",
-        ],
-        recognition: "Đóng góp quan trọng trong việc đảm bảo bảo mật và hiệu suất",
-      },
-      {
-        id: "hoang-van-em",
-        name: "Hoàng Văn Em",
-        role: "Frontend Developer",
-        avatar: "/placeholder.svg?height=80&width=80",
-        contributions: ["Component development", "State management", "Testing automation", "Bug fixing"],
-        recognition: "Làm việc chăm chỉ và có tinh thần trách nhiệm cao",
-      },
-      {
-        id: "vu-thi-phuong",
-        name: "Vũ Thị Phương",
-        role: "UI/UX Designer & Tester",
-        avatar: "/placeholder.svg?height=80&width=80",
-        contributions: ["User research", "Design system", "Usability testing", "Documentation"],
-        recognition: "Đảm bảo sản phẩm có trải nghiệm người dùng tốt nhất",
-      },
-    ],
-
-    // Project Impact & Results
-    impact: {
-      users: "5,000+",
-      satisfaction: "95%",
-      timeReduction: "70%",
-      errorReduction: "85%",
-    },
-
-    // Lessons Learned
-    lessonsLearned: [
-      "Tầm quan trọng của việc thu thập feedback từ người dùng thực tế",
-      "Cần có kế hoạch testing chi tiết từ đầu dự án",
-      "Collaboration tools giúp team work hiệu quả hơn",
-      "Documentation tốt giúp maintain dự án dễ dàng hơn",
-    ],
-
-    // Future Plans
-    futurePlans: [
-      "Tích hợp AI chatbot hỗ trợ sinh viên",
-      "Mobile app cho iOS và Android",
-      "Tính năng thông báo real-time",
-      "Dashboard analytics cho quản lý",
-    ],
-  },
-]
+import { projects } from "@/data/project"
 
 export default function ProjectDetailPage({ params }: { params: { id: string } }) {
   const project = projects.find((p) => p.id === params.id)
@@ -186,8 +16,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
     notFound()
   }
 
-  const completedPhases = project.timeline.filter((phase) => phase.status === "completed").length
-  const progressPercentage = (completedPhases / project.timeline.length) * 100
+  const completedPhases = project.timeline?.filter((phase) => phase.status === "completed").length ?? 0
+  const progressPercentage = project.timeline && project.timeline.length > 0
+    ? (completedPhases / project.timeline.length) * 100
+    : 0
 
   return (
     <div className="min-h-screen">
@@ -261,7 +93,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm">Đội ngũ: {project.team.length} thành viên</span>
+                    <span className="text-sm">Đội ngũ: {project.team?.length ?? 0} thành viên</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500" />
@@ -276,7 +108,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     <p className="text-sm font-medium mb-2">Tiến độ dự án</p>
                     <Progress value={progressPercentage} className="h-2" />
                     <p className="text-xs text-gray-500 mt-1">
-                      {completedPhases}/{project.timeline.length} giai đoạn hoàn thành
+                      {completedPhases}/{project.timeline?.length ?? 0} giai đoạn hoàn thành
                     </p>
                   </div>
                 </CardContent>
@@ -303,17 +135,17 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">{project.impact.users}</div>
+                    <div className="text-2xl font-bold text-blue-600">{project.impact?.users}</div>
                     <div className="text-xs text-gray-600">Người dùng</div>
                   </div>
                   <Separator />
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{project.impact.satisfaction}</div>
+                    <div className="text-2xl font-bold text-green-600">{project.impact?.satisfaction}</div>
                     <div className="text-xs text-gray-600">Độ hài lòng</div>
                   </div>
                   <Separator />
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">{project.impact.timeReduction}</div>
+                    <div className="text-2xl font-bold text-purple-600">{project.impact?.timeReduction}</div>
                     <div className="text-xs text-gray-600">Giảm thời gian xử lý</div>
                   </div>
                 </CardContent>
@@ -346,7 +178,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {project.goals.map((goal, index) => (
+                    {project.goals?.map((goal, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-gray-700">{goal}</span>
@@ -365,7 +197,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {project.objectives.map((objective, index) => (
+                    {project.objectives?.map((objective, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <Star className="h-5 w-5 text-yellow-500 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-gray-700">{objective}</span>
@@ -381,7 +213,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           <section>
             <h2 className="text-3xl font-bold mb-8">Quy Trình Phát Triển</h2>
             <div className="space-y-6">
-              {project.timeline.map((phase, index) => (
+              {project.timeline?.map((phase, index) => (
                 <Card
                   key={index}
                   className={`${phase.status === "completed" ? "border-green-200 bg-green-50" : "border-gray-200"}`}
@@ -429,7 +261,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           <section>
             <h2 className="text-3xl font-bold mb-8">Đội Ngũ Phát Triển & Vinh Danh</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {project.team.map((member, index) => (
+              {project.team?.map((member, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
@@ -448,7 +280,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
                       <div className="flex-1">
                         <h3 className="font-semibold text-lg hover:text-blue-600 transition-colors">
-                          <Link href={`/members/${member.id}`}>{member.name}</Link>
+                          <Link href={`/portfolio/${member.id}`}>{member.name}</Link>
                         </h3>
                         <p className="text-blue-600 text-sm font-medium mb-3">{member.role}</p>
 
@@ -512,7 +344,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {project.lessonsLearned.map((lesson, index) => (
+                    {project.lessonsLearned?.map((lesson, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-gray-700">{lesson}</span>
@@ -531,7 +363,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {project.futurePlans.map((plan, index) => (
+                    {project.futurePlans?.map((plan, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <Star className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-gray-700">{plan}</span>

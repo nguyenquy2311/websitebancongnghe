@@ -133,16 +133,19 @@ const AppleCardSliderPage = () => {
   return (
     <>
       <style jsx>{sliderStyles}</style>
-      <div className="w-full max-w-full pb-12 my-10 overflow-x-hidden overflow-x-hidden">
+      <div className="w-full h-[calc(100dvh-64px)] max-w-full pb-12 my-10 overflow-x-hidden overflow-y-hidden mt-20">
         <div className="w-full px-0">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+          <div className='max-w-3xl mx-auto text-center mb-10 max-sm:px-10'>
+            <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
             Dự Án Nổi Bật
           </h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum velit quisquam vero? Perferendis repudiandae labore perspiciatis ea et quibusdam nemo minima accusantium cumque earum commodi omnis esse, debitis voluptate nostrum?</p>
+          </div>
           <div className="slider-container w-full">
             <Slider {...settings}>
               {projects.map((project, idx) => (
                 <div key={idx} className="px-0">
-                  <div className="relative w-full max-w-none h-[500px] max-sm:max-h-[60dvh]  overflow-hidden rounded-xl group mx-auto transition-all duration-300">
+                  <div className="relative w-full max-w-none h-[500px] max-sm:max-h-[60dvh]  overflow-hidden  group mx-auto transition-all duration-300">
                     <Image
                       src={project.image}
                       alt={project.name}

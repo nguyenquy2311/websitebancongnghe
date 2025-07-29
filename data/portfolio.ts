@@ -3,7 +3,6 @@ import TT from "./images/do-thanh-tuong.png"
 import MinhVu from "./images/nguyen-minh-vu.png"
 import MinhQuy from "./images/nguyen-mai-minh-quy.png"
 
-// Define a type for member data for better type safety
 export type Member = {
   id: string
   name: string

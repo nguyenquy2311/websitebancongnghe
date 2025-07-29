@@ -8,106 +8,107 @@ import { Input } from "@/components/ui/input"
 import { Github, ExternalLink, Search, Filter } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { projects } from "@/data/project" // Import the projects data
 
 // Mock data for projects
-const projects = [
-  {
-    id: "iuh-student-portal",
-    title: "IUH Student Portal",
-    description:
-      "Hệ thống quản lý sinh viên với giao diện hiện đại, tích hợp đầy đủ các tính năng cần thiết cho sinh viên và giảng viên.",
-    image: "/placeholder.svg?height=200&width=400",
-    techStack: ["React", "Node.js", "MongoDB", "Express"],
-    category: "Web",
-    year: "2024",
-    type: "Nhóm",
-    members: [
-      { name: "Nguyễn Văn A", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Trần Thị B", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Lê Văn C", avatar: "/placeholder.svg?height=40&width=40" },
-    ],
-    githubUrl: "https://github.com/bcn-iuh/student-portal",
-    demoUrl: "https://student-portal-demo.vercel.app",
-  },
-  {
-    id: "bcn-mobile-app",
-    title: "BCN Mobile App",
-    description: "Ứng dụng di động kết nối thành viên BCN, quản lý hoạt động và chia sẻ thông tin nội bộ.",
-    image: "/placeholder.svg?height=200&width=400",
-    techStack: ["React Native", "Firebase", "Redux", "Expo"],
-    category: "App",
-    year: "2024",
-    type: "Nhóm",
-    members: [
-      { name: "Phạm Văn D", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Hoàng Thị E", avatar: "/placeholder.svg?height=40&width=40" },
-    ],
-    githubUrl: "https://github.com/bcn-iuh/bcn-mobile",
-    demoUrl: null,
-  },
-  {
-    id: "event-management-system",
-    title: "Event Management System",
-    description: "Hệ thống quản lý sự kiện cho CLB sinh viên, từ đăng ký tham gia đến theo dõi hoạt động.",
-    image: "/placeholder.svg?height=200&width=400",
-    techStack: ["Next.js", "PostgreSQL", "Tailwind CSS", "Prisma"],
-    category: "Web",
-    year: "2023",
-    type: "Nhóm",
-    members: [
-      { name: "Vũ Văn F", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Đặng Thị G", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Bùi Văn H", avatar: "/placeholder.svg?height=40&width=40" },
-    ],
-    githubUrl: "https://github.com/bcn-iuh/event-management",
-    demoUrl: "https://event-management-demo.vercel.app",
-  },
-  {
-    id: "personal-portfolio-template",
-    title: "Personal Portfolio Template",
-    description: "Template portfolio cá nhân dành cho sinh viên IT, dễ dàng tùy chỉnh và triển khai.",
-    image: "/placeholder.svg?height=200&width=400",
-    techStack: ["Vue.js", "Nuxt.js", "SCSS", "Netlify"],
-    category: "Web",
-    year: "2023",
-    type: "Cá nhân",
-    members: [{ name: "Ngô Văn I", avatar: "/placeholder.svg?height=40&width=40" }],
-    githubUrl: "https://github.com/bcn-iuh/portfolio-template",
-    demoUrl: "https://portfolio-template-demo.netlify.app",
-  },
-  {
-    id: "task-management-app",
-    title: "Task Management App",
-    description: "Ứng dụng quản lý công việc nhóm với tính năng real-time collaboration và notification.",
-    image: "/placeholder.svg?height=200&width=400",
-    techStack: ["Flutter", "Dart", "Supabase", "GetX"],
-    category: "App",
-    year: "2023",
-    type: "Nhóm",
-    members: [
-      { name: "Cao Thị J", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Lý Văn K", avatar: "/placeholder.svg?height=40&width=40" },
-    ],
-    githubUrl: "https://github.com/bcn-iuh/task-management",
-    demoUrl: null,
-  },
-  {
-    id: "bcn-website",
-    title: "BCN Website",
-    description: "Website chính thức của Ban Công Nghệ, giới thiệu thông tin và hoạt động của BCN.",
-    image: "/placeholder.svg?height=200&width=400",
-    techStack: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
-    category: "Web",
-    year: "2024",
-    type: "Nhóm",
-    members: [
-      { name: "Đinh Văn L", avatar: "/placeholder.svg?height=40&width=40" },
-      { name: "Tô Thị M", avatar: "/placeholder.svg?height=40&width=40" },
-    ],
-    githubUrl: "https://github.com/bcn-iuh/bcn-website",
-    demoUrl: "https://bcn-iuh.vercel.app",
-  },
-]
+// const projects = [
+//   {
+//     id: "iuh-student-portal",
+//     title: "IUH Student Portal",
+//     description:
+//       "Hệ thống quản lý sinh viên với giao diện hiện đại, tích hợp đầy đủ các tính năng cần thiết cho sinh viên và giảng viên.",
+//     image: "/placeholder.svg?height=200&width=400",
+//     techStack: ["React", "Node.js", "MongoDB", "Express"],
+//     category: "Web",
+//     year: "2024",
+//     type: "Nhóm",
+//     members: [
+//       { name: "Nguyễn Văn A", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Trần Thị B", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Lê Văn C", avatar: "/placeholder.svg?height=40&width=40" },
+//     ],
+//     githubUrl: "https://github.com/bcn-iuh/student-portal",
+//     demoUrl: "https://student-portal-demo.vercel.app",
+//   },
+//   {
+//     id: "bcn-mobile-app",
+//     title: "BCN Mobile App",
+//     description: "Ứng dụng di động kết nối thành viên BCN, quản lý hoạt động và chia sẻ thông tin nội bộ.",
+//     image: "/placeholder.svg?height=200&width=400",
+//     techStack: ["React Native", "Firebase", "Redux", "Expo"],
+//     category: "App",
+//     year: "2024",
+//     type: "Nhóm",
+//     members: [
+//       { name: "Phạm Văn D", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Hoàng Thị E", avatar: "/placeholder.svg?height=40&width=40" },
+//     ],
+//     githubUrl: "https://github.com/bcn-iuh/bcn-mobile",
+//     demoUrl: null,
+//   },
+//   {
+//     id: "event-management-system",
+//     title: "Event Management System",
+//     description: "Hệ thống quản lý sự kiện cho CLB sinh viên, từ đăng ký tham gia đến theo dõi hoạt động.",
+//     image: "/placeholder.svg?height=200&width=400",
+//     techStack: ["Next.js", "PostgreSQL", "Tailwind CSS", "Prisma"],
+//     category: "Web",
+//     year: "2023",
+//     type: "Nhóm",
+//     members: [
+//       { name: "Vũ Văn F", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Đặng Thị G", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Bùi Văn H", avatar: "/placeholder.svg?height=40&width=40" },
+//     ],
+//     githubUrl: "https://github.com/bcn-iuh/event-management",
+//     demoUrl: "https://event-management-demo.vercel.app",
+//   },
+//   {
+//     id: "personal-portfolio-template",
+//     title: "Personal Portfolio Template",
+//     description: "Template portfolio cá nhân dành cho sinh viên IT, dễ dàng tùy chỉnh và triển khai.",
+//     image: "/placeholder.svg?height=200&width=400",
+//     techStack: ["Vue.js", "Nuxt.js", "SCSS", "Netlify"],
+//     category: "Web",
+//     year: "2023",
+//     type: "Cá nhân",
+//     members: [{ name: "Ngô Văn I", avatar: "/placeholder.svg?height=40&width=40" }],
+//     githubUrl: "https://github.com/bcn-iuh/portfolio-template",
+//     demoUrl: "https://portfolio-template-demo.netlify.app",
+//   },
+//   {
+//     id: "task-management-app",
+//     title: "Task Management App",
+//     description: "Ứng dụng quản lý công việc nhóm với tính năng real-time collaboration và notification.",
+//     image: "/placeholder.svg?height=200&width=400",
+//     techStack: ["Flutter", "Dart", "Supabase", "GetX"],
+//     category: "App",
+//     year: "2023",
+//     type: "Nhóm",
+//     members: [
+//       { name: "Cao Thị J", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Lý Văn K", avatar: "/placeholder.svg?height=40&width=40" },
+//     ],
+//     githubUrl: "https://github.com/bcn-iuh/task-management",
+//     demoUrl: null,
+//   },
+//   {
+//     id: "bcn-website",
+//     title: "BCN Website",
+//     description: "Website chính thức của Ban Công Nghệ, giới thiệu thông tin và hoạt động của BCN.",
+//     image: "/placeholder.svg?height=200&width=400",
+//     techStack: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
+//     category: "Web",
+//     year: "2024",
+//     type: "Nhóm",
+//     members: [
+//       { name: "Đinh Văn L", avatar: "/placeholder.svg?height=40&width=40" },
+//       { name: "Tô Thị M", avatar: "/placeholder.svg?height=40&width=40" },
+//     ],
+//     githubUrl: "https://github.com/bcn-iuh/bcn-website",
+//     demoUrl: "https://bcn-iuh.vercel.app",
+//   },
+// ]
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -118,7 +119,7 @@ export default function ProjectsPage() {
   const filteredProjects = projects.filter((project) => {
     const matchesSearch =
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.shortDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.techStack.some((tech) => tech.toLowerCase().includes(searchTerm.toLowerCase()))
 
     const matchesCategory = categoryFilter === "all" || project.category === categoryFilter
@@ -335,7 +336,7 @@ export default function ProjectsPage() {
               </CardHeader>
 
               <CardContent className="space-y-4">
-                <p className="text-gray-600 text-sm leading-relaxed">{project.description}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{project.shortDescription}</p>
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
@@ -350,18 +351,20 @@ export default function ProjectsPage() {
                 <div className="space-y-2">
                   <p className="text-sm font-medium text-gray-700">Thành viên tham gia:</p>
                   <div className="flex items-center gap-2">
-                    {project.members.map((member, index) => (
-                      <div key={index} className="flex items-center gap-1">
-                        <Image
-                          src={member.avatar || "/placeholder.svg"}
-                          alt={member.name}
-                          width={24}
-                          height={24}
-                          className="rounded-full"
-                        />
-                        <span className="text-xs text-gray-600">{member.name}</span>
-                      </div>
-                    ))}
+                    {(() => {
+                      // Lấy danh sách tên không trùng lặp từ team
+                      const uniqueNames = Array.from(new Set((project.team ?? []).map(m => m.name)));
+                      return uniqueNames.slice(0, 3).map((name, index) => (
+                        <span key={index} className="text-xs text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
+                          {name}
+                        </span>
+                      ));
+                    })()}
+                    {project.team && new Set(project.team.map(m => m.name)).size > 3 && (
+                      <span className="text-xs text-gray-500 font-semibold">
+                        +{new Set(project.team.map(m => m.name)).size - 3}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -424,7 +427,7 @@ export default function ProjectsPage() {
             </div>
             <div>
               <div className="text-3xl font-bold text-orange-600 mb-2">
-                {new Set(projects.flatMap((p) => p.members.map((m) => m.name))).size}
+                {new Set(projects.flatMap((p) => (p.team ?? []).map((m) => m.name))).size}
               </div>
               <div className="text-gray-600">Thành viên tham gia</div>
             </div>
