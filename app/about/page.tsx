@@ -30,6 +30,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component"
 import "react-vertical-timeline-component/style.min.css"
+import img2 from '/public/images/homepage/img2.webp';
 
 // Core team data
 const coreTeam = [
