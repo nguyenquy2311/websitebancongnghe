@@ -407,7 +407,7 @@ export default function ProjectsPage() {
         )}
 
         {/* Stats */}
-        <div className="mt-16 bg-gray-50 rounded-lg p-8">
+        {/* <div className="mt-16 bg-gray-50 rounded-lg p-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">{projects.length}</div>
@@ -432,7 +432,7 @@ export default function ProjectsPage() {
               <div className="text-gray-600">Thành viên tham gia</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -1,12 +1,12 @@
 import { Rocket, BookOpen, Users, Code, Trophy, Building, Star, TrendingUp } from "lucide-react"
-import FitImage from "./images/activitygallery/fit.jpg";
-import a from "./images/activitygallery/2.jpg";
-import b from "./images/activitygallery/3.jpg";
-import c from "./images/activitygallery/4.jpg";
-import d from "./images/activitygallery/5.jpg";
-import e from "./images/activitygallery/6.jpg";
-import f from "./images/activitygallery/7.jpg";
-import g from "./images/activitygallery/8.jpg";
+import FitImage from "./images/activitygallery/fit.webp";
+import a from "./images/activitygallery/2.webp";
+import b from "./images/activitygallery/3.webp";
+import c from "./images/activitygallery/4.webp";
+import d from "./images/activitygallery/5.webp";
+import e from "./images/activitygallery/6.webp";
+import f from "./images/activitygallery/7.webp";
+import g from "./images/activitygallery/8.webp";
 
 export const timelineData = [
   {
@@ -89,4 +89,15 @@ export const timelineData = [
     color: "rgb(33, 150, 243)",
     image: g.src,
   },
+]
+
+export const activityGallery = [
+  { src: FitImage.src, alt: "Workshop React" },
+  { src: a.src, alt: "Team Building" },
+  { src: b.src, alt: "Hackathon" },
+  { src: c.src, alt: "Tech Talk" },
+  { src: d.src, alt: "Project Demo" },
+  { src: e.src, alt: "Networking Event" },
+  { src: f.src, alt: "Code Review Session" },
+  { src: g.src, alt: "Member Graduation" },
 ]

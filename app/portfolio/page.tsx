@@ -252,7 +252,7 @@ export default function MembersPage() {
         )}
 
         {/* Stats */}
-        <div className="mt-16 bg-gray-50 rounded-lg p-8">
+        {/* <div className="mt-16 bg-gray-50 rounded-lg p-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">{members.length}</div>
@@ -277,7 +277,7 @@ export default function MembersPage() {
               <div className="text-gray-600">Kỹ năng đa dạng</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

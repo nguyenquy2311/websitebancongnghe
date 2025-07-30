@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Calendar, MapPin, Users, Clock, BookOpen, Trophy, Mic, Heart, Star, Filter, ChevronRight } from "lucide-react"
+import { Calendar, MapPin, Users, Clock, BookOpen, Trophy, Mic, Heart, Star, Filter, ChevronRight, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -422,24 +422,35 @@ export default function ActivitiesPage() {
       </div>
 
       {/* CTA Section */}
-      <section className="py-20 bg-green-600 text-white">
+      <section className="py-20 bg-[#EBEAEF] text-black">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Tham Gia Cộng Đồng BCN</h2>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Đừng bỏ lỡ các hoạt động thú vị và bổ ích. Tham gia BCN để cập nhật thông tin sớm nhất!
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Tham gia hành trình của BCN</h2>
+          <p className="text-xl text-grey-100 mb-8 max-w-2xl mx-auto">
+            Hãy trở thành một phần câu chuyện của BCN và cùng chúng tôi xây dựng tương lai công nghệ
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-green-600 hover:bg-green-50" asChild>
-              <Link href="/join">Tham Gia BCN</Link>
+            <Button size="lg" className="bg-[#0E7490] text-white hover:bg-[#22D3EE]" asChild>
+              <Link href="/join">
+                Tham gia BCN
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            {/* <Button
+              variant="outline"
+              size="lg"
+              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+              asChild
+            >
+              <Link href="/projects">Xem dự án</Link>
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-green-600 bg-transparent"
+              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
               asChild
             >
-              <Link href="/contact">Đề Xuất Hoạt Động</Link>
-            </Button>
+              <Link href="/contact">Liên hệ hợp tác</Link>
+            </Button> */}
           </div>
         </div>
       </section>

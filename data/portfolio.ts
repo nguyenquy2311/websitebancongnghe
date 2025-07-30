@@ -1,7 +1,9 @@
 import type { StaticImageData } from "next/image"
-import TT from "./images/do-thanh-tuong.png"
-import MinhVu from "./images/nguyen-minh-vu.png"
-import MinhQuy from "./images/nguyen-mai-minh-quy.png"
+import TT from "./images/do-thanh-tuong.webp"
+import MinhVu from "./images/nguyen-minh-vu.webp"
+import MinhQuy from "./images/nguyen-mai-minh-quy.webp"
+import HoangLuan from "./images/phan-hoang-luan.webp"
+import CoverImage from "./images/coverImage.jpg"
 
 export type Member = {
   id: string
@@ -47,7 +49,7 @@ export const members: Member[] = [
     group: "Leader",
     department: "Ban Điều hành",
     avatar: TT.src,
-    coverImage: "/placeholder.svg?height=300&width=800&text=Nguyễn+Văn+Anh+Cover",
+    coverImage: CoverImage.src,
     description:
       "Passionate về Full-stack Development và Project Management. Có 3+ năm kinh nghiệm phát triển web và dẫn dắt đội nhóm. Mục tiêu trở thành Tech Lead tại các công ty công nghệ hàng đầu.",
     longBio:
@@ -109,7 +111,7 @@ export const members: Member[] = [
     group: "Core",
     department: "Ban Điều Hành",
     avatar: MinhQuy.src,
-    coverImage: "/placeholder.svg?height=300&width=800&text=Trần+Thị+Bình+Cover",
+    coverImage: CoverImage.src,
     description:
       "Frontend Developer với đam mê UI/UX Design. Yêu thích tạo ra những giao diện người dùng đẹp và thân thiện.",
     longBio:
@@ -162,7 +164,7 @@ export const members: Member[] = [
     group: "Web",
     department: "Ban Phát triển Web",
     avatar: MinhVu.src,
-    coverImage: "/placeholder.svg?height=300&width=800&text=Lê+Văn+Cường+Cover",
+    coverImage: CoverImage.src,
     description:
       "Backend Developer chuyên về API development và database design. Mong muốn trở thành Solution Architect.",
     longBio:
@@ -208,59 +210,59 @@ export const members: Member[] = [
       linesOfCode: "40K+",
     },
   },
-  // {
-  //   id: "chung-ngo-minh-hoang",
-  //   name: "Chung Ngô Minh Hoàng",
-  //   role: "App Developer",
-  //   group: "App",
-  //   department: "Ban Phát triển Web",
-  //   avatar: "/placeholder.svg?height=200&width=200&text=Phạm+Thị+Dung",
-  //   coverImage: "/placeholder.svg?height=300&width=800&text=Phạm+Thị+Dung+Cover",
-  //   description:
-  //     "Mobile App Developer với kinh nghiệm React Native và Flutter. Đam mê tạo ra những ứng dụng mobile hữu ích.",
-  //   longBio:
-  //     "Dung là một Mobile App Developer tài năng với kinh nghiệm phát triển ứng dụng trên cả hai nền tảng iOS và Android. Cô chuyên về React Native và Flutter, có khả năng tạo ra những ứng dụng mobile với hiệu suất cao và trải nghiệm người dùng tuyệt vời. Dung luôn theo dõi các xu hướng mobile development mới nhất.",
-  //   skills: ["React Native", "Flutter", "Dart", "Firebase", "iOS", "Android"],
-  //   joinYear: "2023",
-  //   location: "TP. Hồ Chí Minh",
-  //   education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
-  //   github: "https://github.com/phamthidung",
-  //   linkedin: "https://linkedin.com/in/phamthidung",
-  //   portfolio: null,
-  //   email: "dung.pham@student.iuh.edu.vn",
-  //   achievements: [
-  //     "Mobile Lead của BCN",
-  //     "Phát triển 5+ ứng dụng mobile",
-  //     "Cross-platform Specialist",
-  //     "Google Play Developer",
-  //   ],
-  //   projects: [
-  //     {
-  //       id: "bcn-mobile-app",
-  //       title: "BCN Mobile App",
-  //       role: "Lead Mobile Developer",
-  //       description: "Phát triển ứng dụng mobile chính thức của BCN",
-  //       image: "/placeholder.svg?height=150&width=250",
-  //       techStack: ["React Native", "Firebase", "Redux"],
-  //       status: "In Progress",
-  //     },
-  //     {
-  //       id: "student-helper-app",
-  //       title: "Student Helper App",
-  //       role: "Flutter Developer",
-  //       description: "Ứng dụng hỗ trợ sinh viên trong học tập",
-  //       image: "/placeholder.svg?height=150&width=250",
-  //       techStack: ["Flutter", "Dart", "SQLite"],
-  //       status: "Completed",
-  //     },
-  //   ],
-  //   stats: {
-  //     projectsCompleted: 5,
-  //     yearsExperience: 1,
-  //     teamMembers: 6,
-  //     linesOfCode: "25K+",
-  //   },
-  // },
+  {
+    id: "phan-hoang-luan",
+    name: "Phan Hoàng Luân",
+    role: "App Developer",
+    group: "App",
+    department: "Ban Phát triển Web",
+    avatar: HoangLuan.src,
+    coverImage: CoverImage.src,
+    description:
+      "Mobile App Developer với kinh nghiệm React Native và Flutter. Đam mê tạo ra những ứng dụng mobile hữu ích.",
+    longBio:
+      "Dung là một Mobile App Developer tài năng với kinh nghiệm phát triển ứng dụng trên cả hai nền tảng iOS và Android. Cô chuyên về React Native và Flutter, có khả năng tạo ra những ứng dụng mobile với hiệu suất cao và trải nghiệm người dùng tuyệt vời. Dung luôn theo dõi các xu hướng mobile development mới nhất.",
+    skills: ["React Native", "Flutter", "Dart", "Firebase", "iOS", "Android"],
+    joinYear: "2023",
+    location: "TP. Hồ Chí Minh",
+    education: "Đại học Công nghiệp TP.HCM - Công nghệ Thông tin",
+    github: "https://github.com/phamthidung",
+    linkedin: "https://linkedin.com/in/phamthidung",
+    portfolio: null,
+    email: "dung.pham@student.iuh.edu.vn",
+    achievements: [
+      "Mobile Lead của BCN",
+      "Phát triển 5+ ứng dụng mobile",
+      "Cross-platform Specialist",
+      "Google Play Developer",
+    ],
+    projects: [
+      {
+        id: "bcn-mobile-app",
+        title: "BCN Mobile App",
+        role: "Lead Mobile Developer",
+        description: "Phát triển ứng dụng mobile chính thức của BCN",
+        image: "/placeholder.svg?height=150&width=250",
+        techStack: ["React Native", "Firebase", "Redux"],
+        status: "In Progress",
+      },
+      {
+        id: "student-helper-app",
+        title: "Student Helper App",
+        role: "Flutter Developer",
+        description: "Ứng dụng hỗ trợ sinh viên trong học tập",
+        image: "/placeholder.svg?height=150&width=250",
+        techStack: ["Flutter", "Dart", "SQLite"],
+        status: "Completed",
+      },
+    ],
+    stats: {
+      projectsCompleted: 5,
+      yearsExperience: 1,
+      teamMembers: 6,
+      linesOfCode: "25K+",
+    },
+  },
   // {
   //   id: "hoang-van-em",
   //   name: "Hoàng Văn Em",
@@ -410,24 +412,7 @@ export const memberGroups = [
 
 export const memberRoles = ["Tất cả", "Leader", "Core Team", "Web Developer", "App Developer", "Designer"]
 
-import FitImage from "./images/activitygallery/fit.jpg";
-import a from "./images/activitygallery/2.jpg";
-import b from "./images/activitygallery/3.jpg";
-import c from "./images/activitygallery/4.jpg";
-import d from "./images/activitygallery/5.jpg";
-import e from "./images/activitygallery/6.jpg";
-import f from "./images/activitygallery/7.jpg";
-import g from "./images/activitygallery/8.jpg";
 
 
 
-export const activityGallery = [
-  { src: FitImage.src, alt: "Workshop React" },
-  { src: a.src, alt: "Team Building" },
-  { src: b.src, alt: "Hackathon" },
-  { src: c.src, alt: "Tech Talk" },
-  { src: d.src, alt: "Project Demo" },
-  { src: e.src, alt: "Networking Event" },
-  { src: f.src, alt: "Code Review Session" },
-  { src: g.src, alt: "Member Graduation" },
-]
+

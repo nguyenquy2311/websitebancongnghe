@@ -31,8 +31,8 @@ import Link from "next/link"
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component"
 import "react-vertical-timeline-component/style.min.css"
 import img2 from '/public/images/homepage/img2.webp';
-import { members, memberGroups, memberRoles, activityGallery } from "@/data/portfolio";
-import { timelineData } from "@/data/timeline"
+import { members } from "@/data/portfolio";
+import { timelineData, activityGallery } from "@/data/timeline"
 
 export default function AboutPage() {
   return (
