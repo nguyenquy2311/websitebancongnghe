@@ -1,134 +1,68 @@
-import { Button } from "@/components/ui/button"
-import { Code2, Github, Facebook, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
+import { Mail, Facebook, Github, Youtube } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Code2 className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-bold text-xl">BCN</span>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Ban Công Nghệ - Nơi ươm mầm tài năng công nghệ tại Trường Đại học Công nghiệp TP.HCM
-            </p>
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="https://github.com/bcn-iuh" target="_blank">
-                  <Github className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="https://facebook.com/bcn.iuh" target="_blank">
-                  <Facebook className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="mailto:bcn@student.iuh.edu.vn">
-                  <Mail className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
+    <>
+      <footer className="w-full bg-transparent py-12 mx-auto xl:px-[114px] px-4">
+        <div className="max-w-full mx-auto flex flex-col items-center justify-center text-center gap-8 text-base text-gray-600 bg-gray-100 rounded-2xl shadow-xl p-10">
+          <div className="flex flex-col items-center gap-3">
+            <Link
+              href="/"
+              className="w-full h-full flex items-center flex-col justify-center mb-2"
+            >
+              <h1 className="xl:text-4xl text-3xl font-bold text-gray-800">BAN CÔNG NGHỆ</h1>
+              <span className="text-lg text-gray-500">School Life Stories</span>
+            </Link>
+            <span className="text-base text-gray-500">Khoa Công nghệ thông tin - Đại học Công nghiệp Tp.Hồ Chí Minh</span>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Liên Kết</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/projects" className="text-gray-400 hover:text-white transition-colors">
-                  Dự Án
-                </Link>
-              </li>
-              <li>
-                <Link href="/members" className="text-gray-400 hover:text-white transition-colors">
-                  Thành Viên
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-                  Về BCN
-                </Link>
-              </li>
-              <li>
-                <Link href="/join" className="text-gray-400 hover:text-white transition-colors">
-                  Tham Gia BCN
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-base md:gap-x-12 md:gap-y-4 md:text-lg">
+            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Trang chủ</Link>
+            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Dự án</Link>
+            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Thành viên</Link>
+            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Hoạt động</Link>
+            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Hỗ trợ</Link>
+          </nav>
 
-          {/* Resources */}
-          <div>
-            <h3 className="font-semibold mb-4">Tài Nguyên</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Blog Công Nghệ
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Workshop
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Tech Talk
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Hackathon
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold mb-4">Liên Hệ</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start space-x-2">
-                <Mail className="h-4 w-4 text-gray-400 mt-0.5" />
-                <span className="text-gray-400">bcn@student.iuh.edu.vn</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <Phone className="h-4 w-4 text-gray-400 mt-0.5" />
-                <span className="text-gray-400">+84 123 456 789</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
-                <span className="text-gray-400">
-                  Trường ĐH Công nghiệp TP.HCM
-                  <br />
-                  12 Nguyễn Văn Bảo, Gò Vấp, TP.HCM
-                </span>
-              </li>
-            </ul>
+          <div className="flex gap-8 justify-center mt-2">
+            <Link href="dinhn5687@gmail.com" className="hover:text-cyan-700 text-gray-700" aria-label="Email">
+              <Mail className="w-7 h-7" />
+            </Link>
+            <Link href="https://www.facebook.com/profile.php?id=61572321333029" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-700 text-gray-700" aria-label="Facebook">
+              <Facebook className="w-7 h-7" />
+            </Link>
           </div>
         </div>
-
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Ban Công Nghệ - IUH. All rights reserved.
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Chính Sách Bảo Mật
+      </footer>
+      <div className="w-full bg-transparent mx-auto xl:px-[114px] px-4 mb-5">
+        <div className="w-full h-[1px] bg-gray-300 mb-2"></div>
+        <div className="max-w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 text-base text-gray-600 bg-gray-100 rounded-2xl shadow-xl px-8 py-6">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/logo.svg" alt="Logo" width={195} height={40} className="h-auto w-auto" priority />
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Điều Khoản Sử Dụng
+          </div>
+          <div className="text-center flex-1">
+            <p className="text-base text-gray-600">© {new Date().getFullYear()} Ban Công Nghệ. All rights reserved.</p>
+          </div>
+          <div className="flex gap-6 justify-center">
+            <Link href="dinhn5687@gmail.com" className="hover:text-cyan-700 text-gray-700" aria-label="Email">
+              <Mail className="w-6 h-6" />
+            </Link>
+            <Link href="https://www.facebook.com/profile.php?id=61572321333029" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-700 text-gray-700" aria-label="Facebook">
+              <Facebook className="w-6 h-6" />
+            </Link>
+            <Link href="https://github.com/nguyenquy2311/websitebancongnghe" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-700 text-gray-700" aria-label="GitHub">
+              <Github className="w-6 h-6" />
+            </Link>
+            <Link href="https://www.youtube.com/@bancongnghe" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-700 text-gray-700" aria-label="YouTube">
+              <Youtube className="w-6 h-6" />
             </Link>
           </div>
         </div>
       </div>
-    </footer>
-  )
+    </>
+  );
 }

@@ -63,6 +63,7 @@ export default function AboutPage() {
               src={img2}
               alt="Khóa học"
               className="w-full h-full object-contain"
+              placeholder="blur"
             />
           </div>
         </div>

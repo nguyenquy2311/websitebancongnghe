@@ -6,4 +6,5 @@ export const navigation = [
   { name: 'Dịch vụ', href: '/services' },
   { name: 'Hoạt động', href: '/activities' },
   { name: 'Về chúng tôi', href: '/about' },
+  { name: 'Tham gia', href: '/join' },
 ];
