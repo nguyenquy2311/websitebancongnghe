@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button"
-import Slider from "@/components/slider"
-import Link from "next/link"
-import Image from "next/image"
-import img1 from '/public/images/homepage/image.webp';
-import img2 from '/public/images/homepage/img2.webp';
+import { Button } from "@/components/ui/button";
+import Slider from "@/components/slider";
+import Link from "next/link";
+import Image from "next/image";
+import img1 from "/public/images/homepage/image.webp";
+import img2 from "/public/images/homepage/img2.webp";
 import { ArrowRight } from "lucide-react";
 export default function HomePage() {
   return (
@@ -16,11 +16,13 @@ export default function HomePage() {
               BAN CÔNG NGHỆ
             </h1>
             <p className="font-quicksand font-normal text-base leading-6 tracking-[0.005em] text-gray-500 my-10 max-xl:my-5 max-xl:max-w-[500px] max-sm:max-w-full max-xl:mx-auto max-sm:text-[1.1rem] max-sm:leading-[1.6rem] max-sm:my-5 max-sm:text-center">
-              Ban Công Nghệ Sinh Viên IT thuộc Đoàn Khoa Công Nghệ Thông Tin là nơi kết nối các bạn sinh viên đam mê công nghệ.
-              Chúng tôi tập trung vào việc phát triển phần mềm, tổ chức các hoạt động đào tạo kỹ năng IT,
-              và tạo ra một cộng đồng học hỏi, hợp tác. Với mục tiêu giúp sinh viên nâng cao kỹ năng công nghệ,
-              tham gia các dự án thực tế và phát triển nghề nghiệp, Ban Công Nghệ luôn chào đón những bạn trẻ nhiệt huyết
-              gia nhập để cùng nhau sáng tạo và học hỏi.
+              Ban Công Nghệ Sinh Viên IT thuộc Đoàn Khoa Công Nghệ Thông Tin là
+              nơi kết nối các bạn sinh viên đam mê công nghệ. Chúng tôi tập
+              trung vào việc phát triển phần mềm, tổ chức các hoạt động đào tạo
+              kỹ năng IT, và tạo ra một cộng đồng học hỏi, hợp tác. Với mục tiêu
+              giúp sinh viên nâng cao kỹ năng công nghệ, tham gia các dự án thực
+              tế và phát triển nghề nghiệp, Ban Công Nghệ luôn chào đón những
+              bạn trẻ nhiệt huyết gia nhập để cùng nhau sáng tạo và học hỏi.
             </p>
             <Link
               href="/about"
@@ -29,7 +31,13 @@ export default function HomePage() {
               Tìm hiểu thêm
             </Link>
           </div>
-          <Image className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]" src={img1} alt="" width={343} height={600} />
+          <Image
+            className="w-[343px] h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6 max-sm:w-[35vw] max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2] max-sm:mt-[70px] max-sm:my-[150px]"
+            src={img1}
+            alt=""
+            width={343}
+            height={600}
+          />
         </div>
       </div>
 
@@ -51,31 +59,44 @@ export default function HomePage() {
               Hành trình học hỏi và phát triển cùng BCN
             </h2>
             <p className="font-quicksand font-normal text-base leading-6 tracking-[0.005em] text-gray-500 my-8 max-xl:my-5 max-xl:max-w-[500px] max-sm:max-w-full max-xl:mx-auto max-sm:text-[1.05rem] max-sm:leading-[1.6rem] max-sm:my-4 max-sm:text-center">
-              Tại BCN, sinh viên không chỉ học lập trình mà còn được trải nghiệm một hành trình phát triển toàn diện.
-              Từ những buổi đào tạo nền tảng như C, Web, App... đến việc tham gia dự án thực tế, làm việc theo nhóm, tổ chức workshop nội bộ, talkshow chia sẻ – mọi hoạt động đều được xây dựng để giúp bạn rèn kỹ năng chuyên môn, nâng cao tư duy, và trở thành phiên bản tốt hơn mỗi ngày.
-              Chúng tôi tin rằng một môi trường cởi mở, sáng tạo và gắn kết chính là nền tảng để sinh viên sống hết mình với công nghệ và khám phá tiềm năng của bản thân.
-              gia nhập để cùng nhau sáng tạo và học hỏi.
+              Tại BCN, sinh viên không chỉ học lập trình mà còn được trải nghiệm
+              một hành trình phát triển toàn diện. Từ những buổi đào tạo nền
+              tảng như C, Web, App... đến việc tham gia dự án thực tế, làm việc
+              theo nhóm, tổ chức workshop nội bộ, talkshow chia sẻ – mọi hoạt
+              động đều được xây dựng để giúp bạn rèn kỹ năng chuyên môn, nâng
+              cao tư duy, và trở thành phiên bản tốt hơn mỗi ngày. Chúng tôi tin
+              rằng một môi trường cởi mở, sáng tạo và gắn kết chính là nền tảng
+              để sinh viên sống hết mình với công nghệ và khám phá tiềm năng của
+              bản thân. gia nhập để cùng nhau sáng tạo và học hỏi.
             </p>
-            <Link href="/activities" className="m-auto flex justify-center items-center w-[157px] h-10 bg-cyan-700 shadow-[-9px_-6px_25px_#ffffff,_6px_7px_30px_rgba(0,0,0,0.25)] backdrop-blur-sm rounded font-quicksand font-medium text-sm leading-5 tracking-[0.001em] text-white transition-all duration-300 ease-in-out hover:bg-cyan-400 hover:scale-10 hover:shadow-xl active:scale-95 active:bg-gray-200 active:text-gray-500 active:shadow-[inset_-4px_-4px_4px_rgba(255,255,255,0.75),_inset_4px_4px_4px_rgba(0,0,0,0.25)] max-xl:mx-auto max-sm:mt-6 max-sm:w-[fit-content] max-sm:px-[20px] max-sm:h-[50px] max-sm:text-[18px]">
+            <Link
+              href="/activities"
+              className="m-auto flex justify-center items-center w-[157px] h-10 bg-cyan-700 shadow-[-9px_-6px_25px_#ffffff,_6px_7px_30px_rgba(0,0,0,0.25)] backdrop-blur-sm rounded font-quicksand font-medium text-sm leading-5 tracking-[0.001em] text-white transition-all duration-300 ease-in-out hover:bg-cyan-400 hover:scale-10 hover:shadow-xl active:scale-95 active:bg-gray-200 active:text-gray-500 active:shadow-[inset_-4px_-4px_4px_rgba(255,255,255,0.75),_inset_4px_4px_4px_rgba(0,0,0,0.25)] max-xl:mx-auto max-sm:mt-6 max-sm:w-[fit-content] max-sm:px-[20px] max-sm:h-[50px] max-sm:text-[18px]"
+            >
               Bắt đầu ngay
             </Link>
           </div>
         </div>
       </div>
 
-
-
       {/* Featured Projects Preview */}
       <Slider />
       {/* CTA Section */}
       <section className="py-20 bg-[#EBEAEF] text-black">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Tham gia hành trình của BCN</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+            Tham gia hành trình của BCN
+          </h2>
           <p className="text-xl text-grey-100 mb-8 max-w-2xl mx-auto">
-            Hãy trở thành một phần câu chuyện của BCN và cùng chúng tôi xây dựng tương lai công nghệ
+            Hãy trở thành một phần câu chuyện của BCN và cùng chúng tôi xây dựng
+            tương lai công nghệ
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-[#0E7490] text-white hover:bg-[#22D3EE]" asChild>
+            <Button
+              size="lg"
+              className="bg-[#0E7490] text-white hover:bg-[#22D3EE]"
+              asChild
+            >
               <Link href="/join">
                 Tham gia BCN
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -101,5 +122,5 @@ export default function HomePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

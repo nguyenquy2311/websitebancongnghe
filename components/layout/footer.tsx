@@ -19,11 +19,11 @@ export default function Footer() {
           </div>
 
           <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-base md:gap-x-12 md:gap-y-4 md:text-lg">
-            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Trang chủ</Link>
-            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Dự án</Link>
-            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Thành viên</Link>
-            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Hoạt động</Link>
-            <Link href="#" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Hỗ trợ</Link>
+            <Link href="/" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Trang chủ</Link>
+            <Link href="/projects" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Dự án</Link>
+            <Link href="/portfolio" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Thành viên</Link>
+            <Link href="/activities" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Hoạt động</Link>
+            <Link href="/join" className="hover:underline hover:text-[#0E7490] transition-all duration-200">Hỗ trợ</Link>
           </nav>
 
           <div className="flex gap-8 justify-center mt-2">
