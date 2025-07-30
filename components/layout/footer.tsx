@@ -37,11 +37,6 @@ export default function Footer() {
         <div className="w-full h-[1px] bg-gray-300 mb-2"></div>
         <div className="max-w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 text-base text-gray-600 bg-gray-100 rounded-2xl shadow-xl px-8 py-6">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.svg" alt="Logo" width={195} height={40} className="h-auto w-auto" priority />
-            </Link>
-          </div>
-          <div className="text-center flex-1">
             <p className="text-base text-gray-600">© {new Date().getFullYear()} Ban Công Nghệ. All rights reserved.</p>
           </div>
           <div className="flex gap-6 justify-center">
