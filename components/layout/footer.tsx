@@ -8,13 +8,10 @@ export default function Footer() {
       <footer className="w-full bg-transparent py-12 mx-auto xl:px-[114px] px-4">
         <div className="max-w-full mx-auto flex flex-col items-center justify-center text-center gap-8 text-base text-gray-600 bg-gray-100 rounded-2xl shadow-xl p-10">
           <div className="flex flex-col items-center gap-3">
-            <Link
-              href="/"
-              className="w-full h-full flex items-center flex-col justify-center mb-2"
-            >
+            <div className="w-full h-full flex items-center flex-col justify-center mb-2">
               <h1 className="xl:text-4xl text-3xl font-bold text-gray-800">BAN CÔNG NGHỆ</h1>
               <span className="text-lg text-gray-500">School Life Stories</span>
-            </Link>
+            </div>
             <span className="text-base text-gray-500">Khoa Công nghệ thông tin - Đại học Công nghiệp Tp.Hồ Chí Minh</span>
           </div>
 
