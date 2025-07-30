@@ -241,10 +241,10 @@ export default function ActivitiesPage() {
               <CardContent className="space-y-2">
                 {activityTypes.map((type) => (
                   <Button
-                    key={type.id}
-                    variant={typeFilter === type.id ? "default" : "ghost"}
-                    className="w-full justify-start"
-                    onClick={() => setTypeFilter(type.id)}
+                      key={type.id}
+                      variant={typeFilter === type.id ? "secondary" : "ghost"}
+                      className="w-full justify-start"
+                      onClick={() => setTypeFilter(type.id)}
                   >
                     <type.icon className="h-4 w-4 mr-2" />
                     {type.name}
@@ -393,7 +393,7 @@ export default function ActivitiesPage() {
                       {/* Action Buttons */}
                       <div className="flex gap-3">
                         {activity.status === "upcoming" && (
-                          <Button size="sm" className="flex-1">
+                          <Button variant="default" className="flex-1">
                             Đăng Ký Tham Gia
                           </Button>
                         )}
@@ -420,6 +420,8 @@ export default function ActivitiesPage() {
           </div>
         </div>
       </div>
+
+      {/* rgba(234, 233, 238, 0.95) */}
 
       {/* CTA Section */}
       <section className="py-20 bg-[#EBEAEF] text-black">
