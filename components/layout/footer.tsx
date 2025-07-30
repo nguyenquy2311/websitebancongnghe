@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function Footer() {
   return (
     <>
-      <footer className="w-full bg-transparent py-12 mx-auto xl:px-[114px] px-4">
+      <footer className="container w-full bg-transparent py-12 mx-auto px-4">
         <div className="max-w-full mx-auto flex flex-col items-center justify-center text-center gap-8 text-base text-gray-600 bg-gray-100 rounded-2xl shadow-xl p-10">
           <div className="flex flex-col items-center gap-3">
             <div className="w-full h-full flex items-center flex-col justify-center mb-2">
@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-      <div className="w-full bg-transparent mx-auto xl:px-[114px] px-4 mb-5">
+      <div className="container w-full bg-transparent mx-auto px-4 mb-5">
         <div className="w-full h-[1px] bg-gray-300 mb-2"></div>
         <div className="max-w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 text-base text-gray-600 bg-gray-100 rounded-2xl shadow-xl px-8 py-6">
           <div className="flex items-center gap-3">
