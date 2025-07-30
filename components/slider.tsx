@@ -1,12 +1,11 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Slider from 'react-slick'
 import Image from 'next/image'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
-// Custom CSS for slider
 const sliderStyles = `
   .slider-container .slick-dots {
     bottom: -50px;
@@ -16,55 +15,64 @@ const sliderStyles = `
     color: #cbd5e1;
     opacity: 0.5;
   }
-  
   .slider-container .slick-dots li.slick-active button:before {
     opacity: 1;
     color: #0d7490;
   }
-  
   .slider-container .slick-arrow {
     z-index: 10;
   }
-  
   .slider-container .slick-prev,
   .slider-container .slick-next {
     width: 40px !important;
     height: 40px !important;
   }
-  
   .slider-container .slick-prev {
     left: 25px;
   }
-  
   .slider-container .slick-next {
     right: 25px;
   }
-  
   .slider-container .slick-arrow:before {
     font-size: 40px;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.89);
   }
-  
   .slider-container .slick-slide {
     opacity: 0.6;
     transform: scale(0.9);
     transition: all 0.3s ease;
+    cursor: pointer;
   }
-  
   .slider-container .slick-slide.slick-center {
     opacity: 1;
     transform: scale(1);
   }
-  
-  @media (max-width: 768px) {
+
+  /* Hover chỉ hoạt động ở desktop cho slick-center */
+  .slider-container .slick-slide:not(.slick-center) .md\:group-hover\:scale-110 {
+    transform: scale(1) !important;
+  }
+  .slider-container .slick-slide:not(.slick-center) .md\:group-hover\:translate-y-0 {
+    transform: none !important;
+  }
+  .slider-container .slick-slide:not(.slick-center) .md\:group-hover\:opacity-90,
+  .slider-container .slick-slide:not(.slick-center) .md\:group-hover\:opacity-100 {
+    opacity: 0 !important;
+  }
+
+  /* Tự động hiển thị nội dung nếu là slick-center từ xl trở xuống */
+  @media (max-width: 1280px) {
     .slider-container .slick-arrow {
       display: none !important;
     }
-    
     .slider-container .slick-slide {
       opacity: 0.8;
       transform: scale(0.95);
+    }
+    .slider-container .slick-slide.slick-center .auto-mobile-show {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
   }
 `
@@ -81,7 +89,7 @@ const projects = [
     id: "2", 
     name: "Website Ban Công Nghệ",
     image: "https://media.discordapp.net/attachments/1337249537311379547/1399637133593149571/image.png?ex=6889b928&is=688867a8&hm=87f9cd74a6385dc42fd9109df5c860ab83134776ceef49f6b909e5f3ff5aa908&=&width=3264&height=1578",
-    description: "Ban Công Nghệ Sinh Viên IT thuộc Đoàn Khoa Công Nghệ Thông Tin là nơi kết | nối các bạn sinh viên đam mê công nghệ. Chúng tôi tập trung vào việc phát triển phần mềm, tổ chức các hoạt động đào tạo kỹ năng IT, và tạo ra một cộng đồng học hỏi, hợp tác. Với mục tiêu giúp sinh viên nâng cao kỹ năng công nghệ, tham gia các dự án thực tế và phát triển nghề nghiệp, Ban Công Nghệ luôn) chào đón những bạn trẻ nhiệt huyết gia nhập để cùng nhau sáng tạo và học hỏi.",
+    description: "Ban Công Nghệ Sinh Viên IT thuộc Đoàn Khoa Công Nghệ Thông Tin là nơi kết nối các bạn sinh viên đam mê công nghệ...",
     link: "/projects/2",
   },
   {
@@ -93,43 +101,63 @@ const projects = [
   },
 ]
 
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 800,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  centerMode: true,
-  centerPadding: '12%',
-  arrows: true,
-  autoplay: true,
-  autoplaySpeed: 6000,
-  pauseOnHover: true,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        centerPadding: '10%',
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        centerPadding: '8%',
-        arrows: false,
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        centerPadding: '24px',
-        arrows: false,
-      }
-    }
-  ]
-}
-
 const AppleCardSliderPage = () => {
+  const sliderRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handleSlideClick = (index) => {
+    if (!sliderRef.current || index === currentSlide) return;
+
+    const totalSlides = projects.length;
+    const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+    const nextIndex = (currentSlide + 1) % totalSlides;
+
+    if (index === nextIndex) {
+      sliderRef.current.slickNext();
+    } else if (index === prevIndex) {
+      sliderRef.current.slickPrev();
+    } else {
+      sliderRef.current.slickGoTo(index);
+    }
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '12%',
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    pauseOnHover: true,
+    beforeChange: (_, newIndex) => setCurrentSlide(newIndex),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          centerPadding: '10%',
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          centerPadding: '8%',
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          centerPadding: '24px',
+          arrows: false,
+        }
+      }
+    ]
+  }
+
   return (
     <>
       <style jsx>{sliderStyles}</style>
@@ -137,33 +165,32 @@ const AppleCardSliderPage = () => {
         <div className="w-full px-0">
           <div className='max-w-3xl mx-auto text-center mb-10 max-sm:px-10'>
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-            Dự Án Nổi Bật
-          </h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum velit quisquam vero? Perferendis repudiandae labore perspiciatis ea et quibusdam nemo minima accusantium cumque earum commodi omnis esse, debitis voluptate nostrum?</p>
+              Dự Án Nổi Bật
+            </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum velit quisquam vero?</p>
           </div>
           <div className="slider-container w-full">
-            <Slider {...settings}>
+            <Slider {...settings} ref={sliderRef}>
               {projects.map((project, idx) => (
-                <div key={idx} className="px-0">
-                  <div className="relative w-full max-w-none h-[500px] max-sm:max-h-[60dvh]  overflow-hidden  group mx-auto transition-all duration-300">
+                <div key={idx} className="px-0" onClick={() => handleSlideClick(idx)}>
+                  <div className="relative w-full max-w-none h-[500px] max-sm:max-h-[60dvh] overflow-hidden group mx-auto transition-all duration-300">
                     <Image
                       src={project.image}
                       alt={project.name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                      className="object-cover md:group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 group-hover:from-black/80 group-hover:via-black/60 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-[calc(100%-88px)] group-hover:translate-y-0 transition-transform duration-700 ease-out">
-
-                      <h3 className="text-4xl font-bold mb-3 transform group-hover:translate-y-0 transition-transform duration-300 truncate whitespace-nowrap overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 md:group-hover:from-black/80 md:group-hover:via-black/60 to-transparent opacity-60 md:group-hover:opacity-90 transition-opacity duration-300 auto-mobile-show" />
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-[calc(100%-88px)] md:group-hover:translate-y-0 transition-transform duration-700 ease-out auto-mobile-show">
+                      <h3 className="text-4xl font-bold mb-3 transform md:group-hover:translate-y-0 transition-transform duration-300 truncate whitespace-nowrap overflow-hidden">
                         {project.name}
                       </h3>
-                      <p className="text-xl line-clamp-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200 mb-4 leading-relaxed">
+                      <p className="text-xl line-clamp-6 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 delay-200 mb-4 leading-relaxed auto-mobile-show">
                         {project.description}
                       </p>
                       <button 
                         onClick={() => window.location.href = project.link}
-                        className="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-lg font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200 transform translate-y-4 group-hover:translate-y-0"
+                        className="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-lg font-semibold opacity-0 md:group-hover:opacity-100 transition-all duration-300 delay-200 transform translate-y-4 md:group-hover:translate-y-0 auto-mobile-show"
                       >
                         Xem chi tiết
                       </button>
@@ -179,4 +206,4 @@ const AppleCardSliderPage = () => {
   )
 }
 
-export default AppleCardSliderPage
+export default AppleCardSliderPage;
