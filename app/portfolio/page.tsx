@@ -14,18 +14,16 @@ import { members, memberGroups, memberRoles } from "@/data/portfolio";
 
 export default function MembersPage() {
   const [roleFilter, setRoleFilter] = useState("Tất cả")
-  const [yearFilter, setYearFilter] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
 
   const filteredMembers = members.filter((member) => {
     const matchesRole = roleFilter === "Tất cả" || member.role === roleFilter
-    const matchesYear = yearFilter === "all" || member.joinYear === yearFilter
     const matchesSearch = searchQuery === "" || 
       member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       member.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase())) ||
       member.description.toLowerCase().includes(searchQuery.toLowerCase())
 
-    return matchesRole && matchesYear && matchesSearch
+    return matchesRole && matchesSearch
   })
 
   const getGroupColor = (group: string) => {
@@ -46,54 +44,27 @@ export default function MembersPage() {
 
         {/* Filters */}
         <div className="space-y-6 mb-8">
-          {/* Role and Year Filters in same row */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Role Filter */}
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">Vai trò</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {memberRoles.map((role) => (
-                  <Button
-                    key={role}
-                    variant={roleFilter === role ? "default" : "outline"}
-                    onClick={() => setRoleFilter(role)}
-                    className="rounded-full text-sm"
-                    size="sm"
-                  >
-                    {role}
-                    <Badge variant="secondary" className="ml-1 text-xs">
-                      {role === "Tất cả" 
-                        ? members.length 
-                        : members.filter((m) => m.role === role).length
-                      }
-                    </Badge>
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Year Filter */}
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">Năm tham gia</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {["all", "2024", "2023", "2022"].map((year) => (
-                  <Button
-                    key={year}
-                    variant={yearFilter === year ? "default" : "outline"}
-                    onClick={() => setYearFilter(year)}
-                    className="rounded-full text-sm"
-                    size="sm"
-                  >
-                    {year === "all" ? "Tất cả năm" : year}
-                    <Badge variant="secondary" className="ml-1 text-xs">
-                      {year === "all" 
-                        ? members.length 
-                        : members.filter((m) => m.joinYear === year).length
-                      }
-                    </Badge>
-                  </Button>
-                ))}
-              </div>
+          {/* Role Filter */}
+          <div className="text-center">
+            <h3 className="text-sm font-medium text-gray-700 mb-4">Vai trò</h3>
+            <div className="flex flex-wrap justify-center gap-2">
+              {memberRoles.map((role) => (
+                <Button
+                  key={role}
+                  variant={roleFilter === role ? "default" : "outline"}
+                  onClick={() => setRoleFilter(role)}
+                  className="rounded-full text-sm"
+                  size="sm"
+                >
+                  {role}
+                  <Badge variant="secondary" className="ml-1 text-xs">
+                    {role === "Tất cả" 
+                      ? members.length 
+                      : members.filter((m) => m.role === role).length
+                    }
+                  </Badge>
+                </Button>
+              ))}
             </div>
           </div>
 
@@ -127,7 +98,6 @@ export default function MembersPage() {
               variant="outline"
               onClick={() => {
                 setRoleFilter("Tất cả")
-                setYearFilter("all")
                 setSearchQuery("")
               }}
               className="rounded-full"
@@ -235,11 +205,10 @@ export default function MembersPage() {
                 : "Thử thay đổi bộ lọc để xem thêm thành viên"
               }
             </p>
-            {(searchQuery || roleFilter !== "Tất cả" || yearFilter !== "all") && (
+            {(searchQuery || roleFilter !== "Tất cả") && (
               <Button
                 onClick={() => {
                   setRoleFilter("Tất cả")
-                  setYearFilter("all")
                   setSearchQuery("")
                 }}
                 variant="outline"
