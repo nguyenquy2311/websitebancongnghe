@@ -27,13 +27,12 @@ export const activities = [
         image: C,
         instructor: "Nguyễn Mai Minh Quý",
         level: "Beginner",
-        tags: ["Workshop", "React", "Frontend", "Beginner", "Next.js", "JavaScript"],
+        tags: ["Workshop", "C", "Beginner"],
 
         // Mục tiêu học tập
         objectives: [
-            "Giúp các bạn thành viên làm quen với React, JSX và component-based thinking",
-            "Thực hành tạo dự án React từ đầu với Vite",
-            "Hiểu được cách quản lý state và props trong React components",
+            "Giúp các bạn thành viên làm quen với ngôn ngữ lập trình C, tư duy lập trình hàm",
+            "Thực hành các bài tập cơ bản để làm quen với tư duy lập trình",
         ],
 
         // Kế hoạch học tập chi tiết
@@ -45,7 +44,7 @@ export const activities = [
             },
             {
                 time: "19:30 - 20:30",
-                title: "Tạo dự án với Vite",
+                title: "Dạy lý thuyết cơ bản",
                 description: "Setup môi trường và tạo project đầu tiên",
             },
             {
@@ -98,7 +97,7 @@ export const activities = [
             ],
         },
 
-        relatedActivities: ["vue-workshop-2024", "javascript-fundamentals"],
+        relatedActivities: ["workshop-js-2025", "techtalk-it-2025"],
     },
     {
         id: "workshop-js-2025",
@@ -106,7 +105,7 @@ export const activities = [
         title: "Workshop: Học Javascript cơ bản",
         type: "Workshop",
         category: "Technical",
-        description: "Học cách xây dựng ứng dụng web hiện đại với React và Next.js từ cơ bản đến nâng cao",
+        description: "Học về ngôn ngữ lập trình Javascript",
         date: "2024-04-17",
         time: "19:00 - 22:00",
         duration: "3 tiếng",
@@ -120,31 +119,30 @@ export const activities = [
         image: JS,
         instructor: "Nguyễn Hữu Khang",
         level: "Beginner",
-        tags: ["Workshop", "React", "Frontend", "Beginner", "Next.js", "JavaScript"],
+        tags: ["Workshop", "Javascript", "Frontend", "Beginner"],
 
         // Mục tiêu học tập
         objectives: [
-            "Giúp các bạn thành viên làm quen với React, JSX và component-based thinking",
-            "Thực hành tạo dự án React từ đầu với Vite",
-            "Hiểu được cách quản lý state và props trong React components",
+            "Giúp các bạn thành viên làm quen với Javacript",
+            "Thực hành tạo dự án Javascript đầu tiên"
         ],
 
         // Kế hoạch học tập chi tiết
         agenda: [
             {
                 time: "19:00 - 19:30",
-                title: "Giới thiệu React",
-                description: "Tổng quan về React, Virtual DOM và ecosystem",
+                title: "Giới thiệu Javascript",
+                description: "Tổng quan về Javascript",
             },
             {
                 time: "19:30 - 20:30",
-                title: "Tạo dự án với Vite",
+                title: "Tạo dự án với Javascript",
                 description: "Setup môi trường và tạo project đầu tiên",
             },
             {
                 time: "20:30 - 21:30",
                 title: "Code cùng mini-project",
-                description: "Xây dựng Todo App đơn giản với React",
+                description: "Xây dựng Todo App đơn giản với Javascript",
             },
             {
                 time: "21:30 - 22:00",
@@ -213,7 +211,7 @@ export const activities = [
         image: AI,
         instructor: "Nguyễn Hữu Khang",
         level: "Beginner",
-        tags: ["Workshop", "React", "Frontend", "Beginner", "Next.js", "JavaScript"],
+        tags: ["Workshop", "AI","Intermediate", "Beginner"],
 
         // Mục tiêu học tập
         objectives: [
@@ -226,17 +224,17 @@ export const activities = [
         agenda: [
             {
                 time: "19:00 - 19:30",
-                title: "Giới thiệu React",
+                title: "Giới thiệu về các mô hình AI",
                 description: "Tổng quan về React, Virtual DOM và ecosystem",
             },
             {
                 time: "19:30 - 20:30",
-                title: "Tạo dự án với Vite",
+                title: "giải thich cách họt động của từng mô hình AI",
                 description: "Setup môi trường và tạo project đầu tiên",
             },
             {
                 time: "20:30 - 21:30",
-                title: "Code cùng mini-project",
+                title: "ứng dụng của từng mô hình AI như thế nào",
                 description: "Xây dựng Todo App đơn giản với React",
             },
             {
@@ -314,7 +312,7 @@ export const upcomingEvents = [
         type: "Competition",
     }
 ]
-
+    
 export const activityTypes = [
     { id: "all", name: "Tất cả", icon: Calendar, color: "bg-gray-100 text-gray-800" },
     { id: "Workshop", name: "Workshop", icon: BookOpen, color: "bg-blue-100 text-blue-800" },
