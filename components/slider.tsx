@@ -7,10 +7,11 @@ import Link from "next/link";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const sliderStyles = `
   .slider-container .slick-dots {
-    bottom: -50px;
+    bottom: -20px;
   }
   .slider-container .slick-dots li button:before {
     font-size: 12px;
@@ -96,7 +97,6 @@ const sliderStyles = `
     }
 
     .slider-container .slick-slide:not(.slick-center) .gradient-hover {
-      background-image: none !important;
       opacity: 0.6 !important;
     }
 
@@ -276,13 +276,12 @@ const AppleCardSliderPage = () => {
               ))}
             </Slider>
           </div>
-          <Link
-            href="/projects"
-            className="flex m-auto underline text-[#0E7490] absolute bottom-[0px] translate-x-[-50%] left-[50%] items-center rounded font-quicksand font-medium text-3xl leading-6 tracking-[0.001em] transition-all duration-300 ease-in-out"
-          >
-            Xem tất cả dự án
-            <ArrowRight className="ml-2 w-6 h-6" />
-          </Link>
+          <Button size="lg" className="bg-[#0E7490] shadow-[-9px_-6px_25px_#ffffff,_6px_7px_30px_rgba(0,0,0,0.25)] backdrop-blur-sm rounded font-quicksand font-medium text-sm leading-5 tracking-[0.001em] transition-all duration-300 ease-in-out hover:scale-10 hover:shadow-xl active:scale-95 active:bg-gray-200 active:text-gray-500 active:shadow-[inset_-4px_-4px_4px_rgba(255,255,255,0.75),_inset_4px_4px_4px_rgba(0,0,0,0.25)] absolute bottom-[20px] translate-x-[-50%] left-[50%] text-white hover:bg-[#22D3EE]" asChild>
+              <Link href="/projects">
+                Xem thêm dự án
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
         </div>
       </div>
     </>

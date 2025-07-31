@@ -50,7 +50,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "iuh-student-portal",
+    id: "club-finder",
     title: "Club Finder",
     shortDescription:
       "Hệ thống quản lý sinh viên với giao diện hiện đại, tích hợp đầy đủ các tính năng cần thiết cho sinh viên và giảng viên.",
