@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "@/components/ui/use-toast"
+import { activities } from "@/data/activities"
 import {
   Calendar,
   Clock,
@@ -51,102 +52,6 @@ const useAuth = () => {
 
   return { user, isLoading }
 }
-
-// Mock data for activities
-const activities = [
-  {
-    slug: "workshop-react-2024",
-    title: "Workshop: Làm web với React căn bản",
-    date: "2024-04-17",
-    time: "19:00 - 22:00",
-    duration: "3 tiếng",
-    format: "Offline",
-    location: "Phòng Lab A1.101",
-    status: "upcoming", // upcoming, ongoing, completed
-    allowRegistration: true,
-    registrationDeadline: "2024-04-15",
-    capacity: 30,
-    registered: 25,
-    image: "/placeholder.svg?height=400&width=800",
-
-    // Content
-    objectives: [
-      "Giúp các bạn thành viên làm quen với React, JSX và component-based thinking",
-      "Thực hành tạo dự án React từ đầu với Vite",
-      "Hiểu được cách quản lý state và props trong React components",
-    ],
-
-    agenda: [
-      {
-        time: "19:00 - 19:30",
-        title: "Giới thiệu React",
-        description: "Tổng quan về React, Virtual DOM và ecosystem",
-      },
-      {
-        time: "19:30 - 20:30",
-        title: "Tạo dự án với Vite",
-        description: "Setup môi trường và tạo project đầu tiên",
-      },
-      {
-        time: "20:30 - 21:30",
-        title: "Code cùng mini-project",
-        description: "Xây dựng Todo App đơn giản với React",
-      },
-      {
-        time: "21:30 - 22:00",
-        title: "Hỏi đáp cuối buổi",
-        description: "Q&A và chia sẻ kinh nghiệm",
-      },
-    ],
-
-    // Media
-    gallery: [
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-      "/placeholder.svg?height=300&width=500",
-    ],
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-
-    // Organizers
-    organizers: [
-      {
-        id: "nguyen-van-anh",
-        name: "Nguyễn Văn Anh",
-        role: "Mentor chính",
-        avatar: "/placeholder.svg?height=60&width=60",
-        bio: "Full-stack Developer với 3+ năm kinh nghiệm React",
-      },
-      {
-        id: "tran-thi-binh",
-        name: "Trần Thị Bình",
-        role: "Hỗ trợ kỹ thuật",
-        avatar: "/placeholder.svg?height=60&width=60",
-        bio: "Frontend Developer, chuyên về React và UI/UX",
-      },
-    ],
-
-    // Results & Impact
-    results: {
-      participants: 28,
-      satisfaction: 4.8,
-      completionRate: 95,
-      feedback: [
-        "Workshop rất bổ ích, giảng viên nhiệt tình!",
-        "Nội dung dễ hiểu, thực hành nhiều",
-        "Mong có thêm workshop nâng cao",
-      ],
-    },
-
-    // Tags
-    tags: ["Workshop", "React", "Frontend", "Beginner"],
-
-    // Related activities
-    relatedActivities: ["vue-workshop-2024", "javascript-fundamentals"],
-  },
-]
 
 // Mock registration data
 const registrations = [
@@ -317,7 +222,7 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
 
               {/* Hero Image */}
               <div className="aspect-video relative rounded-lg overflow-hidden mb-8">
-                <Image src={activity.image || "/placeholder.svg"} alt={activity.title} fill className="object-cover" />
+                <Image src={activity.image || "/placeholder.svg"} alt={activity.title} fill className="object-contain" />
               </div>
             </div>
 
@@ -407,27 +312,30 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
                     </Button>
                   </div>
                 </CardContent>
-                    <Card className="mt-10">
-                    <CardHeader>
+                <Card className="mt-10">
+                  <CardHeader>
                     <CardTitle>Người Tổ Chức</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                    {activity.organizers.map((organizer) => (
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {activity.organizers.map((organizer) => {
+                      console.log(organizer.avatar.src);
+                      return (
                         <div key={organizer.id} className="flex items-start gap-3">
-                        <Avatar>
-                            <AvatarImage src={organizer.avatar || "/placeholder.svg"} alt={organizer.name} />
+                          <Avatar>
+                            <AvatarImage className="object-cover" src={organizer.avatar.src || "/placeholder.svg"} alt={organizer.name} />
                             <AvatarFallback>{organizer.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
+                          </Avatar>
+                          <div className="flex-1">
                             <h4 className="font-semibold hover:text-blue-600 transition-colors">
-                            <Link href={`/members/${organizer.id}`}>{organizer.name}</Link>
+                              <Link href={`/members/${organizer.id}`}>{organizer.name}</Link>
                             </h4>
                             <p className="text-sm text-blue-600 mb-1">{organizer.role}</p>
                             <p className="text-xs text-gray-600">{organizer.bio}</p>
+                          </div>
                         </div>
-                        </div>
-                    ))}
-                    </CardContent>
+                      )
+                    })}
+                  </CardContent>
                 </Card>
               </Card>
             </div>
@@ -627,9 +535,8 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
                         <button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`aspect-square relative rounded-lg overflow-hidden border-2 transition-all ${
-                            index === currentImageIndex ? "border-blue-500" : "border-transparent"
-                          }`}
+                          className={`aspect-square relative rounded-lg overflow-hidden border-2 transition-all ${index === currentImageIndex ? "border-blue-500" : "border-transparent"
+                            }`}
                         >
                           <Image
                             src={image || "/placeholder.svg"}

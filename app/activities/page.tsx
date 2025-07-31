@@ -6,159 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar, MapPin, Users, Clock, BookOpen, Trophy, Mic, Heart, Star, Filter, ChevronRight, ArrowRight } from "lucide-react"
+import { activities, activityTypes,upcomingEvents } from "@/data/activities"
 import Image from "next/image"
 import Link from "next/link"
-
-const activities = [
-  {
-    id: "workshop-react-2024",
-    title: "Workshop React & Next.js",
-    type: "Workshop",
-    category: "Technical",
-    description: "Học cách xây dựng ứng dụng web hiện đại với React và Next.js từ cơ bản đến nâng cao",
-    date: "2024-02-15",
-    time: "19:00 - 21:00",
-    location: "Phòng Lab A1.101",
-    capacity: 30,
-    registered: 25,
-    status: "upcoming",
-    image: "/placeholder.svg?height=200&width=400",
-    instructor: "Nguyễn Văn Anh",
-    level: "Beginner",
-    tags: ["React", "Next.js", "JavaScript"],
-    agenda: [
-      "Giới thiệu React và ecosystem",
-      "Tạo component và state management",
-      "Routing với Next.js",
-      "Hands-on project",
-    ],
-  },
-  {
-    id: "hackathon-2024",
-    title: "BCN Hackathon 2024",
-    type: "Competition",
-    category: "Event",
-    description: "Cuộc thi lập trình 48 giờ với chủ đề 'AI for Education' - Giải thưởng lên đến 10 triệu đồng",
-    date: "2024-03-20",
-    time: "08:00 - 20:00",
-    location: "Hội trường A",
-    capacity: 100,
-    registered: 85,
-    status: "upcoming",
-    image: "/placeholder.svg?height=200&width=400",
-    instructor: "BCN Team",
-    level: "All Levels",
-    tags: ["AI", "Machine Learning", "Competition"],
-    agenda: [
-      "Opening ceremony & team formation",
-      "Coding phase (48 hours)",
-      "Mentoring sessions",
-      "Final presentation & judging",
-    ],
-  },
-  {
-    id: "tech-talk-ai",
-    title: "Tech Talk: AI trong Thực Tiễn",
-    type: "Tech Talk",
-    category: "Knowledge",
-    description: "Chia sẻ về ứng dụng AI trong các dự án thực tế và xu hướng công nghệ tương lai",
-    date: "2024-01-25",
-    time: "18:30 - 20:00",
-    location: "Phòng hội thảo B2.201",
-    capacity: 50,
-    registered: 50,
-    status: "completed",
-    image: "/placeholder.svg?height=200&width=400",
-    instructor: "Trần Minh Khoa (Google)",
-    level: "Intermediate",
-    tags: ["AI", "Machine Learning", "Career"],
-    agenda: ["AI landscape overview", "Real-world AI applications", "Career opportunities in AI", "Q&A session"],
-  },
-  {
-    id: "team-building-2024",
-    title: "Team Building BCN 2024",
-    type: "Team Building",
-    category: "Social",
-    description: "Hoạt động gắn kết đội nhóm với các trò chơi, thử thách và BBQ party",
-    date: "2024-01-10",
-    time: "08:00 - 17:00",
-    location: "Khu du lịch Đại Nam",
-    capacity: 80,
-    registered: 75,
-    status: "completed",
-    image: "/placeholder.svg?height=200&width=400",
-    instructor: "BCN Core Team",
-    level: "All Levels",
-    tags: ["Team Building", "Networking", "Fun"],
-    agenda: ["Ice breaking games", "Team challenges", "BBQ lunch", "Sharing & networking"],
-  },
-  {
-    id: "mobile-dev-workshop",
-    title: "Mobile Development với Flutter",
-    type: "Workshop",
-    category: "Technical",
-    description: "Tìm hiểu cách phát triển ứng dụng mobile cross-platform với Flutter",
-    date: "2024-02-28",
-    time: "19:00 - 21:30",
-    location: "Phòng Lab A2.102",
-    capacity: 25,
-    registered: 20,
-    status: "upcoming",
-    image: "/placeholder.svg?height=200&width=400",
-    instructor: "Phạm Thị Dung",
-    level: "Intermediate",
-    tags: ["Flutter", "Mobile", "Dart"],
-    agenda: ["Flutter fundamentals", "Widget system", "State management", "Build first app"],
-  },
-  {
-    id: "code-review-session",
-    title: "Code Review & Best Practices",
-    type: "Study Group",
-    category: "Technical",
-    description: "Buổi học nhóm về code review, clean code và best practices trong lập trình",
-    date: "2024-02-08",
-    time: "19:30 - 21:00",
-    location: "Online (Google Meet)",
-    capacity: 40,
-    registered: 35,
-    status: "upcoming",
-    image: "/placeholder.svg?height=200&width=400",
-    instructor: "Lê Văn Cường",
-    level: "Intermediate",
-    tags: ["Code Review", "Best Practices", "Clean Code"],
-    agenda: ["Code review principles", "Common code smells", "Refactoring techniques", "Live code review session"],
-  },
-]
-
-const activityTypes = [
-  { id: "all", name: "Tất cả", icon: Calendar, color: "bg-gray-100 text-gray-800" },
-  { id: "Workshop", name: "Workshop", icon: BookOpen, color: "bg-blue-100 text-blue-800" },
-  { id: "Tech Talk", name: "Tech Talk", icon: Mic, color: "bg-green-100 text-green-800" },
-  { id: "Competition", name: "Cuộc thi", icon: Trophy, color: "bg-yellow-100 text-yellow-800" },
-  { id: "Team Building", name: "Team Building", icon: Heart, color: "bg-pink-100 text-pink-800" },
-  { id: "Study Group", name: "Nhóm học", icon: Users, color: "bg-purple-100 text-purple-800" },
-]
-
-const upcomingEvents = [
-  {
-    title: "Git & GitHub Workshop",
-    date: "2024-02-05",
-    time: "19:00",
-    type: "Workshop",
-  },
-  {
-    title: "Career Talk: Làm việc tại Startup",
-    date: "2024-02-12",
-    time: "18:30",
-    type: "Tech Talk",
-  },
-  {
-    title: "UI/UX Design Challenge",
-    date: "2024-02-18",
-    time: "14:00",
-    type: "Competition",
-  },
-]
 
 export default function ActivitiesPage() {
   const [typeFilter, setTypeFilter] = useState("all")
@@ -316,7 +166,7 @@ export default function ActivitiesPage() {
                           src={activity.image || "/placeholder.svg"}
                           alt={activity.title}
                           fill
-                          className="object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+                          className="object-contain rounded-t-lg md:rounded-l-lg md:rounded-t-none"
                         />
                       </div>
                     </div>
@@ -381,7 +231,7 @@ export default function ActivitiesPage() {
                           {activity.agenda.slice(0, 2).map((item, index) => (
                             <li key={index} className="flex items-start gap-2">
                               <ChevronRight className="h-3 w-3 mt-1 flex-shrink-0" />
-                              {item}
+                              {item.title}
                             </li>
                           ))}
                           {activity.agenda.length > 2 && (
@@ -437,22 +287,6 @@ export default function ActivitiesPage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            {/* <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-              asChild
-            >
-              <Link href="/projects">Xem dự án</Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-              asChild
-            >
-              <Link href="/contact">Liên hệ hợp tác</Link>
-            </Button> */}
           </div>
         </div>
       </section>
