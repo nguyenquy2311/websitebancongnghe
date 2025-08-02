@@ -1,11 +1,7 @@
 import { Calendar, MapPin, Users, Clock, BookOpen, Trophy, Mic, Heart, Star, Filter, ChevronRight, ArrowRight } from "lucide-react";
-import C from '../data/images/activities/c.webp';
-import JS from '../data/images/activities/js.webp';
-import AI from '../data/images/activities/ai.webp';
 import MinhVu from '../data/images/nguyen-minh-vu.webp';
 import MinhQuy from '../data/images/nguyen-mai-minh-quy.webp';
 import PhanLuan from '../data/images/phan-hoang-luan.webp';
-
 export const activities = [
     {
         id: "workshop-c-2025",
@@ -24,7 +20,7 @@ export const activities = [
         status: "upcoming",
         allowRegistration: true,
         registrationDeadline: "2024-04-15",
-        image: C,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/300px-ISO_C%2B%2B_Logo.svg.png",
         instructor: "Nguyễn Mai Minh Quý",
         level: "Beginner",
         tags: ["Workshop", "C", "Beginner"],
@@ -116,7 +112,7 @@ export const activities = [
         status: "upcoming",
         allowRegistration: true,
         registrationDeadline: "2024-04-15",
-        image: JS,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/250px-JavaScript-logo.png",
         instructor: "Nguyễn Hữu Khang",
         level: "Beginner",
         tags: ["Workshop", "Javascript", "Frontend", "Beginner"],
@@ -208,7 +204,7 @@ export const activities = [
         status: "upcoming",
         allowRegistration: true,
         registrationDeadline: "2024-04-15",
-        image: AI,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhGofb2IC6Teb3fr97aHX1iAUyqBC1E8EoX3n1KJ8kc57cddObWpoSzHKn73Cgd8F3BPw&usqp=CAU",
         instructor: "Nguyễn Hữu Khang",
         level: "Beginner",
         tags: ["Workshop", "AI","Intermediate", "Beginner"],

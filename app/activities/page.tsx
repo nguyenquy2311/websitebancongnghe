@@ -1,16 +1,35 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect  } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Calendar, MapPin, Users, Clock, BookOpen, Trophy, Mic, Heart, Star, Filter, ChevronRight, ArrowRight } from "lucide-react"
+import { Calendar, MapPin, Users, Clock, BookOpen, Star, Filter, ChevronRight, ArrowRight } from "lucide-react"
 import { activities, activityTypes,upcomingEvents } from "@/data/activities"
+import { getUserByUserID, testGetAllUsers } from "@/lib/firestoreService"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function ActivitiesPage() {
+  const userID = "I27yO92RsOOgF11QYVmA";
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getUserByUserID(userID)
+      .then((data) => {
+        console.log("📦 Received data:", data);
+        setUser(data);
+        setError(data ? null : "User not found");
+      })
+      .catch(() => setError("Failed to fetch user"))
+      .finally(() => setLoading(false));
+    
+    // Test để xem có users nào không
+    testGetAllUsers();
+  }, [userID]);
   const [typeFilter, setTypeFilter] = useState("all")
   const [statusFilter, setStatusFilter] = useState("all")
   const [categoryFilter, setCategoryFilter] = useState("all")

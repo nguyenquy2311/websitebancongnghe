@@ -7,7 +7,8 @@ import {
   getDocs,
   updateDoc,
   doc,
-} from "firebase/firestore";
+  getDoc, // 👈 THÊM DÒNG NÀY
+} from "firebase/firestore"
 
 import { db } from "./firebaseConfig";
 import { hashPassword } from "@/lib/utils";
@@ -103,4 +104,48 @@ export const getUserByToken = async (token: string) => {
     studentId: userData.studentId,
     username: userData.username,
   };
+};
+
+export const getUserByUserID = async (userID: string) => {
+  try {
+    const docRef = doc(db, "users", userID);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      console.log("✅ User found:", {
+        id: docSnap.id,
+        name: data.name,
+        email: data.email,
+        username: data.username
+      });
+      return {
+        id: docSnap.id,
+        name: data.name,
+        email: data.email,
+        username: data.username,
+        studentId: data.studentId,
+        avatarUrl: data.avatarUrl
+      };
+    } else {
+      console.log(`❌ User not found: ${userID}`);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
+  }
+};
+
+// Function test để kiểm tra tất cả users
+export const testGetAllUsers = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    console.log("📊 Total users:", querySnapshot.size);
+    querySnapshot.forEach((doc) => {
+      console.log("📄 User:", doc.id, "=>", doc.data().name);
+    });
+  } catch (error) {
+    console.error("Error getting all users:", error);
+  }
 };
