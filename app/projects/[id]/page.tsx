@@ -1,22 +1,63 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Progress } from "@/components/ui/progress"
-import { Github, ExternalLink, Calendar, Users, Target, Lightbulb, CheckCircle, Clock, Star, Award } from "lucide-react"
+import { Github, ExternalLink, Calendar, Users, Target, Lightbulb, CheckCircle, Clock, Star, Award, Loader2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { projects } from "@/data/project"
+import { Project } from "@/data/project"
+import { getAllProjects } from "@/lib/firestoreService"
 
 export default function ProjectDetailPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id)
+  const [project, setProject] = useState<Project | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setLoading(true)
+        const firestoreProjects = await getAllProjects()
+        
+        const foundProject = firestoreProjects.find((p: Project) => p.id === params.id) || null
+        setProject(foundProject)
+        
+        if (foundProject) {
+          console.log("✅ Project loaded from Firestore")
+        } else {
+          console.log("⚠️ Project not found")
+        }
+      } catch (error) {
+        console.error("❌ Error fetching project:", error)
+        setProject(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProject()
+  }, [params.id])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Đang tải thông tin dự án...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!project) {
     notFound()
   }
 
-  const completedPhases = project.timeline?.filter((phase) => phase.status === "completed").length ?? 0
+  const completedPhases = project.timeline?.filter((phase: any) => phase.status === "completed").length ?? 0
   const progressPercentage = project.timeline && project.timeline.length > 0
     ? (completedPhases / project.timeline.length) * 100
     : 0

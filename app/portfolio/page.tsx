@@ -1,26 +1,44 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Github, Linkedin, ExternalLink, Mail, Filter, Search } from "lucide-react"
+import { Github, Linkedin, ExternalLink, Mail, Filter, Search, Loader2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { members, memberGroups, memberRoles } from "@/data/portfolio";
+import { memberGroups, memberRoles, type Member } from "@/data/portfolio"
+import { getAllMembers } from "@/lib/firestoreService"
 
 
 
 export default function MembersPage() {
   const [roleFilter, setRoleFilter] = useState("Tất cả")
   const [searchQuery, setSearchQuery] = useState("")
+  const [members, setMembers] = useState<Member[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const filteredMembers = members.filter((member) => {
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const membersData = await getAllMembers()
+        setMembers(membersData)
+      } catch (error) {
+        console.error("Error fetching members:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchMembers()
+  }, [])
+
+  const filteredMembers = members.filter((member: Member) => {
     const matchesRole = roleFilter === "Tất cả" || member.role === roleFilter
     const matchesSearch = searchQuery === "" || 
       member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      member.skills.some((skill: string) => skill.toLowerCase().includes(searchQuery.toLowerCase())) ||
       member.description.toLowerCase().includes(searchQuery.toLowerCase())
 
     return matchesRole && matchesSearch
@@ -29,6 +47,28 @@ export default function MembersPage() {
   const getGroupColor = (group: string) => {
     const groupInfo = memberGroups.find((g) => g.id === group)
     return groupInfo?.color || "bg-gray-100 text-gray-800"
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen py-12">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4">Thành Viên BCN</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Gặp gỡ đội ngũ tài năng của Ban Công Nghệ - những người đang cùng nhau xây dựng tương lai công nghệ
+            </p>
+          </div>
+          
+          <div className="flex justify-center items-center py-20">
+            <div className="text-center">
+              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+              <p className="text-gray-600">Đang tải thông tin thành viên...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -60,7 +100,7 @@ export default function MembersPage() {
                   <Badge variant="secondary" className="ml-1 text-xs">
                     {role === "Tất cả" 
                       ? members.length 
-                      : members.filter((m) => m.role === role).length
+                      : members.filter((m: Member) => m.role === role).length
                     }
                   </Badge>
                 </Button>
@@ -110,7 +150,7 @@ export default function MembersPage() {
 
         {/* Members Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredMembers.map((member) => (
+          {filteredMembers.map((member: Member) => (
             <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
               <CardContent className="p-6">
                 {/* Avatar and Basic Info */}
@@ -136,7 +176,7 @@ export default function MembersPage() {
                 <div className="mb-4">
                   <p className="text-xs font-medium text-gray-700 mb-2">Kỹ năng:</p>
                   <div className="flex flex-wrap gap-1">
-                    {member.skills.map((skill) => (
+                    {member.skills.map((skill: string) => (
                       <Badge key={skill} variant="secondary" className="text-xs">
                         {skill}
                       </Badge>

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -25,16 +26,43 @@ import {
   Mail,
   ArrowRight,
   Trophy,
+  Loader2,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component"
 import "react-vertical-timeline-component/style.min.css"
 import img2 from '/public/images/homepage/img2.webp';
-import { members } from "@/data/portfolio";
-import { timelineData, activityGallery } from "@/data/timeline"
+import { type Member } from "@/data/portfolio";
+import { getAllMembers, getAllTimeline, getAllActivityGallery, type TimelineItem, type ActivityGalleryItem } from "@/lib/firestoreService"
+import { getIconComponent } from "@/data/timeline"
 
 export default function AboutPage() {
+  const [members, setMembers] = useState<Member[]>([])
+  const [timelineData, setTimelineData] = useState<TimelineItem[]>([])
+  const [activityGallery, setActivityGallery] = useState<ActivityGalleryItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [membersData, timelineDataFromFirestore, activityGalleryData] = await Promise.all([
+          getAllMembers(),
+          getAllTimeline(),
+          getAllActivityGallery()
+        ])
+        setMembers(membersData)
+        setTimelineData(timelineDataFromFirestore)
+        setActivityGallery(activityGalleryData)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -118,22 +146,31 @@ export default function AboutPage() {
 
           <div className="max-w-6xl mx-auto">
             <VerticalTimeline>
-              {timelineData.map((item, index) => (
-                <VerticalTimelineElement
-                  key={index}
-                  className="vertical-timeline-element--work"
-                  contentStyle={{
-                    background: "#fff",
-                    color: "#333",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)", // giảm shadow cho mượt
-                    border: "1px solid #e5e7eb",
-                    willChange: "transform, opacity",
+              {loading ? (
+                <div className="text-center py-20">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+                  <p className="text-gray-600">Đang tải timeline...</p>
+                </div>
+              ) : (
+                timelineData.map((item: TimelineItem, index: number) => (
+                  <VerticalTimelineElement
+                    key={index}
+                    className="vertical-timeline-element--work"
+                    contentStyle={{
+                      background: "#fff",
+                      color: "#333",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.08)", // giảm shadow cho mượt
+                      border: "1px solid #e5e7eb",
+                      willChange: "transform, opacity",
                     transform: "translateZ(0)",
                   }}
                   contentArrowStyle={{ borderRight: "7px solid #fff" }}
                   date={item.date}
                   iconStyle={{ background: item.color, color: "#fff", willChange: "transform", transform: "translateZ(0)" }}
-                  icon={<item.icon />}
+                  icon={(() => {
+                    const IconComponent = getIconComponent(item.icon);
+                    return <IconComponent />;
+                  })()}
                 >
                   <div className="flex flex-col md:flex-row gap-4" style={{ willChange: "transform", transform: "translateZ(0)" }}>
                     <div className="flex-1">
@@ -148,7 +185,8 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </VerticalTimelineElement>
-              ))}
+                ))
+              )}
               <VerticalTimelineElement iconStyle={{ background: "rgb(16, 204, 82)", color: "#fff" }} icon={<Star />} />
             </VerticalTimeline>
           </div>
@@ -264,58 +302,66 @@ export default function AboutPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {members.map((member) => (
-                <div
-                  key={member.id}
-                  className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-                >
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={member.avatar || "/placeholder.svg?height=400&width=300"}
-                      alt={member.name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+              {loading ? (
+                <div className="col-span-full flex justify-center items-center py-20">
+                  <div className="text-center">
+                    <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+                    <p className="text-gray-600">Đang tải thông tin đội ngũ...</p>
                   </div>
-
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                    {/* Always visible content */}
-                    <div className="transform transition-all duration-500 group-hover:translate-y-0">
-                      <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors duration-300">
-                        {member.name}
-                      </h3>
-                      <p className="text-blue-200 font-medium mb-1">{member.role}</p>
-                      <Badge variant="outline" className="border-white/50 text-white/90 mb-4 w-fit">
-                        {member.department}
-                      </Badge>
+                </div>
+              ) : (
+                members.map((member: Member) => (
+                  <div
+                    key={member.id}
+                    className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
+                      <Image
+                        src={member.avatar || "/placeholder.svg?height=400&width=300"}
+                        alt={member.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
                     </div>
 
-                    {/* Hover content */}
-                    <div className="transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-                      <p className="text-white/90 text-sm mb-4 leading-relaxed line-clamp-3">{member.description}</p>
-
-                      {/* Achievements */}
-                      <div className="mb-4">
-                        <h4 className="font-medium text-xs text-blue-200 mb-2">Thành tựu nổi bật:</h4>
-                        <div className="flex flex-wrap gap-1">
-                          {member.achievements?.slice(0, 2).map((achievement, idx) => (
-                            <Badge
-                              key={idx}
-                              variant="secondary"
-                              className="text-xs bg-white/20 text-white border-white/30"
-                            >
-                              {achievement}
-                            </Badge>
-                          ))}
-                        </div>
+                    {/* Content Overlay */}
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                      {/* Always visible content */}
+                      <div className="transform transition-all duration-500 group-hover:translate-y-0">
+                        <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors duration-300">
+                          {member.name}
+                        </h3>
+                        <p className="text-blue-200 font-medium mb-1">{member.role}</p>
+                        <Badge variant="outline" className="border-white/50 text-white/90 mb-4 w-fit">
+                          {member.department}
+                        </Badge>
                       </div>
 
-                      {/* Social Links */}
-                      <div className="flex gap-3">
+                      {/* Hover content */}
+                      <div className="transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                        <p className="text-white/90 text-sm mb-4 leading-relaxed line-clamp-3">{member.description}</p>
+
+                        {/* Achievements */}
+                        <div className="mb-4">
+                          <h4 className="font-medium text-xs text-blue-200 mb-2">Thành tựu nổi bật:</h4>
+                          <div className="flex flex-wrap gap-1">
+                            {member.achievements?.slice(0, 2).map((achievement: string, idx: number) => (
+                              <Badge
+                                key={idx}
+                                variant="secondary"
+                                className="text-xs bg-white/20 text-white border-white/30"
+                              >
+                                {achievement}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Social Links */}
+                        <div className="flex gap-3">
                         <Button
                           variant="outline"
                           size="sm"
@@ -370,7 +416,8 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>

@@ -1,15 +1,51 @@
+"use client"
+
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Github, Linkedin, ExternalLink, Mail, MapPin, Calendar, Award, Code, Users } from "lucide-react"
+import { Github, Linkedin, ExternalLink, Mail, MapPin, Calendar, Award, Code, Users, Loader2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { members } from "@/data/portfolio";
+import { type Member } from "@/data/portfolio"
+import { getAllMembers } from "@/lib/firestoreService"
+import { useEffect, useState } from "react"
 
 export default function MemberDetailPage({ params }: { params: { id: string } }) {
-  const member = members.find((m) => m.id === params.id)
+  const [member, setMember] = useState<Member | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchMember = async () => {
+      try {
+        const members = await getAllMembers()
+        const foundMember = members.find((m) => m.id === params.id)
+        setMember(foundMember || null)
+      } catch (error) {
+        console.error("Error fetching member:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchMember()
+  }, [params.id])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <div className="container mx-auto px-4 py-20">
+          <div className="flex justify-center items-center">
+            <div className="text-center">
+              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+              <p className="text-gray-600">Đang tải thông tin thành viên...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (!member) {
     notFound()

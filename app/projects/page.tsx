@@ -1,14 +1,42 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Github, ExternalLink, Search, Filter } from "lucide-react"
+import { Github, ExternalLink, Search, Filter, Loader2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { projects } from "@/data/project" // Import the projects data
+import { Project } from "@/data/project" // Import Project interface only
+import { getAllProjects } from "@/lib/firestoreService" // Import the function from firestoreService
+
+// Loading skeleton component
+const LoadingSkeleton = () => (
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[...Array(6)].map((_, index) => (
+      <Card key={index} className="overflow-hidden animate-pulse">
+        <div className="aspect-video bg-gray-200"></div>
+        <CardHeader>
+          <div className="h-6 bg-gray-200 rounded mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="h-16 bg-gray-200 rounded"></div>
+          <div className="flex gap-2">
+            <div className="h-6 bg-gray-200 rounded w-16"></div>
+            <div className="h-6 bg-gray-200 rounded w-20"></div>
+            <div className="h-6 bg-gray-200 rounded w-14"></div>
+          </div>
+          <div className="flex gap-2">
+            <div className="h-8 bg-gray-200 rounded flex-1"></div>
+            <div className="h-8 bg-gray-200 rounded flex-1"></div>
+          </div>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
 
 // Mock data for projects
 // const projects = [
@@ -115,12 +143,38 @@ export default function ProjectsPage() {
   const [categoryFilter, setCategoryFilter] = useState("all")
   const [yearFilter, setYearFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const filteredProjects = projects.filter((project) => {
+  // Fetch projects from Firestore on component mount
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true)
+        const firestoreProjects = await getAllProjects()
+        setProjects(firestoreProjects)
+        
+        if (firestoreProjects.length > 0) {
+          console.log("✅ Projects loaded from Firestore:", firestoreProjects.length)
+        } else {
+          console.log("⚠️ No projects found in Firestore")
+        }
+      } catch (error) {
+        console.error("❌ Error fetching projects:", error)
+        setProjects([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjects()
+  }, [])
+
+  const filteredProjects = projects.filter((project: Project) => {
     const matchesSearch =
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.shortDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.techStack.some((tech) => tech.toLowerCase().includes(searchTerm.toLowerCase()))
+      project.techStack.some((tech: string) => tech.toLowerCase().includes(searchTerm.toLowerCase()))
 
     const matchesCategory = categoryFilter === "all" || project.category === categoryFilter
     const matchesYear = yearFilter === "all" || project.year === yearFilter
@@ -140,8 +194,13 @@ export default function ProjectsPage() {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="space-y-6 mb-8">
+        {/* Loading state */}
+        {loading ? (
+          <LoadingSkeleton />
+        ) : (
+          <>
+            {/* Filters */}
+            <div className="space-y-6 mb-8">
           {/* Filter Tags in grid layout */}
           <div className="grid md:grid-cols-3 gap-6">
             {/* Category Filter */}
@@ -167,7 +226,7 @@ export default function ProjectsPage() {
                 >
                   Web
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.category === "Web").length}
+                    {projects.filter((p: Project) => p.category === "Web").length}
                   </Badge>
                 </Button>
                 <Button
@@ -178,7 +237,7 @@ export default function ProjectsPage() {
                 >
                   Mobile App
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.category === "App").length}
+                    {projects.filter((p: Project) => p.category === "App").length}
                   </Badge>
                 </Button>
               </div>
@@ -207,7 +266,7 @@ export default function ProjectsPage() {
                 >
                   2024
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.year === "2024").length}
+                    {projects.filter((p: Project) => p.year === "2024").length}
                   </Badge>
                 </Button>
                 <Button
@@ -218,7 +277,7 @@ export default function ProjectsPage() {
                 >
                   2023
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.year === "2023").length}
+                    {projects.filter((p: Project) => p.year === "2023").length}
                   </Badge>
                 </Button>
                 <Button
@@ -229,7 +288,7 @@ export default function ProjectsPage() {
                 >
                   2022
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.year === "2022").length}
+                    {projects.filter((p: Project) => p.year === "2022").length}
                   </Badge>
                 </Button>
               </div>
@@ -258,7 +317,7 @@ export default function ProjectsPage() {
                 >
                   Nhóm
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.type === "Nhóm").length}
+                    {projects.filter((p: Project) => p.type === "Nhóm").length}
                   </Badge>
                 </Button>
                 <Button
@@ -269,7 +328,7 @@ export default function ProjectsPage() {
                 >
                   Cá nhân
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p) => p.type === "Cá nhân").length}
+                    {projects.filter((p: Project) => p.type === "Cá nhân").length}
                   </Badge>
                 </Button>
               </div>
@@ -340,7 +399,7 @@ export default function ProjectsPage() {
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech) => (
+                  {project.techStack.map((tech: string) => (
                     <Badge key={tech} variant="secondary" className="text-xs">
                       {tech}
                     </Badge>
@@ -353,16 +412,16 @@ export default function ProjectsPage() {
                   <div className="flex items-center gap-2">
                     {(() => {
                       // Lấy danh sách tên không trùng lặp từ team
-                      const uniqueNames = Array.from(new Set((project.team ?? []).map(m => m.name)));
-                      return uniqueNames.slice(0, 3).map((name, index) => (
+                      const uniqueNames = Array.from(new Set((project.team ?? []).map((m: any) => m.name)));
+                      return uniqueNames.slice(0, 3).map((name: string, index: number) => (
                         <span key={index} className="text-xs text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
                           {name}
                         </span>
                       ));
                     })()}
-                    {project.team && new Set(project.team.map(m => m.name)).size > 3 && (
+                    {project.team && new Set(project.team.map((m: any) => m.name)).size > 3 && (
                       <span className="text-xs text-gray-500 font-semibold">
-                        +{new Set(project.team.map(m => m.name)).size - 3}
+                        +{new Set(project.team.map((m: any) => m.name)).size - 3}
                       </span>
                     )}
                   </div>
@@ -415,13 +474,13 @@ export default function ProjectsPage() {
             </div>
             <div>
               <div className="text-3xl font-bold text-green-600 mb-2">
-                {projects.filter((p) => p.category === "Web").length}
+                {projects.filter((p: Project) => p.category === "Web").length}
               </div>
               <div className="text-gray-600">Dự án Web</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-purple-600 mb-2">
-                {projects.filter((p) => p.category === "App").length}
+                {projects.filter((p: Project) => p.category === "App").length}
               </div>
               <div className="text-gray-600">Ứng dụng Mobile</div>
             </div>
@@ -433,6 +492,8 @@ export default function ProjectsPage() {
             </div>
           </div>
         </div> */}
+            </>
+        )}
       </div>
     </div>
   )

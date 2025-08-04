@@ -12,6 +12,58 @@ import {
 
 import { db } from "./firebaseConfig";
 import { hashPassword } from "@/lib/utils";
+import { Project } from "@/data/project"; // Import Project interface
+import { Member } from "@/data/portfolio"; // Import Member interface
+
+// Timeline interface for Firestore
+export interface TimelineItem {
+  id?: string;
+  date: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: string;
+  color: string;
+  image: string;
+}
+
+export interface ActivityGalleryItem {
+  id?: string;
+  src: string;
+  alt: string;
+}
+
+// ✅ Hàm lấy tất cả projects từ Firestore
+export const getAllProjects = async (): Promise<Project[]> => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "projects"));
+    const projects = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    })) as Project[];
+    console.log("✅ Projects fetched from Firestore:", projects.length);
+    return projects;
+  } catch (error) {
+    console.error("❌ Error fetching projects:", error);
+    return [];
+  }
+};
+
+// ✅ Hàm lấy tất cả members từ Firestore
+export const getAllMembers = async (): Promise<Member[]> => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "portfolios"));
+    const members = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    })) as Member[];
+    console.log("✅ Members fetched from Firestore:", members.length);
+    return members;
+  } catch (error) {
+    console.error("❌ Error fetching members:", error);
+    return [];
+  }
+};
 
 // ✅ Kiểu dữ liệu người dùng mới
 export interface NewUser {
@@ -136,6 +188,39 @@ export const getUserByUserID = async (userID: string) => {
     return null;
   }
 };
+
+// ✅ Hàm lấy tất cả timeline data từ Firestore
+export async function getAllTimeline(): Promise<TimelineItem[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'timelineData'));
+    const timeline = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as TimelineItem));
+    
+    console.log('Timeline data fetched:', timeline.length, 'items');
+    return timeline;
+  } catch (error) {
+    console.error('Error fetching timeline data:', error);
+    return [];
+  }
+}
+
+export async function getAllActivityGallery(): Promise<ActivityGalleryItem[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'activityGallery'));
+    const gallery = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as ActivityGalleryItem));
+    
+    console.log('Activity gallery data fetched:', gallery.length, 'items');
+    return gallery;
+  } catch (error) {
+    console.error('Error fetching activity gallery data:', error);
+    return [];
+  }
+}
 
 // Function test để kiểm tra tất cả users
 export const testGetAllUsers = async () => {
