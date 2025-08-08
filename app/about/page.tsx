@@ -66,8 +66,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="h-screen flex items-center w-full overflow-hidden overflow-y-auto max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
-        <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col-reverse max-xl:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:my-10">
+      <div className=" flex items-center w-full overflow-hidden overflow-y-auto max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
+        <div className="overflow-hidden mx-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:mb-10 max-lg:mt-20">
           {/* Content */}
           <div className="w-[600px] max-xl:w-[90vw] max-xl:max-w-[550px] max-sm:max-w-full text-center">
             <h2 className="font-quicksand font-normal text-[48px] leading-[58px] tracking-[-0.0025em] text-gray-600 max-sm:leading-[48px] max-sm:text-[2.2rem]">
@@ -313,35 +313,35 @@ export default function AboutPage() {
                 members.map((member: Member) => (
                   <div
                     key={member.id}
-                    className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+                    className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer will-change-transform transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
                   >
                     {/* Background Image */}
-                    <div className="absolute inset-0">
+                    <div className="absolute inset-0 group-hover:blur-sm">
                       <Image
                         src={member.avatar || "/placeholder.svg?height=400&width=300"}
                         alt={member.name}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="object-cover will-change-transform transition-transform duration-300 group-hover:scale-105"
                       />
                       {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                     </div>
 
-                    {/* Content Overlay */}
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                      {/* Always visible content */}
-                      <div className="transform transition-all duration-500 group-hover:translate-y-0">
-                        <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors duration-300">
+                    {/* Content Overlay - Initially positioned at bottom with partial visibility */}
+                    <div className="absolute bottom-[5px] left-0 right-0 p-6 text-white transform translate-y-[calc(100%-88px)] group-hover:translate-y-0 transition-transform duration-700 ease-out">
+                      {/* Always visible content (Name, Role, Department) */}
+                      <div className="mb-4">
+                        <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors duration-300 truncate">
                           {member.name}
                         </h3>
                         <p className="text-blue-200 font-medium mb-1">{member.role}</p>
-                        <Badge variant="outline" className="border-white/50 text-white/90 mb-4 w-fit">
+                        <Badge variant="outline" className="border-white/50 text-white/90 w-fit">
                           {member.department}
                         </Badge>
                       </div>
 
-                      {/* Hover content */}
-                      <div className="transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                      {/* Hover content - Hidden initially and shown on hover */}
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
                         <p className="text-white/90 text-sm mb-4 leading-relaxed line-clamp-3">{member.description}</p>
 
                         {/* Achievements */}
@@ -362,40 +362,41 @@ export default function AboutPage() {
 
                         {/* Social Links */}
                         <div className="flex gap-3">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
-                          asChild
-                        >
-                          <Link href={`mailto:${member.email}`}>
-                            <Mail className="h-4 w-4" />
-                          </Link>
-                        </Button>
-                        {member.github && (
                           <Button
                             variant="outline"
                             size="sm"
                             className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
                             asChild
                           >
-                            <Link href={member.github} target="_blank">
-                              <Github className="h-4 w-4" />
+                            <Link href={`mailto:${member.email}`}>
+                              <Mail className="h-4 w-4" />
                             </Link>
                           </Button>
-                        )}
-                        {member.linkedin && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
-                            asChild
-                          >
-                            <Link href={member.linkedin} target="_blank">
-                              <Linkedin className="h-4 w-4" />
-                            </Link>
-                          </Button>
-                        )}
+                          {member.github && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
+                              asChild
+                            >
+                              <Link href={member.github} target="_blank">
+                                <Github className="h-4 w-4" />
+                              </Link>
+                            </Button>
+                          )}
+                          {member.linkedin && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
+                              asChild
+                            >
+                              <Link href={member.linkedin} target="_blank">
+                                <Linkedin className="h-4 w-4" />
+                              </Link>
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -410,12 +411,11 @@ export default function AboutPage() {
 
                     {/* Star Badge */}
                     <div className="absolute top-4 left-4">
-                      <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                      <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center will-change-transform transform rotate-6 group-hover:rotate-0 transition-transform duration-300">
                         <Star className="h-4 w-4 text-white fill-current" />
                       </div>
                     </div>
                   </div>
-                </div>
                 ))
               )}
             </div>
