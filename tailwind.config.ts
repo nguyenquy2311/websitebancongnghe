@@ -15,7 +15,7 @@ const config: Config = {
       // ✅ Thêm breakpoint tùy chỉnh
       screens: {
         xs: "480px",
-        tablet: "900px",
+        tablet: "970px",
         xl2: "1440px",
 		p1400: "1400px",
 		p680: "680px",

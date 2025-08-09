@@ -67,9 +67,9 @@ export default function MemberDetailPage({ params }: { params: { id: string } })
 
         <div className="container mx-auto px-4">
           <div className="relative -mt-32 pb-8">
-            <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="flex flex-col tablet:flex-row gap-8 items-center tablet:items-start">
               {/* Avatar */}
-              <div className="relative">
+              <div className="relative flex-shrink-0">
                 <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white">
                   <Image src={member.avatar || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
                 </div>
@@ -79,56 +79,97 @@ export default function MemberDetailPage({ params }: { params: { id: string } })
               </div>
 
               {/* Basic Info */}
-              <div className="flex-1 bg-white rounded-lg shadow-lg p-8 mt-8 md:mt-0">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                  <div>
-                    <h1 className="text-3xl font-bold mb-2">{member.name}</h1>
-                    <div className="flex items-center gap-4 mb-4">
-                      <Badge className="bg-blue-100 text-blue-800 text-sm px-3 py-1">{member.role}</Badge>
-                      <div className="flex items-center text-gray-600 text-sm">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        Tham gia từ {member.joinYear}
+              <div className="flex-1 bg-white rounded-lg shadow-lg p-4 sm:p-6 tablet:p-8 mt-8 tablet:mt-0">
+                <div className="space-y-4 tablet:space-y-6">
+                  {/* Header */}
+                  <div className="flex flex-col tablet:flex-row tablet:items-center tablet:justify-between mb-6 items-center">
+                    <div className="text-center tablet:text-left">
+                      <h1 className="text-2xl tablet:text-3xl font-bold mb-2">{member.name}</h1>
+                      <div className="flex flex-col tablet:flex-row tablet:items-center gap-2 tablet:gap-4 mb-4 items-center">
+                        <Badge className="bg-blue-100 text-blue-800 text-sm px-3 py-1 w-fit">{member.role}</Badge>
+                        <div className="flex items-center gap-4 text-center sm:text-left">
+                          <div className="text-gray-600 text-xs sm:text-sm">
+                            <span className="hidden sm:inline"><Calendar className="h-4 w-4 mr-1 inline" /></span>
+                            <span>Tham gia từ {member.joinYear}</span>
+                          </div>
+                          <div className="text-gray-600 text-xs sm:text-sm">
+                            <span className="hidden sm:inline"><MapPin className="h-4 w-4 mr-1 inline" /></span>
+                            <span>{member.location}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center text-gray-600 text-sm">
-                        <MapPin className="h-4 w-4 mr-1" />
-                        {member.location}
-                      </div>
+                    </div>
+                    <div className="flex gap-3 justify-center tablet:justify-start">
+                      <Button variant="outline" size="sm" asChild className="flex items-center justify-center gap-2">
+                        <Link href={`mailto:${member.email}`}>
+                          <Mail className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                      {member.github && (
+                        <Button variant="outline" size="sm" asChild className="flex items-center justify-center gap-2">
+                          <Link href={member.github} target="_blank">
+                            <Github className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      )}
+                      {member.linkedin && (
+                        <Button variant="outline" size="sm" asChild className="flex items-center justify-center gap-2">
+                          <Link href={member.linkedin} target="_blank">
+                            <Linkedin className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      )}
+                      {member.portfolio && (
+                        <Button size="sm" asChild className="flex items-center justify-center gap-2">
+                          <Link href={member.portfolio} target="_blank">
+                            <ExternalLink className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </div>
 
-                  {/* Social Links */}
-                  <div className="flex gap-3">
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href={`mailto:${member.email}`}>
-                        <Mail className="h-4 w-4" />
-                      </Link>
-                    </Button>
-                    {member.github && (
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={member.github} target="_blank">
-                          <Github className="h-4 w-4" />
+                  {/* Social Links for Mobile - Hidden on desktop since moved above */}
+                  <div className="border-t pt-4 tablet:hidden">
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button variant="outline" size="sm" asChild className="flex items-center justify-center gap-2">
+                        <Link href={`mailto:${member.email}`}>
+                          <Mail className="h-4 w-4" />
+                          <span className="text-xs">Email</span>
                         </Link>
                       </Button>
-                    )}
-                    {member.linkedin && (
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={member.linkedin} target="_blank">
-                          <Linkedin className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                    )}
-                    {member.portfolio && (
-                      <Button size="sm" asChild>
-                        <Link href={member.portfolio} target="_blank">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Portfolio
-                        </Link>
-                      </Button>
-                    )}
+                      {member.github && (
+                        <Button variant="outline" size="sm" asChild className="flex items-center justify-center gap-2">
+                          <Link href={member.github} target="_blank">
+                            <Github className="h-4 w-4" />
+                            <span className="text-xs">GitHub</span>
+                          </Link>
+                        </Button>
+                      )}
+                      {member.linkedin && (
+                        <Button variant="outline" size="sm" asChild className="flex items-center justify-center gap-2">
+                          <Link href={member.linkedin} target="_blank">
+                            <Linkedin className="h-4 w-4" />
+                            <span className="text-xs">LinkedIn</span>
+                          </Link>
+                        </Button>
+                      )}
+                      {member.portfolio && (
+                        <Button size="sm" asChild className="col-span-2 flex items-center justify-center gap-2">
+                          <Link href={member.portfolio} target="_blank">
+                            <ExternalLink className="h-4 w-4" />
+                            <span className="text-xs">Portfolio</span>
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="border-t pt-4">
+                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{member.description}</p>
                   </div>
                 </div>
-
-                <p className="text-gray-600 leading-relaxed">{member.description}</p>
               </div>
             </div>
           </div>
@@ -161,12 +202,12 @@ export default function MemberDetailPage({ params }: { params: { id: string } })
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {member.projects?.length ? (
                     member.projects.map((project, index) => (
-                      <div key={index} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
-                        <div className="flex gap-6">
-                          <div className="w-32 h-20 relative rounded-lg overflow-hidden flex-shrink-0">
+                      <div key={index} className="border rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                          <div className="w-full sm:w-32 h-32 sm:h-20 relative rounded-lg overflow-hidden flex-shrink-0">
                             <Image
                               src={project.image || "/placeholder.svg"}
                               alt={project.title}
@@ -174,30 +215,40 @@ export default function MemberDetailPage({ params }: { params: { id: string } })
                               className="object-cover"
                             />
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-start justify-between mb-2">
-                              <h3 className="text-lg font-semibold hover:text-blue-600 transition-colors">
+                          <div className="flex-1 space-y-2 sm:space-y-3">
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                              <h3 className="text-base sm:text-lg font-semibold hover:text-blue-600 transition-colors leading-snug">
                                 <Link href={`/projects/${project.id}`}>{project.title}</Link>
                               </h3>
-                              <Badge variant={project.status === "Completed" ? "default" : "secondary"}>
+                              <Badge 
+                                variant={project.status === "Completed" ? "default" : "secondary"}
+                                className="w-fit text-xs"
+                              >
                                 {project.status === "Completed" ? "Hoàn thành" : "Đang phát triển"}
                               </Badge>
                             </div>
-                            <p className="text-blue-600 font-medium text-sm mb-2">{project.role}</p>
-                            <p className="text-gray-600 text-sm mb-3">{project.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                              {project.techStack.map((tech) => (
-                                <Badge key={tech} variant="outline" className="text-xs">
+                            <p className="text-blue-600 font-medium text-xs sm:text-sm">{project.role}</p>
+                            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-none">
+                              {project.description}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
+                              {project.techStack.slice(0, 6).map((tech) => (
+                                <Badge key={tech} variant="outline" className="text-xs px-2 py-0.5">
                                   {tech}
                                 </Badge>
                               ))}
+                              {project.techStack.length > 6 && (
+                                <Badge variant="outline" className="text-xs px-2 py-0.5 bg-gray-50">
+                                  +{project.techStack.length - 6}
+                                </Badge>
+                              )}
                             </div>
                           </div>
                         </div>
                       </div>
                     ))
                   ) : (
-                    <div className="text-gray-500 text-sm">Chưa có dự án nào.</div>
+                    <div className="text-gray-500 text-sm text-center py-8">Chưa có dự án nào.</div>
                   )}
                 </div>
               </CardContent>
