@@ -222,6 +222,23 @@ export async function getAllActivityGallery(): Promise<ActivityGalleryItem[]> {
   }
 }
 
+// ✅ Hàm lấy tất cả outstanding projects từ Firestore
+export async function getOutstandingProject(): Promise<Project[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'outstandingProject'));
+    const projects = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as Project));
+    
+    console.log('Outstanding projects data fetched:', projects.length, 'items');
+    return projects;
+  } catch (error) {
+    console.error('Error fetching outstanding projects data:', error);
+    return [];
+  }
+}
+
 // Function test để kiểm tra tất cả users
 export const testGetAllUsers = async () => {
   try {

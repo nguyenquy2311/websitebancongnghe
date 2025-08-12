@@ -58,7 +58,7 @@ const AppHeader = () => {
 
   return (
     <header className="header fixed top-0 z-50 w-full bg-[rgba(234,233,238,0.95)] backdrop-blur-md border-white/20 shadow-lg px-4 md:px-10 lg:px-[60px] xl:px-[150px] py-3">
-      <div className="mx-auto flex justify-between items-center px-4">
+      <div className="mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image src="/logo.svg" alt="Logo" width={195} height={40} className="h-auto w-auto" priority />

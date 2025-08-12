@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="vi">
+    <html lang="vi" className="bg-[#f9fafb]">
       <body className={quicksand.className}>
         <Header />
         <main className="mt-[64px]">{children}</main>
