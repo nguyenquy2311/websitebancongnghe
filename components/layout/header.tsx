@@ -57,8 +57,12 @@ const AppHeader = () => {
   };
 
   return (
-    <header className="header fixed top-0 z-50 w-full bg-[rgba(234,233,238,0.95)] backdrop-blur-md border-white/20 shadow-lg px-4 md:px-10 lg:px-[60px] xl:px-[150px] py-3">
-      <div className="mx-auto flex justify-between items-center">
+    <div className="group fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full">
+      {/* Lớp phủ để mở rộng vùng hover */}
+      <div className="absolute inset-0 h-[calc(100%)] w-full"></div>
+      
+      <header className="header relative left-1/2 -translate-x-1/2 w-full bg-[rgba(234,233,238,0.95)] backdrop-blur-md border-white/20 shadow-lg px-4 md:px-10 lg:px-[60px] xl:px-[100px] py-3 transition-all duration-300 xl:group-hover:rounded-3xl xl:group-hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] xl:group-hover:w-[calc(100%-80px)] xl:group-hover:px-[calc(100px-40px)] xl:group-hover:py-5 xl:group-hover:bg-[#f0f1f4]">
+        <div className="mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image src="/logo.svg" alt="Logo" width={195} height={40} className="h-auto w-auto" priority />
@@ -146,6 +150,7 @@ const AppHeader = () => {
         </div>
       )}
     </header>
+    </div>
   );
 };
 
