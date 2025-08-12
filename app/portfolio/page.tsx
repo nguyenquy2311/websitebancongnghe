@@ -36,7 +36,7 @@ export default function MembersPage() {
 
   const filteredMembers = members.filter((member: Member) => {
     const matchesRole = roleFilter === "Tất cả" || member.role === roleFilter
-    const matchesSearch = searchQuery === "" || 
+    const matchesSearch = searchQuery === "" ||
       member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       member.skills.some((skill: string) => skill.toLowerCase().includes(searchQuery.toLowerCase())) ||
       member.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -59,7 +59,7 @@ export default function MembersPage() {
               Gặp gỡ đội ngũ tài năng của Ban Công Nghệ - những người đang cùng nhau xây dựng tương lai công nghệ
             </p>
           </div>
-          
+
           <div className="flex justify-center items-center py-20">
             <div className="text-center">
               <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
@@ -98,8 +98,8 @@ export default function MembersPage() {
                 >
                   {role}
                   <Badge variant="secondary" className="ml-1 text-xs">
-                    {role === "Tất cả" 
-                      ? members.length 
+                    {role === "Tất cả"
+                      ? members.length
                       : members.filter((m: Member) => m.role === role).length
                     }
                   </Badge>
@@ -151,84 +151,86 @@ export default function MembersPage() {
         {/* Members Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredMembers.map((member: Member) => (
-            <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-              <CardContent className="p-6">
-                {/* Avatar and Basic Info */}
-                <div className="text-center mb-4">
-                  <div className="relative w-24 h-24 mx-auto mb-4">
-                    <Image
-                      src={member.avatar || "/placeholder.svg"}
-                      alt={member.name}
-                      fill
-                      className="rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+            <Link href={`/portfolio/${member.id}`} >
+              <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                <CardContent className="p-6">
+                  {/* Avatar and Basic Info */}
+                  <div className="text-center mb-4">
+                    <div className="relative w-24 h-24 mx-auto mb-4">
+                      <Image
+                        src={member.avatar || "/placeholder.svg"}
+                        alt={member.name}
+                        fill
+                        className="rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-1 hover:text-blue-600 transition-colors">
+                      <Link href={`/portfolio/${member.id}`}>{member.name}</Link>
+                    </h3>
+                    <Badge className={getGroupColor(member.group)}>{member.role}</Badge>
                   </div>
-                  <h3 className="text-lg font-semibold mb-1 hover:text-blue-600 transition-colors">
-                    <Link href={`/portfolio/${member.id}`}>{member.name}</Link>
-                  </h3>
-                  <Badge className={getGroupColor(member.group)}>{member.role}</Badge>
-                </div>
 
-                {/* Description */}
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed">{member.description}</p>
+                  {/* Description */}
+                  <p className="text-sm text-gray-600 mb-4 leading-relaxed">{member.description}</p>
 
-                {/* Skills */}
-                <div className="mb-4">
-                  <p className="text-xs font-medium text-gray-700 mb-2">Kỹ năng:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {member.skills.map((skill: string) => (
-                      <Badge key={skill} variant="secondary" className="text-xs">
-                        {skill}
-                      </Badge>
-                    ))}
+                  {/* Skills */}
+                  <div className="mb-4">
+                    <p className="text-xs font-medium text-gray-700 mb-2">Kỹ năng:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {member.skills.map((skill: string) => (
+                        <Badge key={skill} variant="secondary" className="text-xs">
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Join Year */}
-                <div className="mb-4">
-                  <p className="text-xs text-gray-500">Tham gia BCN từ năm {member.joinYear}</p>
-                </div>
+                  {/* Join Year */}
+                  <div className="mb-4">
+                    <p className="text-xs text-gray-500">Tham gia BCN từ năm {member.joinYear}</p>
+                  </div>
 
-                {/* Social Links */}
-                <div className="flex gap-2">
-                  <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                    <Link href={`/portfolio/${member.id}`}>
-                      Xem chi tiết
-                    </Link>
-                  </Button>
-
-                  <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                    <Link href={`mailto:${member.email}`}>
-                      <Mail className="h-4 w-4" />
-                    </Link>
-                  </Button>
-
-                  {member.github && (
+                  {/* Social Links */}
+                  <div className="flex gap-2">
                     <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={member.github} target="_blank">
-                        <Github className="h-4 w-4" />
+                      <Link href={`/portfolio/${member.id}`}>
+                        Xem chi tiết
                       </Link>
                     </Button>
-                  )}
 
-                  {member.linkedin && (
                     <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={member.linkedin} target="_blank">
-                        <Linkedin className="h-4 w-4" />
+                      <Link href={`mailto:${member.email}`}>
+                        <Mail className="h-4 w-4" />
                       </Link>
                     </Button>
-                  )}
 
-                  {member.portfolio && (
-                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={member.portfolio} target="_blank">
-                        <ExternalLink className="h-4 w-4" />
-                      </Link>
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                    {member.github && (
+                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                        <Link href={member.github} target="_blank">
+                          <Github className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    )}
+
+                    {member.linkedin && (
+                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                        <Link href={member.linkedin} target="_blank">
+                          <Linkedin className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    )}
+
+                    {member.portfolio && (
+                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                        <Link href={member.portfolio} target="_blank">
+                          <ExternalLink className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
@@ -240,7 +242,7 @@ export default function MembersPage() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Không tìm thấy thành viên</h3>
             <p className="text-gray-600 mb-4">
-              {searchQuery 
+              {searchQuery
                 ? `Không có kết quả nào cho "${searchQuery}". Thử tìm kiếm với từ khóa khác hoặc thay đổi bộ lọc.`
                 : "Thử thay đổi bộ lọc để xem thêm thành viên"
               }

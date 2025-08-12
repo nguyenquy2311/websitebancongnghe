@@ -212,7 +212,7 @@ const AppleCardSliderPage = () => {
   return (
     <>
       <style jsx>{sliderStyles}</style>
-      <div className="w-full max-w-full pb-[120px] mb-[80px] overflow-x-hidden overflow-y-hidden relative">
+      <div className="pt-[20px] w-full mt-[20px] bg-[rgba(234,233,238,0.95)] max-w-full pb-[120px] mb-[80px] overflow-x-hidden overflow-y-hidden relative">
         <div className="w-full px-0">
           <div className="max-w-3xl mx-auto text-center mb-[50px] max-sm:px-10">
             <h1 className="font-quicksand font-normal text-[57px] leading-[64px] tracking-[-0.0025em] text-gray-600 max-xl:hover:text-cyan-700 transition-colors max-sm:leading-[55px] max-sm:text-[2.8rem]">
