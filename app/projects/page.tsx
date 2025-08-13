@@ -396,10 +396,10 @@ export default function ProjectsPage() {
               </CardHeader>
 
               <CardContent className="space-y-4">
-                <p className="text-gray-600 text-sm leading-relaxed">{project.shortDescription}</p>
+                <p className="text-gray-600 overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] text text-sm leading-relaxed">{project.shortDescription}</p>
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden flex-wrap gap-2">
                   {project.techStack.map((tech: string) => (
                     <Badge key={tech} variant="secondary" className="text-xs">
                       {tech}

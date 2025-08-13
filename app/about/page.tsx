@@ -142,7 +142,7 @@ export default function AboutPage() {
                       <p className="text-gray-700 leading-relaxed">{item.description}</p>
                     </div>
                     <div className="w-full md:w-48 h-32 relative rounded-lg overflow-hidden" style={{ willChange: "transform", transform: "translateZ(0)" }}>
-                      <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" style={{ willChange: "transform", transform: "translateZ(0)" }} />
+                      <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-contain" style={{ willChange: "transform", transform: "translateZ(0)" }} />
                     </div>
                   </div>
                 </VerticalTimelineElement>

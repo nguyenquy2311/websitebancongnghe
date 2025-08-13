@@ -171,12 +171,12 @@ export default function MembersPage() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-600 mb-4 leading-relaxed">{member.description}</p>
+                  <p className="[display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden  text-sm text-gray-600  mb-4 leading-relaxed">{member.description}</p>
 
                   {/* Skills */}
                   <div className="mb-4">
                     <p className="text-xs font-medium text-gray-700 mb-2">Kỹ năng:</p>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden flex-wrap gap-1">
                       {member.skills.map((skill: string) => (
                         <Badge key={skill} variant="secondary" className="text-xs">
                           {skill}
