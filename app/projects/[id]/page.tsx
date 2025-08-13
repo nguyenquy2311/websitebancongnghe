@@ -64,52 +64,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex justify-center gap-4 mb-6">
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                {project.category}
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                {project.year}
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                {project.type}
-              </Badge>
-            </div>
-
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">{project.title}</h1>
-            <p className="text-xl text-blue-100 leading-relaxed mb-8 max-w-3xl mx-auto">{project.shortDescription}</p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {project.demoUrl && (
-                <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50" asChild>
-                  <Link href={project.demoUrl} target="_blank">
-                    <ExternalLink className="mr-2 h-5 w-5" />
-                    Xem Demo
-                  </Link>
-                </Button>
-              )}
-              {project.githubUrl && (
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-blue-900 bg-transparent"
-                  asChild
-                >
-                  <Link href={project.githubUrl} target="_blank">
-                    <Github className="mr-2 h-5 w-5" />
-                    Source Code
-                  </Link>
-                </Button>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Project Overview */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
