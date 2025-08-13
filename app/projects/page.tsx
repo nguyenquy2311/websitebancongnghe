@@ -363,6 +363,7 @@ export default function ProjectsPage() {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
+            <Link href={`/projects/${project.id}`} >
             <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
               <div className="aspect-video relative overflow-hidden">
                 <Image
@@ -413,15 +414,15 @@ export default function ProjectsPage() {
                     {(() => {
                       // Lấy danh sách tên không trùng lặp từ team
                       const uniqueNames = Array.from(new Set((project.team ?? []).map((m: any) => m.name)));
-                      return uniqueNames.slice(0, 3).map((name: string, index: number) => (
-                        <span key={index} className="text-xs text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
+                      return uniqueNames.slice(0, 2).map((name: string, index: number) => (
+                        <span key={index} className="text-xs whitespace-nowrap text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
                           {name}
                         </span>
                       ));
                     })()}
-                    {project.team && new Set(project.team.map((m: any) => m.name)).size > 3 && (
+                    {project.team && new Set(project.team.map((m: any) => m.name)).size > 2 && (
                       <span className="text-xs text-gray-500 font-semibold">
-                        +{new Set(project.team.map((m: any) => m.name)).size - 3}
+                        +{new Set(project.team.map((m: any) => m.name)).size - 2}
                       </span>
                     )}
                   </div>
@@ -451,6 +452,7 @@ export default function ProjectsPage() {
                 </div>
               </CardContent>
             </Card>
+            </Link>
           ))}
         </div>
 
@@ -464,34 +466,6 @@ export default function ProjectsPage() {
             <p className="text-gray-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
           </div>
         )}
-
-        {/* Stats */}
-        {/* <div className="mt-16 bg-gray-50 rounded-lg p-8">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">{projects.length}</div>
-              <div className="text-gray-600">Tổng dự án</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-green-600 mb-2">
-                {projects.filter((p: Project) => p.category === "Web").length}
-              </div>
-              <div className="text-gray-600">Dự án Web</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-600 mb-2">
-                {projects.filter((p: Project) => p.category === "App").length}
-              </div>
-              <div className="text-gray-600">Ứng dụng Mobile</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-orange-600 mb-2">
-                {new Set(projects.flatMap((p) => (p.team ?? []).map((m) => m.name))).size}
-              </div>
-              <div className="text-gray-600">Thành viên tham gia</div>
-            </div>
-          </div>
-        </div> */}
             </>
         )}
       </div>

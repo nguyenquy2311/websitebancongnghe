@@ -373,20 +373,20 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       </div>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-[rgba(234,233,238,0.95)] text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Quan Tâm Đến Dự Án Này?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl text-black font-bold mb-4">Quan Tâm Đến Dự Án Này?</h2>
+          <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
             Tìm hiểu thêm về các dự án khác của BCN hoặc tham gia cùng chúng tôi
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50" asChild>
+            <Button size="lg" className="bg-white text-black hover:bg-blue-50" asChild>
               <Link href="/projects">Xem Dự Án Khác</Link>
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+              className="border-black text-black hover:bg-black hover:text-white bg-transparent"
               asChild
             >
               <Link href="/join">Tham Gia BCN</Link>

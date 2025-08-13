@@ -97,45 +97,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Mission & Vision */}
-      {/* <section id="mission" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">🧭 Sứ mệnh & Tầm nhìn</h2>
-              <p className="text-xl text-gray-600">Định hướng phát triển và mục tiêu của BCN</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Target className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Sứ mệnh</h3>
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    "Tạo ra môi trường học tập – thực hành – phát triển cho sinh viên yêu công nghệ tại IUH."
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Lightbulb className="h-8 w-8 text-green-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Tầm nhìn</h3>
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    "Trở thành nơi ươm mầm các lập trình viên, designer, PM tương lai, với hệ sinh thái học – chơi – làm
-                    việc thực tế."
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Our Story Timeline */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -192,105 +153,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Core Values */}
-      {/* <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">🧠 Giá trị cốt lõi</h2>
-              <p className="text-xl text-gray-600">Những nguyên tắc định hướng mọi hoạt động của BCN</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  icon: BookOpen,
-                  title: "Học từ thực tiễn",
-                  description: "Áp dụng kiến thức vào dự án thực tế, học hỏi từ kinh nghiệm thực hành",
-                  color: "bg-blue-100 text-blue-600",
-                },
-                {
-                  icon: Code,
-                  title: "Xây dựng từ kinh nghiệm",
-                  description: "Phát triển sản phẩm dựa trên kinh nghiệm và thực hành tốt nhất từ cộng đồng",
-                  color: "bg-green-100 text-green-600",
-                },
-                {
-                  icon: Heart,
-                  title: "Trách nhiệm và hỗ trợ",
-                  description: "Luôn sẵn sàng hỗ trợ lẫn nhau và chịu trách nhiệm với nhiệm vụ được giao",
-                  color: "bg-red-100 text-red-600",
-                },
-                {
-                  icon: Rocket,
-                  title: "Cởi mở và tiến bộ",
-                  description: "Luôn học hỏi, tiếp thu phản hồi và không ngừng cải thiện bản thân",
-                  color: "bg-purple-100 text-purple-600",
-                },
-              ].map((value, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div
-                      className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${value.color.split(" ")[0]}`}
-                    >
-                      <value.icon className={`h-8 w-8 ${value.color.split(" ")[1]}`} />
-                    </div>
-                    <h3 className="text-lg font-semibold mb-3">{value.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Organization Structure */}
-      {/* <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Cơ cấu tổ chức</h2>
-              <p className="text-xl text-gray-600">Mô hình hoạt động: Tình nguyện viên → Thành viên → Chuyên gia</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {organizationStructure.map((dept, index) => (
-                <Card key={index} className="hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center ${dept.color.split(" ")[0]}`}
-                      >
-                        <dept.icon className={`h-6 w-6 ${dept.color.split(" ")[1]}`} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold">{dept.name}</h3>
-                        <Badge variant="outline">{dept.members} thành viên</Badge>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 text-sm mb-4">{dept.description}</p>
-
-                    <div>
-                      <h4 className="font-medium text-sm mb-2">Trách nhiệm chính:</h4>
-                      <ul className="text-xs text-gray-600 space-y-1">
-                        {dept.responsibilities.map((resp, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <div className="w-1 h-1 bg-blue-500 rounded-full"></div>
-                            {resp}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       {/* Core Team */}
       <section className="py-20">
@@ -423,32 +285,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Achievements */}
-      {/* <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">📈 Thành tựu nổi bật</h2>
-              <p className="text-xl text-gray-600">Những con số ấn tượng trong hành trình phát triển của BCN</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {achievements.map((achievement, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-8">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <achievement.icon className={`h-8 w-8 ${achievement.color}`} />
-                    </div>
-                    <div className={`text-3xl font-bold mb-2 ${achievement.color}`}>{achievement.number}</div>
-                    <div className="text-gray-600">{achievement.label}</div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Message from BCN */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -463,19 +299,18 @@ export default function AboutPage() {
                   <Quote className="h-12 w-12 text-blue-600 flex-shrink-0 mt-2" />
                   <div>
                     <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 italic">
-                      "Chúng tôi tin rằng mỗi sinh viên đều xứng đáng có cơ hội học hỏi và phát triển trong một môi
-                      trường năng động, sáng tạo và thực tiễn. BCN không chỉ là nơi để code, mà còn là nơi để rèn luyện
-                      tư duy, kỹ năng làm việc nhóm và tinh thần khởi nghiệp. Chúng tôi hy vọng mỗi thành viên BCN sẽ
-                      trở thành những chuyên gia công nghệ có tâm, có tầm và có khả năng đóng góp tích cực cho xã hội."
+                      "Ban Công Nghệ là nơi hội tụ của những con người trẻ trung, nhiệt huyết và sáng tạo. Chúng tôi không chỉ học hỏi
+                      từ những dự án thực tế mà còn xây dựng những mối quan hệ bền vững, cùng nhau phát triển và chinh phục
+                      những thử thách mới. Đây là nơi mà mỗi thành viên đều có cơ hội để tỏa sáng và tạo nên giá trị."
                     </blockquote>
                     <div className="flex items-center gap-4">
                       <Avatar className="w-12 h-12">
-                        <AvatarImage src="/placeholder.svg?height=48&width=48&text=NVA" alt="Nguyễn Văn Anh" />
+                        <AvatarImage src="https://lflnpvqjxbtajywjtees.supabase.co/storage/v1/object/public/bancongnghe/bancongnghe/members/chokhang.png" alt="Nguyễn Hữu Khang" />
                         <AvatarFallback>A</AvatarFallback>
                       </Avatar>
                       <div>
                         <p className="font-semibold text-gray-900">Nguyễn Hữu Khang</p>
-                        <p className="text-sm text-gray-600">Sáng lập & Trưởng ban BCN</p>
+                        <p className="text-sm text-gray-600">Thành viên Ban Công Nghệ</p>
                       </div>
                     </div>
                   </div>
@@ -486,19 +321,19 @@ export default function AboutPage() {
                   <Quote className="h-12 w-12 text-blue-600 flex-shrink-0 mt-2" />
                   <div>
                     <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 italic">
-                      "Chúng tôi tin rằng mỗi sinh viên đều xứng đáng có cơ hội học hỏi và phát triển trong một môi
-                      trường năng động, sáng tạo và thực tiễn. BCN không chỉ là nơi để code, mà còn là nơi để rèn luyện
-                      tư duy, kỹ năng làm việc nhóm và tinh thần khởi nghiệp. Chúng tôi hy vọng mỗi thành viên BCN sẽ
-                      trở thành những chuyên gia công nghệ có tâm, có tầm và có khả năng đóng góp tích cực cho xã hội."
+                      "Ban Công Nghệ là nơi mà những ý tưởng sáng tạo được hiện thực hóa, nơi mà mỗi thành viên đều có cơ hội
+                      phát triển bản thân và khám phá tiềm năng của mình. Chúng tôi luôn hướng tới việc xây dựng một
+                      cộng đồng công nghệ gắn kết, nơi mọi người cùng nhau học hỏi, chia sẻ và tạo nên những giá trị
+                      bền vững cho tương lai."
                     </blockquote>
                     <div className="flex items-center gap-4">
                       <Avatar className="w-12 h-12">
-                        <AvatarImage src="/placeholder.svg?height=48&width=48&text=NVA" alt="Nguyễn Văn Anh" />
+                        <AvatarImage src="https://lflnpvqjxbtajywjtees.supabase.co/storage/v1/object/public/bancongnghe/bancongnghe/members/nguyen-mai-minh-quy.webp" alt="Nguyễn Văn Anh" />
                         <AvatarFallback>A</AvatarFallback>
                       </Avatar>
                       <div>
                         <p className="font-semibold text-gray-900">Nguyễn Mai Minh Quý</p>
-                        <p className="text-sm text-gray-600">Con gà của BCN</p>
+                        <p className="text-sm text-gray-600">Thành viên Ban Công Nghệ</p>
                       </div>
                     </div>
                   </div>
