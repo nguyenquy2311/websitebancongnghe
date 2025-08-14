@@ -153,7 +153,7 @@ export default function ProjectsPage() {
         setLoading(true)
         const firestoreProjects = await getAllProjects()
         setProjects(firestoreProjects)
-        
+
         if (firestoreProjects.length > 0) {
           console.log("✅ Projects loaded from Firestore:", firestoreProjects.length)
         } else {
@@ -201,272 +201,276 @@ export default function ProjectsPage() {
           <>
             {/* Filters */}
             <div className="space-y-6 mb-8">
-          {/* Filter Tags in grid layout */}
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Category Filter */}
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">Loại dự án</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                <Button
-                  variant={categoryFilter === "all" ? "default" : "outline"}
-                  onClick={() => setCategoryFilter("all")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Tất cả
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={categoryFilter === "Web" ? "default" : "outline"}
-                  onClick={() => setCategoryFilter("Web")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Web
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.category === "Web").length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={categoryFilter === "App" ? "default" : "outline"}
-                  onClick={() => setCategoryFilter("App")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Mobile App
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.category === "App").length}
-                  </Badge>
-                </Button>
-              </div>
-            </div>
-
-            {/* Year Filter */}
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">Năm thực hiện</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                <Button
-                  variant={yearFilter === "all" ? "default" : "outline"}
-                  onClick={() => setYearFilter("all")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Tất cả năm
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={yearFilter === "2024" ? "default" : "outline"}
-                  onClick={() => setYearFilter("2024")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  2024
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.year === "2024").length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={yearFilter === "2023" ? "default" : "outline"}
-                  onClick={() => setYearFilter("2023")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  2023
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.year === "2023").length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={yearFilter === "2022" ? "default" : "outline"}
-                  onClick={() => setYearFilter("2022")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  2022
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.year === "2022").length}
-                  </Badge>
-                </Button>
-              </div>
-            </div>
-
-            {/* Type Filter */}
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">Loại nhóm</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                <Button
-                  variant={typeFilter === "all" ? "default" : "outline"}
-                  onClick={() => setTypeFilter("all")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Tất cả
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={typeFilter === "Nhóm" ? "default" : "outline"}
-                  onClick={() => setTypeFilter("Nhóm")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Nhóm
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.type === "Nhóm").length}
-                  </Badge>
-                </Button>
-                <Button
-                  variant={typeFilter === "Cá nhân" ? "default" : "outline"}
-                  onClick={() => setTypeFilter("Cá nhân")}
-                  className="rounded-full text-sm"
-                  size="sm"
-                >
-                  Cá nhân
-                  <Badge variant="secondary" className="ml-1 text-xs">
-                    {projects.filter((p: Project) => p.type === "Cá nhân").length}
-                  </Badge>
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
-                type="text"
-                placeholder="Tìm kiếm dự án theo tên, mô tả hoặc công nghệ..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-3 w-full rounded-full border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
-              />
-              {searchTerm && (
-                <Button
-                  onClick={() => setSearchTerm("")}
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  ✕
-                </Button>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <Link href={`/projects/${project.id}`} >
-            <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-              <div className="aspect-video relative overflow-hidden">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4">
-                  <Badge variant={project.category === "Web" ? "default" : "secondary"}>{project.category}</Badge>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <Badge variant="outline" className="bg-white/90">
-                    {project.year}
-                  </Badge>
-                </div>
-              </div>
-
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
-                    <Link href={`/projects/${project.id}`} className="hover:text-blue-600">
-                      {project.title}
-                    </Link>
-                  </CardTitle>
-                  <Badge variant="outline" className="ml-2">
-                    {project.type}
-                  </Badge>
-                </div>
-              </CardHeader>
-
-              <CardContent className="space-y-4">
-                <p className="text-gray-600 overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] text text-sm leading-relaxed">{project.shortDescription}</p>
-
-                {/* Tech Stack */}
-                <div className="flex [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden flex-wrap gap-2">
-                  {project.techStack.map((tech: string) => (
-                    <Badge key={tech} variant="secondary" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-
-                {/* Team Members */}
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-gray-700">Thành viên tham gia:</p>
-                  <div className="flex items-center gap-2">
-                    {(() => {
-                      // Lấy danh sách tên không trùng lặp từ team
-                      const uniqueNames = Array.from(new Set((project.team ?? []).map((m: any) => m.name)));
-                      return uniqueNames.slice(0, 2).map((name: string, index: number) => (
-                        <span key={index} className="text-xs whitespace-nowrap text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
-                          {name}
-                        </span>
-                      ));
-                    })()}
-                    {project.team && new Set(project.team.map((m: any) => m.name)).size > 2 && (
-                      <span className="text-xs text-gray-500 font-semibold">
-                        +{new Set(project.team.map((m: any) => m.name)).size - 2}
-                      </span>
-                    )}
+              {/* Filter Tags in grid layout */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Category Filter */}
+                <div className="text-center">
+                  <h3 className="text-sm font-medium text-gray-700 mb-4">Loại dự án</h3>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <Button
+                      variant={categoryFilter === "all" ? "default" : "outline"}
+                      onClick={() => setCategoryFilter("all")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Tất cả
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.length}
+                      </Badge>
+                    </Button>
+                    <Button
+                      variant={categoryFilter === "Web" ? "default" : "outline"}
+                      onClick={() => setCategoryFilter("Web")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Web
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.category === "Web").length}
+                      </Badge>
+                    </Button>
+                    <Button
+                      variant={categoryFilter === "App" ? "default" : "outline"}
+                      onClick={() => setCategoryFilter("App")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Mobile App
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.category === "App").length}
+                      </Badge>
+                    </Button>
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-2 pt-2">
-                  <Button asChild size="sm" className="flex-1">
-                    <Link href={`/projects/${project.id}`}>Chi Tiết</Link>
-                  </Button>
-                  {project.githubUrl && (
-                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={project.githubUrl} target="_blank">
-                        <Github className="h-4 w-4 mr-2" />
-                        GitHub
-                      </Link>
+                {/* Year Filter */}
+                <div className="text-center">
+                  <h3 className="text-sm font-medium text-gray-700 mb-4">Năm thực hiện</h3>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <Button
+                      variant={yearFilter === "all" ? "default" : "outline"}
+                      onClick={() => setYearFilter("all")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Tất cả năm
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.length}
+                      </Badge>
                     </Button>
-                  )}
-                  {project.demoUrl && (
-                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={project.demoUrl} target="_blank">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Demo
-                      </Link>
+                    <Button
+                      variant={yearFilter === "2024" ? "default" : "outline"}
+                      onClick={() => setYearFilter("2024")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      2024
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.year === "2024").length}
+                      </Badge>
+                    </Button>
+                    <Button
+                      variant={yearFilter === "2023" ? "default" : "outline"}
+                      onClick={() => setYearFilter("2023")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      2023
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.year === "2023").length}
+                      </Badge>
+                    </Button>
+                    <Button
+                      variant={yearFilter === "2022" ? "default" : "outline"}
+                      onClick={() => setYearFilter("2022")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      2022
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.year === "2022").length}
+                      </Badge>
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Type Filter */}
+                <div className="text-center">
+                  <h3 className="text-sm font-medium text-gray-700 mb-4">Loại nhóm</h3>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <Button
+                      variant={typeFilter === "all" ? "default" : "outline"}
+                      onClick={() => setTypeFilter("all")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Tất cả
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.length}
+                      </Badge>
+                    </Button>
+                    <Button
+                      variant={typeFilter === "Nhóm" ? "default" : "outline"}
+                      onClick={() => setTypeFilter("Nhóm")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Nhóm
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.type === "Nhóm").length}
+                      </Badge>
+                    </Button>
+                    <Button
+                      variant={typeFilter === "Cá nhân" ? "default" : "outline"}
+                      onClick={() => setTypeFilter("Cá nhân")}
+                      className="rounded-full text-sm"
+                      size="sm"
+                    >
+                      Cá nhân
+                      <Badge variant="secondary" className="ml-1 text-xs">
+                        {projects.filter((p: Project) => p.type === "Cá nhân").length}
+                      </Badge>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className="max-w-2xl mx-auto">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                  <Input
+                    type="text"
+                    placeholder="Tìm kiếm dự án theo tên, mô tả hoặc công nghệ..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10 pr-4 py-3 w-full rounded-full border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm"
+                  />
+                  {searchTerm && (
+                    <Button
+                      onClick={() => setSearchTerm("")}
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      ✕
                     </Button>
                   )}
                 </div>
-              </CardContent>
-            </Card>
-            </Link>
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">
-              <Search className="h-16 w-16 mx-auto" />
+              </div>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Không tìm thấy dự án</h3>
-            <p className="text-gray-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
-          </div>
-        )}
-            </>
+
+            {/* Projects Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project) => (
+                <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                  <Link href={`/projects/${project.id}`} >
+                    <div className="aspect-video relative overflow-hidden">
+                      <Image
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge variant={project.category === "Web" ? "default" : "secondary"}>{project.category}</Badge>
+                      </div>
+                      <div className="absolute top-4 right-4">
+                        <Badge variant="outline" className="bg-white/90">
+                          {project.year}
+                        </Badge>
+                      </div>
+                    </div>
+
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                          <Link href={`/projects/${project.id}`} className="hover:text-blue-600">
+                            {project.title}
+                          </Link>
+                        </CardTitle>
+                        <Badge variant="outline" className="ml-2">
+                          {project.type}
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                  </Link>
+
+
+                  <CardContent className="space-y-4">
+                    <Link href={`/projects/${project.id}`} >
+                      <p className="text-gray-600 overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] text text-sm leading-relaxed">{project.shortDescription}</p>
+
+                      {/* Tech Stack */}
+                      <div className="flex [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden flex-wrap gap-2">
+                        {project.techStack.map((tech: string) => (
+                          <Badge key={tech} variant="secondary" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      {/* Team Members */}
+                      <div className="space-y-2">
+                        <p className="text-sm font-medium text-gray-700">Thành viên tham gia:</p>
+                        <div className="flex items-center gap-2">
+                          {(() => {
+                            // Lấy danh sách tên không trùng lặp từ team
+                            const uniqueNames = Array.from(new Set((project.team ?? []).map((m: any) => m.name)));
+                            return uniqueNames.slice(0, 2).map((name: string, index: number) => (
+                              <span key={index} className="text-xs whitespace-nowrap text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
+                                {name}
+                              </span>
+                            ));
+                          })()}
+                          {project.team && new Set(project.team.map((m: any) => m.name)).size > 2 && (
+                            <span className="text-xs text-gray-500 font-semibold">
+                              +{new Set(project.team.map((m: any) => m.name)).size - 2}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 pt-2">
+                      <Button asChild size="sm" className="flex-1">
+                        <Link href={`/projects/${project.id}`}>Chi Tiết</Link>
+                      </Button>
+                      {project.githubUrl && (
+                        <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                          <Link href={project.githubUrl} target="_blank">
+                            <Github className="h-4 w-4 mr-2" />
+                            GitHub
+                          </Link>
+                        </Button>
+                      )}
+                      {project.demoUrl && (
+                        <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                          <Link href={project.demoUrl} target="_blank">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Demo
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* No Results */}
+            {filteredProjects.length === 0 && (
+              <div className="text-center py-12">
+                <div className="text-gray-400 mb-4">
+                  <Search className="h-16 w-16 mx-auto" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Không tìm thấy dự án</h3>
+                <p className="text-gray-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

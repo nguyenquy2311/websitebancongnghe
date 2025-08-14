@@ -86,7 +86,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-[20px] bg-[rgba(234,233,238,0.95)] text-black max-xl:mt-0">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="text-3xl lg:text-4xl font-quicksand font-normal mb-4">
             Tham gia hành trình của BCN
           </h2>
           <p className="text-xl text-grey-100 mb-8 max-w-2xl mx-auto">

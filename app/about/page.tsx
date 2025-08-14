@@ -66,7 +66,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className=" flex items-center w-full overflow-hidden overflow-y-auto max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
+      <div className=" flex h-screen items-center w-full overflow-hidden overflow-y-auto max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
         <div className="overflow-hidden mx-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:mb-10 max-lg:mt-20">
           {/* Content */}
           <div className="w-[600px] max-xl:w-[90vw] max-xl:max-w-[550px] max-sm:max-w-full text-center">
@@ -101,7 +101,7 @@ export default function AboutPage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Câu chuyện của chúng tôi</h2>
+            <h2 className="font-quicksand font-normal text-[48px] leading-1.5 tracking-[-0.0025em] text-gray-600 max-sm:leading-[48px] max-sm:text-[2.2rem]">Câu chuyện của chúng tôi</h2>
             <p className="text-xl text-gray-600">Hành trình phát triển của BCN qua các cột mốc quan trọng</p>
           </div>
 
@@ -159,7 +159,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Đội ngũ cốt cán</h2>
+              <h2 className="font-quicksand font-normal text-[48px] leading-1.5 tracking-[-0.0025em] text-gray-600 max-sm:leading-[48px] max-sm:text-[2.2rem]">Đội ngũ cốt cán</h2>
               <p className="text-xl text-gray-600">Những người lãnh đạo và định hướng phát triển BCN</p>
             </div>
 
@@ -290,7 +290,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Thông điệp từ BCN</h2>
+              <h2 className="font-quicksand font-normal text-[48px] leading-1.5 tracking-[-0.0025em] text-gray-600 max-sm:leading-[48px] max-sm:text-[2.2rem]">Thông điệp từ BCN</h2>
             </div>
 
             <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
@@ -380,7 +380,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-20 bg-[#EBEAEF] text-black">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Tham gia hành trình của BCN</h2>
+          <h2 className="text-3xl lg:text-4xl font-quicksand font-normal  mb-4">Tham gia hành trình của BCN</h2>
           <p className="text-xl text-grey-100 mb-8 max-w-2xl mx-auto">
             Hãy trở thành một phần câu chuyện của BCN và cùng chúng tôi xây dựng tương lai công nghệ
           </p>
