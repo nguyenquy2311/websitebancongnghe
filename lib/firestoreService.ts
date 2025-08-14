@@ -8,6 +8,7 @@ import {
   updateDoc,
   doc,
   getDoc, // 👈 THÊM DÒNG NÀY
+  deleteDoc,
 } from "firebase/firestore"
 
 import { db } from "./firebaseConfig";
@@ -72,6 +73,7 @@ export interface NewUser {
   username: string;
   studentId: string;
   password: string; // đã hash
+  role: 'admin' | 'member'; // Thêm role
   createdAt?: Timestamp;
 }
 
@@ -80,6 +82,7 @@ export const addUser = async (user: NewUser) => {
   try {
     const docRef = await addDoc(collection(db, "users"), {
       ...user,
+      role: user.role || 'member', // Default role là member
       createdAt: Timestamp.now(),
     });
 
@@ -135,6 +138,7 @@ export const loginUser = async (username: string, password: string) => {
       email: userData.email,
       studentId: userData.studentId,
       username: userData.username,
+      role: userData.role || 'member', // Thêm role vào response
     },
   };
 };
@@ -155,7 +159,37 @@ export const getUserByToken = async (token: string) => {
     email: userData.email,
     studentId: userData.studentId,
     username: userData.username,
+    role: userData.role || 'member', // Thêm role
   };
+};
+
+// ✅ Hàm lấy người dùng từ email
+export const getUserByEmail = async (email: string) => {
+  try {
+    const q = query(collection(db, "users"), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.log("❌ No user found with email:", email);
+      return null;
+    }
+
+    const userDoc = querySnapshot.docs[0];
+    const userData = userDoc.data();
+
+    return {
+      id: userDoc.id,
+      name: userData.name,
+      email: userData.email,
+      studentId: userData.studentId,
+      username: userData.username,
+      role: userData.role || 'member',
+      avatarUrl: userData.avatarUrl || userData.avatar || '', // Include avatar field
+    };
+  } catch (error) {
+    console.error("❌ Error fetching user by email:", error);
+    return null;
+  }
 };
 
 export const getUserByUserID = async (userID: string) => {
@@ -177,7 +211,8 @@ export const getUserByUserID = async (userID: string) => {
         email: data.email,
         username: data.username,
         studentId: data.studentId,
-        avatarUrl: data.avatarUrl
+        avatarUrl: data.avatarUrl,
+        role: data.role || 'member', // Thêm role
       };
     } else {
       console.log(`❌ User not found: ${userID}`);
@@ -202,6 +237,22 @@ export async function getAllTimeline(): Promise<TimelineItem[]> {
     return timeline;
   } catch (error) {
     console.error('Error fetching timeline data:', error);
+    return [];
+  }
+}
+
+export async function getAllActivities(): Promise<any[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'activities'));
+    const activities = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    
+    console.log('Activities data fetched:', activities.length, 'items');
+    return activities;
+  } catch (error) {
+    console.error('Error fetching activities data:', error);
     return [];
   }
 }
@@ -249,5 +300,75 @@ export const testGetAllUsers = async () => {
     });
   } catch (error) {
     console.error("Error getting all users:", error);
+  }
+};
+
+// ✅ Hàm tạo/cập nhật project
+export const saveProject = async (projectData: Partial<Project>): Promise<void> => {
+  try {
+    if (projectData.id) {
+      // Update existing project
+      const { id, ...dataToUpdate } = projectData;
+      const docRef = doc(db, "projects", id);
+      await updateDoc(docRef, { ...dataToUpdate, updatedAt: new Date() });
+      console.log("✅ Project updated successfully:", id);
+    } else {
+      // Create new project
+      const docRef = await addDoc(collection(db, "projects"), {
+        ...projectData,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+      console.log("✅ Project created successfully:", docRef.id);
+    }
+  } catch (error) {
+    console.error("❌ Error saving project:", error);
+    throw error;
+  }
+};
+
+// ✅ Hàm tạo/cập nhật member
+export const saveMember = async (memberData: Partial<Member>): Promise<void> => {
+  try {
+    if (memberData.id) {
+      // Update existing member
+      const { id, ...dataToUpdate } = memberData;
+      const docRef = doc(db, "portfolios", id);
+      await updateDoc(docRef, { ...dataToUpdate, updatedAt: new Date() });
+      console.log("✅ Member updated successfully:", id);
+    } else {
+      // Create new member
+      const docRef = await addDoc(collection(db, "portfolios"), {
+        ...memberData,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+      console.log("✅ Member created successfully:", docRef.id);
+    }
+  } catch (error) {
+    console.error("❌ Error saving member:", error);
+    throw error;
+  }
+};
+
+// ✅ Hàm xóa project
+export const deleteProject = async (projectId: string): Promise<void> => {
+  try {
+    await deleteDoc(doc(db, "projects", projectId));
+    console.log("✅ Project deleted successfully:", projectId);
+  } catch (error) {
+    console.error("❌ Error deleting project:", error);
+    throw error;
+  }
+};
+
+// ✅ Hàm xóa member
+export const deleteMember = async (memberId: string): Promise<void> => {
+  try {
+    await deleteDoc(doc(db, "portfolios", memberId));
+    console.log("✅ Member deleted successfully:", memberId);
+  } catch (error) {
+    console.error("❌ Error deleting member:", error);
+    throw error;
   }
 };
