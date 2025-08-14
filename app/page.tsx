@@ -10,10 +10,10 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="mt-[65px] mb-[100px] pt-[20px] flex items-center  w-full overflow-hidden max-sm:pt-[70px] max-sm:h-auto max-sm:min-h-screen max-sm:pb-8">
-        <div className="overflow-hidden m-auto gap-10 relative flex items-center justify-between max-xl:flex-col max-xl:items-center max-sm:py-0 max-sm:px-10">
+      <div className="mb-[100px] flex items-center w-full overflow-hidden md:h-screen xl:h-screen max-sm:min-h-screen max-sm:pb-8">
+        <div className="overflow-hidden pt-[10px] m-auto gap-10 relative px-10 flex justify-center items-center max-sm:flex max-sm:flex-col max-md:flex max-sm:py-0 max-sm:px-10">
           <div className="w-[678px] max-xl:w-[90vw] max-xl:max-w-[650px] max-sm:max-w-full max-xl:text-center">
-            <h1 className="font-quicksand font-normal text-[57px] leading-[64px] tracking-[-0.0025em] text-gray-600 max-xl:hover:text-cyan-700 transition-colors max-sm:leading-[55px] max-sm:text-4xl">
+            <h1 className="font-quicksand font-normal text-[57px] leading-[64px] tracking-[-0.0025em] text-gray-600 max-xl:hover:text -cyan-700 transition-colors max-sm:leading-[55px] max-sm:text-4xl">
               BAN CÔNG NGHỆ
             </h1>
             <p className="font-quicksand font-normal text-base leading-6 tracking-[0.005em] text-gray-500 my-10 max-xl:my-5 max-xl:max-w-[500px] max-sm:max-w-full max-xl:mx-auto max-sm:text-[1.1rem] max-sm:leading-[1.6rem] max-sm:my-5 max-sm:text-center">
@@ -33,7 +33,7 @@ export default function HomePage() {
             </Link>
           </div>
           <Image
-            className="w-[343px] mt-0 mb-0 h-[600px] md:mt-12 xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6  max-sm:w-[35vw]max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2]"
+            className="w-[343px] md:m-auto mt-0 mb-0 h-[600px] xl:mt-0 max-xl:w-[220px] max-xl:h-[350px] max-xl:mt-6  max-sm:w-[35vw]max-sm:h-[calc(35vw*9/5)] max-sm:aspect-[9/2]"
             src={img1}
             alt=""
             width={343}
@@ -47,7 +47,7 @@ export default function HomePage() {
 
       {/* Quick Navigation */}
       <div className="flex items-center mb-[20px] w-full overflow-hidden overflow-y-auto max-xl:mt-[50px] max-sm:h-auto max-sm:min-h-screen">
-        <div className="overflow-hidden mx-auto gap-10 relative flex items-center justify-between max-xl:flex-col-reverse max-xl:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:my-0">
+        <div className="overflow-hidden px-[10px]  lg:h-screen mx-auto gap-10 relative flex items-center justify-between max-lg:flex-col-reverse max-l:items-center max-sm:py-0 max-sm:px-10 max-lg:gap-0 max-lg:my-0">
           {/* Image */}
           <div className="w-[686px] h-auto md:mt-12 xl:mt-0 max-xl:w-[70vw] max-xl:mt-6 max-sm:w-full max-sm:my-[50px]">
             <Image
