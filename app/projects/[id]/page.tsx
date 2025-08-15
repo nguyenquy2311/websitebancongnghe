@@ -57,7 +57,8 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
     notFound()
   }
 
-  const completedPhases = project.timeline?.filter((phase: any) => phase.status === "completed").length ?? 0
+  // Toán tử ? -> ( Trả về vế phải nếu vế trái là null hay undefined )
+  const completedPhases = project.timeline?.filter((phase: any) => phase.status === "completed").length ?? 0 
   const progressPercentage = project.timeline && project.timeline.length > 0
     ? (completedPhases / project.timeline.length) * 100
     : 0

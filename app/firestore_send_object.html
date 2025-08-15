@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gửi Object có sẵn vào Firestore</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <style>
+    body {
+      max-width: 600px;
+      margin: 40px auto;
+      font-family: sans-serif;
+      line-height: 1.6;
+    }
+
+    input,
+    button {
+      margin-top: 10px;
+      display: block;
+      width: 100%;
+      padding: 10px;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Đẩy dữ liệu "xàm" lên Firestore</h2>
+
+  <label for="collectionInput">Nhập tên collection:</label>
+  <input type="text" id="collectionInput" placeholder="ví dụ: testCollection">
+
+  <button onclick="sendToFirestore()">Gửi object</button>
+
+  <p id="status"></p>
+
+  <script>
+    // ✅ Object "xàm" được định nghĩa sẵn
+    const myFunnyObject = {
+      category: "Web",
+      demoUrl: 'https://knlvn-dhdi20a.vercel.app/',
+      duration: "6 tháng",
+      endDate: "2025-07-15",
+      futurePlans: [
+        "Tích hợp AI Agent để hỗ trợ người dùng trong việc tìm kiếm thông tin"
+      ],
+      gallery: null,
+      githubUrl: null,
+      goals: [
+        "Tạo ra giao diện người dùng thân thiện, độc đáo, sáng tạo"
+      ],
+      id: "gioi-thieu-nganh-dien-website",
+      image: "https://lflnpvqjxbtajywjtees.supabase.co/storage/v1/object/public/bancongnghe/bancongnghe/projects/ramfood.webp",
+      longDescription: "Website này được thiết kế để giới thiệu ngành Điện - Điện tử, cung cấp thông tin chi tiết về chương trình học, cơ hội nghề nghiệp, và các dự án nghiên cứu nổi bật. Với giao diện hiện đại và dễ sử dụng, website giúp sinh viên và phụ huynh dễ dàng tiếp cận thông tin cần thiết, đồng thời thúc đẩy sự quan tâm đến ngành học này.",
+      shortDescription: "Website giới thiệu ngành Điện - Điện tử IUH",
+      startDate: "2025-07-15",
+      status: "Completed",
+      impact: {
+        errorReduction: "85%",
+        satisfaction: "95%",
+        timeReduction: "70%",
+        users: "10+"
+      },
+      lessonsLearned: [
+        "Tầm quan trọng của việc lập kế hoạch chi tiết trước khi bắt đầu dự án.",
+        "Cải thiện kỹ năng làm việc nhóm và giao tiếp hiệu quả giữa các thành viên.",
+        "Hiểu rõ hơn về quy trình phát triển phần mềm từ nghiên cứu, thiết kế đến triển khai.",
+        "Nâng cao kỹ năng sử dụng các công cụ và công nghệ như Firebase và Android Studio.",
+        "Học cách quản lý thời gian và phân chia công việc hợp lý để đảm bảo tiến độ dự án.",
+        "Tăng cường khả năng giải quyết vấn đề và xử lý lỗi trong quá trình phát triển."
+      ],
+      objectives: [
+        "Cung cấp một công cụ tạo logo tự động, nhanh chóng và dễ sử dụng.",
+        "Hỗ trợ người dùng cá nhân hóa thiết kế logo theo nhu cầu cụ thể.",
+        "Tích hợp công nghệ AI tiên tiến để đảm bảo chất lượng và tính sáng tạo của logo.",
+        "Tăng cường khả năng tiếp cận cho các doanh nghiệp nhỏ và cá nhân không có kỹ năng thiết kế.",
+        "Phát triển các tính năng phân tích và gợi ý thiết kế dựa trên xu hướng thị trường.",
+        "Đảm bảo tính ổn định, bảo mật và hiệu suất cao trong quá trình sử dụng."
+      ],
+      timeline: [
+        {
+          description: "Khảo sát nhu cầu, phân tích yêu cầu và thiết kế hệ thống",
+          duration: "2 tuần",
+          phase: "Nghiên cứu & Phân tích",
+          status: "completed",
+          tasks: [
+            "Khảo sát sinh viên & giảng viên",
+            "Phân tích hệ thống hiện đại",
+            "Thiết kế database scheme",
+            "Lập kế hoạch dự án chi tiết"
+          ]
+        },
+        {
+          description: "Xây dựng API và logic xử lý phía server",
+          duration: "8 tuần",
+          phase: "Phát triển Backend",
+          status: "completed",
+          tasks: [
+            "Thiết lập database",
+            "Phát triển REST API",
+            "Xác thực và phân quyền",
+            "Testing và optimization"
+          ]
+        },
+        {
+          description: "Xây dựng giao diện người dùng",
+          duration: "6 tuần",
+          phase: "Phát triển Frontend",
+          status: "completed",
+          tasks: [
+            "Component development",
+            "State management",
+            "API integration",
+            "Responsive design"
+          ]
+        }
+      ],
+      team: [
+        {
+          avatar: "https://lflnpvqjxbtajywjtees.supabase.co/storage/v1/object/public/bancongnghe/bancongnghe/members/phan-hoang-luan.webp",
+          contributions: [
+            "Phát triển giao diện người dùng"
+          ],
+          id: "phan-hoang-luan",
+          name: "Phan Hoàng Luân",
+          recognition: "Xuất sắc trong việc đảm bảo chất lượng code",
+          role: "Frontend Developer"
+        },
+        {
+          avatar: "https://lflnpvqjxbtajywjtees.supabase.co/storage/v1/object/public/bancongnghe/bancongnghe/members/nguyen-trung-hau.webp",
+          contributions: [
+            "Phát triển giao diện người dùng"
+          ],
+          id: "nguyen-trung-hau",
+          name: "Nguyễn Trung Hậu",
+          recognition: "Xuất sắc trong việc đảm bảo chất lượng code",
+          role: "Frontend Developer"
+        }
+      ],
+      techStack: [
+        "HTML",
+        "CSS",
+        "Javascript"
+      ],
+      title: "Website Giới thiệu ngành Điện - Điện tử",
+      type: "Nhóm",
+      year: "2025"
+    };
+
+    // 🔧 Thay cấu hình Firebase của bạn vào đây
+    const firebaseConfig = {
+      apiKey: "AIzaSyDhvtjVMOEhGRkp0rOQFEF26j2MTpjRiXA",
+      authDomain: "bancongnghe-cbe71.firebaseapp.com",
+      projectId: "bancongnghe-cbe71",
+      storageBucket: "bancongnghe-cbe71.firebasestorage.app",
+      messagingSenderId: "757520025437",
+      appId: "1:757520025437:web:6256965ff3e45cf5568ab4",
+      measurementId: "G-7QYFP5156F"
+    };
+
+    // 🔥 Khởi tạo Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    async function sendToFirestore() {
+      const collectionName = document.getElementById('collectionInput').value.trim();
+      const statusEl = document.getElementById('status');
+
+      if (!collectionName) {
+        statusEl.innerText = "⚠️ Bạn cần nhập tên collection!";
+        return;
+      }
+
+      try {
+        const collectionRef = db.collection(collectionName);
+        const newId = collectionRef.doc().id; // Tạo ID ngẫu nhiên trước
+        await collectionRef.doc(newId).set(myFunnyObject);
+
+        statusEl.innerText = `✅ Gửi thành công! Document ID: ${newId}`;
+      } catch (error) {
+        statusEl.innerText = `❌ Gửi thất bại: ${error.message}`;
+      }
+    }
+  </script>
+
+</body>
+
+</html>

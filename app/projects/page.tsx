@@ -402,18 +402,27 @@ export default function ProjectsPage() {
                       <p className="text-gray-600 overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] text text-sm leading-relaxed">{project.shortDescription}</p>
 
                       {/* Tech Stack */}
-                      <div className="flex [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden flex-wrap gap-2">
-                        {project.techStack.map((tech: string) => (
-                          <Badge key={tech} variant="secondary" className="text-xs">
-                            {tech}
-                          </Badge>
-                        ))}
+                      <div className="flex overflow-hidden flex-wrap  gap-2">
+                        {(() => {
+                          // Lấy danh sách technologies
+                          const uniqueNames = Array.from(new Set((project.techStack ?? []).map((tech: string) => tech)));
+                          return uniqueNames.slice(0, 3).map((tech: string, index: number) => (
+                            <Badge key={`${tech}-${index}`} variant="secondary" className="text-xs">
+                              {tech}
+                            </Badge>
+                          ));
+                        })()}
+                        {project.techStack && new Set(project.techStack.map((tech: string) => tech)).size > 2 && (
+                          <span className="text-xs text-gray-500 font-semibold">
+                            +{new Set(project.techStack.map((tech: string) => tech)).size - 2}
+                          </span>
+                        )}
                       </div>
 
                       {/* Team Members */}
                       <div className="space-y-2">
                         <p className="text-sm font-medium text-gray-700">Thành viên tham gia:</p>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center flex-wrap gap-2">
                           {(() => {
                             // Lấy danh sách tên không trùng lặp từ team
                             const uniqueNames = Array.from(new Set((project.team ?? []).map((m: any) => m.name)));

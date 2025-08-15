@@ -281,33 +281,6 @@ export default function MemberDetailPage({ params }: { params: { id: string } })
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Stats */}
-            {/* <Card>
-              <CardHeader>
-                <CardTitle>Thống Kê</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{member.stats?.projectsCompleted ?? 0}</div>
-                  <div className="text-sm text-gray-600">Dự án hoàn thành</div>
-                </div>
-                <Separator />
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{member.stats?.yearsExperience ?? 0}</div>
-                  <div className="text-sm text-gray-600">Năm kinh nghiệm</div>
-                </div>
-                <Separator />
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">{member.stats?.teamMembers ?? 0}</div>
-                  <div className="text-sm text-gray-600">Thành viên đã mentor</div>
-                </div>
-                <Separator />
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-orange-600">{member.stats?.linesOfCode ?? 0}</div>
-                  <div className="text-sm text-gray-600">Dòng code đã viết</div>
-                </div>
-              </CardContent>
-            </Card> */}
 
             {/* Skills */}
             <Card>

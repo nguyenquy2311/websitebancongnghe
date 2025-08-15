@@ -57,41 +57,41 @@ export default function ActivitiesPage() {
   // Tính trạng thái thực tế dựa trên 4 mốc thời gian
   const getActivityRealStatus = (activity: Activity) => {
     const currentTime = new Date()
-    
-    if (activity.registrationStartDateTime && activity.registrationDeadline && 
-        activity.startDateTime && activity.endDateTime) {
-      
+
+    if (activity.registrationStartDateTime && activity.registrationDeadline &&
+      activity.startDateTime && activity.endDateTime) {
+
       const registrationStart = new Date(activity.registrationStartDateTime)
       const registrationEnd = new Date(activity.registrationDeadline)
       const eventStart = new Date(activity.startDateTime)
       const eventEnd = new Date(activity.endDateTime)
-      
+
       // Đã kết thúc sự kiện
       if (currentTime > eventEnd) {
         return "completed"
       }
-      
+
       // Đang diễn ra sự kiện
       if (currentTime >= eventStart && currentTime <= eventEnd) {
         return "ongoing"
       }
-      
+
       // Đã hết hạn đăng ký nhưng chưa bắt đầu sự kiện
       if (currentTime > registrationEnd && currentTime < eventStart) {
         return "registration_closed"
       }
-      
+
       // Đang trong thời gian đăng ký
       if (currentTime >= registrationStart && currentTime <= registrationEnd) {
         return "upcoming"
       }
-      
+
       // Chưa mở đăng ký
       if (currentTime < registrationStart) {
         return "waiting_registration"
       }
     }
-    
+
     // Fallback về status gốc nếu thiếu thông tin
     return activity.status
   }
@@ -99,44 +99,44 @@ export default function ActivitiesPage() {
   const filteredActivities = activities.filter((activity) => {
     const matchesType = typeFilter === "all" || activity.type === typeFilter
     const matchesCategory = categoryFilter === "all" || activity.category === categoryFilter
-    
+
     // Lọc theo trạng thái thực tế (sử dụng trạng thái động)
     const realStatus = getActivityRealStatus(activity)
     const matchesStatus = statusFilter === "all" || statusFilter === realStatus
-    
+
     // Hiển thị tất cả sự kiện đã mở đăng ký (không ẩn sự kiện đã kết thúc)
     const currentTime = new Date()
     let shouldShowActivity = true
-    
+
     if (activity.registrationStartDateTime) {
       const registrationStart = new Date(activity.registrationStartDateTime)
-      
+
       // Chỉ ẩn những sự kiện chưa mở đăng ký
       const hasRegistrationStarted = registrationStart <= currentTime
       shouldShowActivity = hasRegistrationStarted
     }
-    
+
     return matchesType && matchesStatus && matchesCategory && shouldShowActivity
   })
 
   // Get upcoming events from activities
   const getUpcomingEvents = () => {
     const currentTime = new Date()
-    
+
     const filtered = activities.filter((activity) => {
-      
+
       // Chỉ hiển thị sự kiện chưa mở đăng ký (registration start > now)
       if (activity.registrationStartDateTime) {
         const registrationStart = new Date(activity.registrationStartDateTime)
         const hasRegistrationNotStarted = registrationStart > currentTime
-        
+
         // Chỉ hiển thị nếu chưa mở đăng ký
         return hasRegistrationNotStarted
       }
-      
+
       return false
     })
-    
+
     return filtered
       .sort((a, b) => {
         // Sort by registration start time (earliest first)
@@ -282,9 +282,9 @@ export default function ActivitiesPage() {
                   // Chỉ đếm những hoạt động đã mở đăng ký
                   const getRegistrationOpenedActivitiesCount = (typeId: string) => {
                     const currentTime = new Date()
-                    
+
                     const activitiesForType = typeId === "all" ? activities : activities.filter((a) => a.type === typeId)
-                    
+
                     return activitiesForType.filter((activity) => {
                       // Chỉ tính những hoạt động đã mở đăng ký
                       if (activity.registrationStartDateTime) {
@@ -294,7 +294,7 @@ export default function ActivitiesPage() {
                       return true // Nếu không có thời gian đăng ký thì vẫn tính
                     }).length
                   }
-                  
+
                   return (
                     <Button
                       key={type.id}
@@ -396,91 +396,94 @@ export default function ActivitiesPage() {
                         </div>
 
                         <div className="md:w-2/3 p-6">
-                          <div className="flex items-start justify-between mb-4">
-                            <div>
-                              <div className="flex items-center gap-2 mb-2">
-                                <Badge variant="outline">{activity.type}</Badge>
-                                <Badge className={getStatusColor(getActivityRealStatus(activity))}>{getStatusText(getActivityRealStatus(activity))}</Badge>
+                          <Link href={`/activities/${activity.id}`}>
+                            <div className="flex items-start justify-between mb-4">
+                              <div>
+                                <div className="flex items-center gap-2 mb-2">
+                                  <Badge variant="outline">{activity.type}</Badge>
+                                  <Badge className={getStatusColor(getActivityRealStatus(activity))}>{getStatusText(getActivityRealStatus(activity))}</Badge>
+                                </div>
+                                <h3 className="text-xl font-semibold mb-2">{activity.title}</h3>
+                                <p className="text-gray-600 text-sm mb-4">{activity.description}</p>
                               </div>
-                              <h3 className="text-xl font-semibold mb-2">{activity.title}</h3>
-                              <p className="text-gray-600 text-sm mb-4">{activity.description}</p>
                             </div>
-                          </div>
 
-                          <div className="grid md:grid-cols-2 gap-4 mb-4">
-                            <div className="space-y-2">
-                              {activity.registrationStartDateTime && (
+                            <div className="grid md:grid-cols-2 gap-4 mb-4">
+                              <div className="space-y-2">
+                                {activity.registrationStartDateTime && (
+                                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                                    <Calendar className="h-4 w-4" />
+                                    Mở đăng ký: {new Date(activity.registrationStartDateTime).toLocaleDateString("en-GB")} {new Date(activity.registrationStartDateTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}
+                                  </div>
+                                )}
+                                {activity.registrationDeadline && (
+                                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                                    <Clock className="h-4 w-4" />
+                                    Hạn đăng ký: {new Date(activity.registrationDeadline).toLocaleDateString("en-GB")} {new Date(activity.registrationDeadline).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}
+                                  </div>
+                                )}
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
                                   <Calendar className="h-4 w-4" />
-                                  Mở đăng ký: {new Date(activity.registrationStartDateTime).toLocaleDateString("en-GB")} {new Date(activity.registrationStartDateTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}
+                                  Bắt đầu: {activity.startDateTime
+                                    ? `${new Date(activity.startDateTime).toLocaleDateString("en-GB")} ${new Date(activity.startDateTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}`
+                                    : activity.date ? `${new Date(activity.date).toLocaleDateString("en-GB")} ${activity.time?.split(' - ')[0] || activity.time}` : 'N/A'
+                                  }
                                 </div>
-                              )}
-                              {activity.registrationDeadline && (
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
                                   <Clock className="h-4 w-4" />
-                                  Hạn đăng ký: {new Date(activity.registrationDeadline).toLocaleDateString("en-GB")} {new Date(activity.registrationDeadline).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}
+                                  Kết thúc: {activity.endDateTime
+                                    ? `${new Date(activity.endDateTime).toLocaleDateString("en-GB")} ${new Date(activity.endDateTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}`
+                                    : activity.date ? `${new Date(activity.date).toLocaleDateString("en-GB")} ${activity.time?.split(' - ')[1] || activity.time}` : 'N/A'
+                                  }
                                 </div>
-                              )}
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <Calendar className="h-4 w-4" />
-                                Bắt đầu: {activity.startDateTime 
-                                  ? `${new Date(activity.startDateTime).toLocaleDateString("en-GB")} ${new Date(activity.startDateTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}`
-                                  : activity.date ? `${new Date(activity.date).toLocaleDateString("en-GB")} ${activity.time?.split(' - ')[0] || activity.time}` : 'N/A'
-                                }
+                                <div className="flex items-center gap-2 text-sm text-gray-600">
+                                  <MapPin className="h-4 w-4" />
+                                  {activity.location}
+                                </div>
                               </div>
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <Clock className="h-4 w-4" />
-                                Kết thúc: {activity.endDateTime 
-                                  ? `${new Date(activity.endDateTime).toLocaleDateString("en-GB")} ${new Date(activity.endDateTime).toLocaleTimeString("vi-VN", { hour: '2-digit', minute: '2-digit' })}`
-                                  : activity.date ? `${new Date(activity.date).toLocaleDateString("en-GB")} ${activity.time?.split(' - ')[1] || activity.time}` : 'N/A'
-                                }
-                              </div>
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <MapPin className="h-4 w-4" />
-                                {activity.location}
+
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2 text-sm text-gray-600">
+                                  <Users className="h-4 w-4" />
+                                  {activity.registered}/{activity.capacity} người tham gia
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-gray-600">
+                                  <Star className="h-4 w-4" />
+                                  Instructor: {activity.instructor}
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-gray-600">
+                                  <BookOpen className="h-4 w-4" />
+                                  Level: {activity.level}
+                                </div>
                               </div>
                             </div>
 
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <Users className="h-4 w-4" />
-                                {activity.registered}/{activity.capacity} người tham gia
-                              </div>
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <Star className="h-4 w-4" />
-                                Instructor: {activity.instructor}
-                              </div>
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <BookOpen className="h-4 w-4" />
-                                Level: {activity.level}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Tags */}
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {(activity.tags ?? []).map((tag) => (
-                              <Badge key={tag} variant="secondary" className="text-xs">
-                                {tag}
-                              </Badge>
-                            ))}
-                          </div>
-
-                          {/* Agenda Preview */}
-                          <div className="mb-4">
-                            <h4 className="font-semibold text-sm mb-2">Nội dung chính:</h4>
-                            <ul className="text-sm text-gray-600 space-y-1">
-                              {(activity.agenda ?? []).slice(0, 2).map((item, index) => (
-                                <li key={index} className="flex items-start gap-2">
-                                  <ChevronRight className="h-3 w-3 mt-1 flex-shrink-0" />
-                                  {item.title}
-                                </li>
+                            {/* Tags */}
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {(activity.tags ?? []).map((tag) => (
+                                <Badge key={tag} variant="secondary" className="text-xs">
+                                  {tag}
+                                </Badge>
                               ))}
-                              {(activity.agenda?.length ?? 0) > 2 && (
-                                <li className="text-blue-600 text-xs">+{(activity.agenda?.length ?? 0) - 2} nội dung khác...</li>
-                              )}
-                            </ul>
-                          </div>
+                            </div>
+
+                            {/* Agenda Preview */}
+                            <div className="mb-4">
+                              <h4 className="font-semibold text-sm mb-2">Nội dung chính:</h4>
+                              <ul className="text-sm text-gray-600 space-y-1">
+                                {(activity.agenda ?? []).slice(0, 2).map((item, index) => (
+                                  <li key={index} className="flex items-start gap-2">
+                                    <ChevronRight className="h-3 w-3 mt-1 flex-shrink-0" />
+                                    {item.title}
+                                  </li>
+                                ))}
+                                {(activity.agenda?.length ?? 0) > 2 && (
+                                  <li className="text-blue-600 text-xs">+{(activity.agenda?.length ?? 0) - 2} nội dung khác...</li>
+                                )}
+                              </ul>
+                            </div>
+                          </Link>
+
 
                           {/* Action Buttons */}
                           <div className="flex gap-3">

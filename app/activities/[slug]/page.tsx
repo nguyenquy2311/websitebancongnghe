@@ -534,7 +534,7 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
                           </Avatar>
                           <div className="flex-1">
                             <h4 className="font-semibold hover:text-blue-600 transition-colors">
-                              <Link href={`/members/${organizer.id}`}>{organizer.name}</Link>
+                              <Link href={`/portfolio/${organizer.id}`}>{organizer.name}</Link>
                             </h4>
                             <p className="text-sm text-blue-600 mb-1">{organizer.role}</p>
                             <p className="text-xs text-gray-600">{organizer.bio}</p>

@@ -151,9 +151,9 @@ export default function MembersPage() {
         {/* Members Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredMembers.map((member: Member) => (
-            <Link href={`/portfolio/${member.id}`} >
-              <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                <CardContent className="p-6">
+            <Card key={member.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                <Link href={`/portfolio/${member.id}`} >
                   {/* Avatar and Basic Info */}
                   <div className="text-center mb-4">
                     <div className="relative w-24 h-24 mx-auto mb-4">
@@ -176,61 +176,61 @@ export default function MembersPage() {
                   {/* Skills */}
                   <div className="mb-4">
                     <p className="text-xs font-medium text-gray-700 mb-2">Kỹ năng:</p>
-                    <div className="flex [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden flex-wrap gap-1">
+                    <div className="truncate">
                       {member.skills.map((skill: string) => (
-                        <Badge key={skill} variant="secondary" className="text-xs">
+                        <Badge key={skill} variant="secondary" className="whitespace-nowrap mr-[5px] text-xs">
                           {skill}
                         </Badge>
                       ))}
                     </div>
                   </div>
+                </Link>
 
-                  {/* Join Year */}
-                  <div className="mb-4">
-                    <p className="text-xs text-gray-500">Tham gia BCN từ năm {member.joinYear}</p>
-                  </div>
+                {/* Join Year */}
+                <div className="mb-4">
+                  <p className="text-xs text-gray-500">Tham gia BCN từ năm {member.joinYear}</p>
+                </div>
 
-                  {/* Social Links */}
-                  <div className="flex gap-2">
+                {/* Social Links */}
+                <div className="flex gap-2">
+                  <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                    <Link href={`/portfolio/${member.id}`}>
+                      Xem chi tiết
+                    </Link>
+                  </Button>
+
+                  <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                    <Link href={`mailto:${member.email}`}>
+                      <Mail className="h-4 w-4" />
+                    </Link>
+                  </Button>
+
+                  {member.github && (
                     <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={`/portfolio/${member.id}`}>
-                        Xem chi tiết
+                      <Link href={member.github} target="_blank">
+                        <Github className="h-4 w-4" />
                       </Link>
                     </Button>
+                  )}
 
+                  {member.linkedin && (
                     <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                      <Link href={`mailto:${member.email}`}>
-                        <Mail className="h-4 w-4" />
+                      <Link href={member.linkedin} target="_blank">
+                        <Linkedin className="h-4 w-4" />
                       </Link>
                     </Button>
+                  )}
 
-                    {member.github && (
-                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                        <Link href={member.github} target="_blank">
-                          <Github className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                    )}
-
-                    {member.linkedin && (
-                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                        <Link href={member.linkedin} target="_blank">
-                          <Linkedin className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                    )}
-
-                    {member.portfolio && (
-                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                        <Link href={member.portfolio} target="_blank">
-                          <ExternalLink className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+                  {member.portfolio && (
+                    <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                      <Link href={member.portfolio} target="_blank">
+                        <ExternalLink className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 

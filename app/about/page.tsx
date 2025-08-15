@@ -391,22 +391,6 @@ export default function AboutPage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            {/* <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-              asChild
-            >
-              <Link href="/projects">Xem dự án</Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-              asChild
-            >
-              <Link href="/contact">Liên hệ hợp tác</Link>
-            </Button> */}
           </div>
         </div>
       </section>
