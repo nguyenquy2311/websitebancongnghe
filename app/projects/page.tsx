@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { ExternalLink, Search, Filter, Loader2 } from "lucide-react"
+import { ExternalLink, Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { Project } from "@/data/project" // Import Project interface only
@@ -141,7 +141,6 @@ const LoadingSkeleton = () => (
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("all")
-  const [yearFilter, setYearFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -177,10 +176,9 @@ export default function ProjectsPage() {
       project.techStack.some((tech: string) => tech.toLowerCase().includes(searchTerm.toLowerCase()))
 
     const matchesCategory = categoryFilter === "all" || project.category === categoryFilter
-    const matchesYear = yearFilter === "all" || project.year === yearFilter
     const matchesType = typeFilter === "all" || project.type === typeFilter
 
-    return matchesSearch && matchesCategory && matchesYear && matchesType
+    return matchesSearch && matchesCategory && matchesType
   })
 
   return (
@@ -374,16 +372,16 @@ export default function ProjectsPage() {
                         <div className="flex items-center flex-wrap gap-2">
                           {(() => {
                             // Lấy danh sách tên không trùng lặp từ team
-                            const uniqueNames = Array.from(new Set((project.team ?? []).map((m: any) => m.name)));
+                            const uniqueNames = Array.from(new Set((project.team ?? []).map((m) => m.name)));
                             return uniqueNames.slice(0, 2).map((name: string, index: number) => (
                               <span key={index} className="text-xs whitespace-nowrap text-gray-600 font-semibold bg-gray-200 rounded px-2 py-1">
                                 {name}
                               </span>
                             ));
                           })()}
-                          {project.team && new Set(project.team.map((m: any) => m.name)).size > 2 && (
+                          {project.team && new Set(project.team.map((m) => m.name)).size > 2 && (
                             <span className="text-xs text-gray-500 font-semibold">
-                              +{new Set(project.team.map((m: any) => m.name)).size - 2}
+                              +{new Set(project.team.map((m) => m.name)).size - 2}
                             </span>
                           )}
                         </div>
