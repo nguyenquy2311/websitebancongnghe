@@ -32,7 +32,6 @@ const AppHeader = () => {
         if (userData) {
           setUser({
             name: userData.name,
-            avatarUrl: userData.avatarUrl || '',
           });
         }
         setLoading(false);

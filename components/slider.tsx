@@ -243,23 +243,23 @@ const AppleCardSliderPage = () => {
                     >
                       <Image
                         src={project.image}
-                        alt={project.name}
+                        alt={project.title}
                         fill
                         className="object-cover scale-hover transition-transform duration-700 ease-out"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-300 auto-mobile-show gradient-hover" />
                       <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-[calc(100%-88px)] transition-transform duration-700 ease-out auto-mobile-show translate-hover">
                         <h3 className="text-4xl font-bold mb-3 truncate whitespace-nowrap overflow-hidden">
-                          {project.name}
+                          {project.title}
                         </h3>
                         <p className="text-xl line-clamp-6 opacity-0 transition-opacity duration-300 delay-200 mb-4 leading-relaxed auto-mobile-show opacity-hover">
-                          {project.description}
+                          {project.shortDescription}
                         </p>
                         <div className="btn-wrapper">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              window.location.href = project.link || `/projects/${project.id}`;
+                              window.location.href = `/projects/${project.id}`;
                             }}
                             className="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-lg font-semibold opacity-0 transition-all duration-300 delay-200 transform translate-y-4 auto-mobile-show translate-hover opacity-hover"
                           >

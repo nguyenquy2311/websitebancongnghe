@@ -124,28 +124,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tác Động & Kết Quả</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">{project.impact?.users}</div>
-                    <div className="text-xs text-gray-600">Người dùng</div>
-                  </div>
-                  <Separator />
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{project.impact?.satisfaction}</div>
-                    <div className="text-xs text-gray-600">Độ hài lòng</div>
-                  </div>
-                  <Separator />
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">{project.impact?.timeReduction}</div>
-                    <div className="text-xs text-gray-600">Giảm thời gian xử lý</div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>

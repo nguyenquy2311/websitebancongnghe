@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Github, ExternalLink, Search, Filter, Loader2 } from "lucide-react"
+import { ExternalLink, Search, Filter, Loader2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { Project } from "@/data/project" // Import Project interface only
@@ -202,7 +202,7 @@ export default function ProjectsPage() {
             {/* Filters */}
             <div className="space-y-6 mb-8">
               {/* Filter Tags in grid layout */}
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {/* Category Filter */}
                 <div className="text-center">
                   <h3 className="text-sm font-medium text-gray-700 mb-4">Loại dự án</h3>
@@ -238,57 +238,6 @@ export default function ProjectsPage() {
                       Mobile App
                       <Badge variant="secondary" className="ml-1 text-xs">
                         {projects.filter((p: Project) => p.category === "App").length}
-                      </Badge>
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Year Filter */}
-                <div className="text-center">
-                  <h3 className="text-sm font-medium text-gray-700 mb-4">Năm thực hiện</h3>
-                  <div className="flex flex-wrap justify-center gap-2">
-                    <Button
-                      variant={yearFilter === "all" ? "default" : "outline"}
-                      onClick={() => setYearFilter("all")}
-                      className="rounded-full text-sm"
-                      size="sm"
-                    >
-                      Tất cả năm
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {projects.length}
-                      </Badge>
-                    </Button>
-                    <Button
-                      variant={yearFilter === "2024" ? "default" : "outline"}
-                      onClick={() => setYearFilter("2024")}
-                      className="rounded-full text-sm"
-                      size="sm"
-                    >
-                      2024
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {projects.filter((p: Project) => p.year === "2024").length}
-                      </Badge>
-                    </Button>
-                    <Button
-                      variant={yearFilter === "2023" ? "default" : "outline"}
-                      onClick={() => setYearFilter("2023")}
-                      className="rounded-full text-sm"
-                      size="sm"
-                    >
-                      2023
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {projects.filter((p: Project) => p.year === "2023").length}
-                      </Badge>
-                    </Button>
-                    <Button
-                      variant={yearFilter === "2022" ? "default" : "outline"}
-                      onClick={() => setYearFilter("2022")}
-                      className="rounded-full text-sm"
-                      size="sm"
-                    >
-                      2022
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {projects.filter((p: Project) => p.year === "2022").length}
                       </Badge>
                     </Button>
                   </div>
@@ -447,14 +396,6 @@ export default function ProjectsPage() {
                       <Button asChild size="sm" className="flex-1">
                         <Link href={`/projects/${project.id}`}>Chi Tiết</Link>
                       </Button>
-                      {project.githubUrl && (
-                        <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
-                          <Link href={project.githubUrl} target="_blank">
-                            <Github className="h-4 w-4 mr-2" />
-                            GitHub
-                          </Link>
-                        </Button>
-                      )}
                       {project.demoUrl && (
                         <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
                           <Link href={project.demoUrl} target="_blank">

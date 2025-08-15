@@ -50,6 +50,7 @@ export default function RegisterPage() {
       username,
       studentId,
       password: hashedPassword,
+      role: 'member',
     });
 
     if (result.success) {
