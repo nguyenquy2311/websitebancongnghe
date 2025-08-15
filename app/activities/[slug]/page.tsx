@@ -262,7 +262,7 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
         title: "Đăng ký thành công! ✅",
         description: "Bạn đã đăng ký tham gia hoạt động thành công. Chúng tôi sẽ gửi thông tin chi tiết qua email.",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Đăng ký thất bại",
         description: "Có lỗi xảy ra, vui lòng thử lại sau",
@@ -284,7 +284,7 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
         title: "Hủy đăng ký thành công",
         description: "Bạn đã hủy đăng ký tham gia hoạt động",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Hủy đăng ký thất bại",
         description: "Có lỗi xảy ra, vui lòng thử lại sau",
@@ -635,7 +635,7 @@ export default function ActivityDetailPage({ params }: { params: { slug: string 
                                   ))}
                                 </div>
                               </div>
-                              <p className="text-gray-700 italic">"{feedback}"</p>
+                              <p className="text-gray-700 italic">&ldquo;{feedback}&rdquo;</p>
                             </div>
                           ))}
                         </div>

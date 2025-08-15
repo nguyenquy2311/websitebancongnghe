@@ -4,7 +4,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,7 +12,6 @@ import { getUserByToken } from '@/lib/firestoreService';
 import { getToken, removeToken } from '@/lib/tokenStorage';
 
 const AppHeader = () => {
-  const router = useRouter();
   const [user, setUser] = useState<{ name: string; avatarUrl?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);

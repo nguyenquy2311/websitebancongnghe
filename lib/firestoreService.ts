@@ -241,7 +241,7 @@ export async function getAllTimeline(): Promise<TimelineItem[]> {
   }
 }
 
-export async function getAllActivities(): Promise<any[]> {
+export async function getAllActivities(): Promise<unknown[]> {
   try {
     const querySnapshot = await getDocs(collection(db, 'activities'));
     const activities = querySnapshot.docs.map(doc => ({

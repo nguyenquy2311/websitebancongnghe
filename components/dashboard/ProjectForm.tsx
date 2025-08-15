@@ -71,7 +71,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCan
     recognition: ''
   })
   const [newContribution, setNewContribution] = useState('')
-  const [availableMembers, setAvailableMembers] = useState<any[]>([])
+  // const [availableMembers, setAvailableMembers] = useState<unknown[]>([])
 
   // Load available members from Firestore
   useEffect(() => {
@@ -79,7 +79,8 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCan
       try {
         const { getAllMembers } = await import('@/lib/firestoreService')
         const members = await getAllMembers()
-        setAvailableMembers(members)
+        // setAvailableMembers(members)
+        console.log('Members loaded:', members)
       } catch (error) {
         console.error('Error loading members:', error)
       }
@@ -921,7 +922,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCan
               {formData.team?.length === 0 ? (
                 <p className="text-sm text-muted-foreground p-4 border rounded-lg">Chưa có thành viên nào trong dự án</p>
               ) : (
-                formData.team?.map((member, index) => (
+                formData.team?.map((member) => (
                   <div key={member.id} className="p-4 border rounded-lg bg-gray-50">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
@@ -936,7 +937,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCan
                                 e.currentTarget.nextElementSibling?.classList.remove('hidden')
                               }}
                             />
-                            <div className="hidden w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 items-center justify-center text-white font-medium" style={{ display: 'none' }}>
                               {member.name.charAt(0)}
                             </div>
                           </div>

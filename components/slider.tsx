@@ -130,6 +130,7 @@ const sliderStyles = `
 `;
 
 const AppleCardSliderPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sliderRef = useRef<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -185,7 +186,7 @@ const AppleCardSliderPage = () => {
     autoplay: true,
     autoplaySpeed: 6000,
     pauseOnHover: true,
-    beforeChange: (_: any, newIndex: any) => setCurrentSlide(newIndex),
+    beforeChange: (_: number, newIndex: number) => setCurrentSlide(newIndex),
     responsive: [
       {
         breakpoint: 1024,

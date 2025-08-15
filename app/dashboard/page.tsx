@@ -8,11 +8,9 @@ import {
   Clock, 
   Settings, 
   BarChart3, 
-  FileText,
   Plus,
   Edit,
   Trash2,
-  Search,
   Filter,
   Eye,
   Download,
@@ -51,8 +49,6 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview')
   const [projects, setProjects] = useState<Project[]>([])
   const [members, setMembers] = useState<Member[]>([])
-  const [activities, setActivities] = useState<any[]>([])
-  const [timeline, setTimeline] = useState<any[]>([])
   const [stats, setStats] = useState<DashboardStats>({
     totalProjects: 0,
     totalMembers: 0,
@@ -76,8 +72,6 @@ const Dashboard = () => {
 
         setProjects(projectsData)
         setMembers(membersData)
-        setActivities(activitiesData)
-        setTimeline(timelineData)
         
         setStats({
           totalProjects: projectsData.length,
@@ -168,7 +162,13 @@ const Dashboard = () => {
     { id: 'settings', label: 'Cài đặt', icon: Settings },
   ]
 
-  const StatCard = ({ title, value, description, icon: Icon, color }: any) => (
+  const StatCard = ({ title, value, description, icon: Icon, color }: {
+    title: string;
+    value: string | number;
+    description: string;
+    icon: React.ComponentType<{ className?: string }>;
+    color: string;
+  }) => (
     <Card className="hover:shadow-md transition-shadow">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
